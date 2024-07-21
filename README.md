@@ -1,17 +1,34 @@
 # PVRU Project
 
-# Unity 2022.3.31f1 (LTS)
+## Abstract
 
 
-Install: Android Build Support
+## Project Setup
 
+### Unity Version
+- Unity 2022.3.31f1 (LTS)
 
-# Quest needs to be in Developer Mode
+### Installation Requirements
+- Android Build Support
 
-# Create-with-VR_2022LTS Starter Project
+### Device Requirements
+- Quest 3 must be in Developer Mode
 
-# To Use with Meta Quest
+## Content
 
-Project Settings -> XR Plug-in Management -> Enable Oculus in all Tabs
-<br>
-Make sure to set the game object "XR Device Simulator" to disabled when using the Meta Quest
+### Project Overview
+- **Create-with-VR_2022LTS Starter Project**: A starter project template for VR development.
+
+## Implemented Features
+
+### Meta Quest Configuration
+1. **XR Plug-in Management**: 
+    - Navigate to `Project Settings -> XR Plug-in Management`.
+    - Enable `Oculus` in all tabs.
+
+2. **Game Object Settings**:
+    - Ensure the game object `XR Device Simulator` is set to disabled when using the Meta Quest.
+
+## Included Assets
+- Starter project template (`Create-with-VR_2022LTS`).
+- XR Plug-in Management configurations for Oculus.
