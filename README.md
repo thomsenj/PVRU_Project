@@ -6,13 +6,14 @@
 ## Project Setup
 
 ### Unity Version
-- Unity 2022.3.31f1 (LTS)
+- [Unity 2022.3.31f1 (LTS)](https://unity.com/releases/2022-lts)
 
 ### Installation Requirements
-- Android Build Support
+- [Android Build Support](https://docs.unity3d.com/Manual/android-sdksetup.html)
 
 ### Device Requirements
-- Quest 3 must be in Developer Mode
+- [Quest must be in Developer Mode](https://developer.oculus.com/documentation/native/android/mobile-device-setup/)
+
 
 ## Content
 
@@ -30,5 +31,5 @@
     - Ensure the game object `XR Device Simulator` is set to disabled when using the Meta Quest.
 
 ## Included Assets
-- Starter project template (`Create-with-VR_2022LTS`).
-- XR Plug-in Management configurations for Oculus.
+- Includes finished [`VR Developer`](https://learn.unity.com/learn/pathway/vr-development) Tutorial (`Create-with-VR_2022LTS`) 
+- [POLYGON - Western Pack](https://syntystore.com/products/polygon-western-pack)
