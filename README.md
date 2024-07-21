@@ -31,5 +31,9 @@
     - Ensure the game object `XR Device Simulator` is set to disabled when using the Meta Quest.
 
 ## Included Assets
-- Includes finished [`VR Developer`](https://learn.unity.com/learn/pathway/vr-development) Tutorial (`Create-with-VR_2022LTS`) 
+- Includes finished [`VR Development`](https://learn.unity.com/learn/pathway/vr-development) Tutorial (`Create-with-VR_2022LTS`) 
 - [POLYGON - Western Pack](https://syntystore.com/products/polygon-western-pack)
+
+
+## Included Packages
+-
