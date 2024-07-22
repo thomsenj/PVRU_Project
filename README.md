@@ -18,7 +18,7 @@
 ## Content
 
 ### Project Overview
-- **Create-with-VR_2022LTS Starter Project**: A starter project template for VR development.
+- 
 
 ## Implemented Features
 
@@ -33,6 +33,7 @@
 ## Included Assets
 - Includes finished [`VR Development`](https://learn.unity.com/learn/pathway/vr-development) Tutorial (`Create-with-VR_2022LTS`) 
 - [POLYGON - Western Pack](https://syntystore.com/products/polygon-western-pack)
+- [POLYGON - Nature Pack](https://syntystore.com/products/polygon-nature-pack)
 
 
 ## Included Packages
