@@ -40,9 +40,6 @@
 
 - [POLYGON - Western Pack](https://syntystore.com/products/polygon-western-pack)
 - [POLYGON - Nature Pack](https://syntystore.com/products/polygon-nature-pack)
-
-### Not purchased yet
-
 - [POLYGON - Icons Pack](https://syntystore.com/products/polygon-icons-pack)
 - [POLYGON - Particle FX Pack (Unity only)](https://syntystore.com/products/polygon-particle-fx-pack)
 
