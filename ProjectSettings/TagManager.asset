@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fuel
   - Meteor
+  - Player2
   layers:
   - Default
   - TransparentFX

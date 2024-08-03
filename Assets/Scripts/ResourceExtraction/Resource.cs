@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
-    public ResourceType resourceType; 
-    public int amount = 1; 
+    public ResourceType resourceType;
+    public int amount = 1;
+    public int hitsToHarvest = 3;
 
+    private int currentHits = 0;
     private PlayerInventory playerInventory;
 
     void Start()
@@ -14,7 +16,13 @@ public class Resource : MonoBehaviour
 
     public void Harvest()
     {
-        playerInventory.AddResource(resourceType, amount);
-        Destroy(gameObject);
+        currentHits++;
+        Debug.Log($"Resource hit {currentHits} times.");
+
+        if (currentHits >= hitsToHarvest)
+        {
+            playerInventory.AddResource(resourceType, amount);
+            Destroy(gameObject);
+        }
     }
 }
