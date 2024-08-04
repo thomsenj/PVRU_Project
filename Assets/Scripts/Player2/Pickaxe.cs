@@ -25,6 +25,16 @@ public class Pickaxe : MonoBehaviour
         }
     }
 
+    public bool IsSwinging()
+    {
+        return isSwinging;
+    }
+
+    public void setSwinging(bool isSwinging)
+    {
+        this.isSwinging = isSwinging;
+    }
+
     private IEnumerator SwingPickaxe()
     {
         isSwinging = true;
@@ -40,17 +50,6 @@ public class Pickaxe : MonoBehaviour
             heldPickaxe.transform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / halfSwingDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(heldPickaxe.transform.position, heldPickaxe.transform.forward, out hit, 2.0f))
-        {
-            Debug.Log($"Hit detected on: {hit.collider.name}");
-            Resource resource = hit.collider.GetComponent<Resource>();
-            if (resource != null)
-            {
-                resource.Harvest();
-            }
         }
 
         yield return new WaitForSeconds(0.05f);

@@ -5,5 +5,6 @@ using UnityEngine;
 public class TagConstants : MonoBehaviour
 {
     public const string Player2Name = "Player2";
-
+    public const string GAME_OVER_COLLIDER = "GameOverCollider";
+    public const string RESOURCE_TOOL = "ResourceTool";
 }
