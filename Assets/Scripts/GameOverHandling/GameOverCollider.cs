@@ -6,12 +6,7 @@ public class GameOverCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameOverManager gameOverManager = FindObjectOfType<GameOverManager>();
-        if (gameOverManager == null)
-        {
-            Debug.LogError("No GameOverManager found in the scene.");
-            return;
-        }
+        GameOverManager gameOverManager = GameOverManagerUtil.GetGameOverManager();
         if (other.CompareTag(TagConstants.GAME_OVER_COLLIDER))
         {
             Debug.Log("Triggered with Player2, triggering Game Over.");

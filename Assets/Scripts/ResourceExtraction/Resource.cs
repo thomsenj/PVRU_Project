@@ -29,7 +29,6 @@ public class Resource : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("In Trigger Enter.");
         try
         {
             if (other.CompareTag(TagConstants.RESOURCE_TOOL))

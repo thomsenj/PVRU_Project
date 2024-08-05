@@ -13,11 +13,12 @@ TagManager:
   - ResourceTool
   - Ground
   - Coal
+  - DamageCollider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

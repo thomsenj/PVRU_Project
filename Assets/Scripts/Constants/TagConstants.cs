@@ -9,4 +9,5 @@ public class TagConstants : MonoBehaviour
     public const string RESOURCE_TOOL = "ResourceTool";
     public const string GROUND = "Ground";
     public const string COAL = "Coal";
+    public const string PLAYER_DAMAGE_COLLIDER = "DamageCollider";
 }
