@@ -7,6 +7,12 @@ TagManager:
   - Fuel
   - Meteor
   - Player2
+  - Box
+  - Trail
+  - GameOverCollider
+  - ResourceTool
+  - Ground
+  - Coal
   layers:
   - Default
   - TransparentFX
