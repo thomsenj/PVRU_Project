@@ -1036,6 +1036,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3424765613553645275, guid: fcdb12c0011022649b9ec1569d29917d, type: 3}
   m_PrefabInstance: {fileID: 604492673}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &836926024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6383241796071162761, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
+  m_PrefabInstance: {fileID: 4135085009177522543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &899179201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,7 +1072,7 @@ Transform:
   m_GameObject: {fileID: 899179201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.313, y: 1.7299998, z: 4.287}
+  m_LocalPosition: {x: 0.44, y: 1.7299998, z: 0.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1210,7 +1215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4818126417322290, guid: 51917b8e41ef6a1469249c9dfee70390, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.22
       objectReference: {fileID: 0}
     - target: {fileID: 4818126417322290, guid: 51917b8e41ef6a1469249c9dfee70390, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1380,6 +1385,55 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1467554088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1467554090}
+  - component: {fileID: 1467554089}
+  m_Layer: 0
+  m_Name: EnemyFactorySlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1467554089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467554088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f460b59a421f2e40b0fc15f6d8f667b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyGameObject: {fileID: 836926024}
+  enemyCount: 0
+  enemyMax: 5
+  spawnRadius: 10
+  spawnInterval: 1
+--- !u!4 &1467554090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467554088}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.8783436, y: 8.797564, z: -28.426506}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1672319005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1394,7 +1448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302026258544176, guid: 47ac04e5b24338c44ba15b946641236c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.49
       objectReference: {fileID: 0}
     - target: {fileID: 4302026258544176, guid: 47ac04e5b24338c44ba15b946641236c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1402,7 +1456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302026258544176, guid: 47ac04e5b24338c44ba15b946641236c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.88
+      value: 8.787
       objectReference: {fileID: 0}
     - target: {fileID: 4302026258544176, guid: 47ac04e5b24338c44ba15b946641236c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1699,6 +1753,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtleShellPBR
       objectReference: {fileID: 0}
+    - target: {fileID: 4521841156112018567, guid: badaf500709b0c341b141a760df12352, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8293814073323824969, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.552
@@ -1758,3 +1816,4 @@ SceneRoots:
   - {fileID: 119974089}
   - {fileID: 4135085009177522543}
   - {fileID: 5992054518352018308}
+  - {fileID: 1467554090}
