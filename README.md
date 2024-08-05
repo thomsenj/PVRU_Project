@@ -16,14 +16,6 @@
 
 - [Quest must be in Developer Mode](https://developer.oculus.com/documentation/native/android/mobile-device-setup/)
 
-## Content
-
-### Project Overview
-
--
-
-## Implemented Features
-
 ### Meta Quest Configuration
 
 1. **XR Plug-in Management**:
@@ -38,9 +30,17 @@
 3. **Build Settings**:
    - Make sure that the `Build Platform` is set to `Android` and that the `Meta Quest 3` shows up under `Run Device`.
 
+## Content
+
+### Project Overview
+
+-
+
+## Implemented Features
+
 ## Included Assets
 
-## Multiplayer
+### Multiplayer
 
 - [Photon Fusion 2](https://assetstore.unity.com/packages/tools/network/photon-fusion-267958)
 
@@ -71,9 +71,12 @@
 - [XR Hands 1.4.1](https://docs.unity3d.com/Packages/com.unity.xr.hands@1.4/manual/index.html)
 - [XR Interaction Toolkit 2.5.4](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.5/manual/index.html)
 - [XR Plugin Management 4.5.0](https://docs.unity3d.com/Packages/com.unity.xr.management@4.5/manual/index.html)
+- [Animation Rigging 1.3.0](https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.3/manual/index.html)
 
 ## Additional Assets from Tutorials
 
 - [`VR Development`](https://learn.unity.com/learn/pathway/vr-development) Tutorial (`Create-with-VR_2022LTS`)
 - [Learn VR Development in 3 Hours - Unity VR Tutorial Complete Course](https://www.youtube.com/watch?v=YBQ_ps6e71k)
+- [Creating procedural walk movement | Prototype Series](https://www.youtube.com/watch?v=acMK93A-FSY)
+- [Complete VR Body Setup - Arms and Legs IK with Hand Animation](https://www.youtube.com/watch?v=v47lmqfrQ9s)
 -
