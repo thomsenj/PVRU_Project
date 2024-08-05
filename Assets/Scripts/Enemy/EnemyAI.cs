@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.ReloadAttribute;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -19,7 +21,6 @@ public class EnemyAI : MonoBehaviour
     {
         // rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        Debug.Log("Animator: " + animator);
         if (player == null)
         {
             player = GameObject.FindWithTag(TagConstants.Player2Name).transform;
@@ -37,7 +38,7 @@ public class EnemyAI : MonoBehaviour
         if (direction.magnitude > 0.5f)
         {
             // move in direction of the player
-            // isAttacking = false;
+            isAttacking = false;
             direction.Normalize();
             transform.position += direction * speed * Time.deltaTime;
             animator.SetBool(AnimationConstants.IS_RUNNING, true);
@@ -48,6 +49,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
+            isAttacking = true;
             animator.SetBool("isRunning", false);
         }
 
@@ -72,6 +74,17 @@ public class EnemyAI : MonoBehaviour
         {
             Attack();
         }
+        if (other.CompareTag(TagConstants.WEAPON) && !isDead)
+        {
+            Debug.Log("Weapon Trigger.");
+            Weapon weapon = GameObject.FindWithTag(TagConstants.Player2Name).GetComponent<Weapon>();
+            if (weapon.IsSwinging())
+            {
+                weapon.setSwinging(false);
+                TakeDamage(weapon.getDamage());
+            }
+        }
+
     }
 
     void Jump()
@@ -86,9 +99,11 @@ public class EnemyAI : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        Debug.Log("Health: " + health + " Damage: " + damage);
         if (isDead) return;
 
         health -= amount;
+        Debug.Log("Health: " + health);
         animator.SetTrigger(AnimationConstants.GET_HIT);
 
         if (health <= 0)
@@ -103,7 +118,7 @@ public class EnemyAI : MonoBehaviour
         this.isAttacking = true;
     }
 
-    void Die()
+     void Die()
     {
         isDead = true;
         animator.SetTrigger(AnimationConstants.DIE);
