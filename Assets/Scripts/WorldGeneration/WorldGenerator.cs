@@ -9,12 +9,14 @@ public class WorldGenerator : MonoBehaviour
 
     private GameObject train;
     private GameObject mainPlane;
+    private GameObject lastPlane;
 
     private void Start()
     {
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
         mainPlane = planes[0];
-        Debug.Log("Mainplane = " + mainPlane.name);
+        lastPlane = planes[planes.Count - 1];
+        Debug.Log(lastPlane.name);
     }
 
     private void Update()
@@ -32,11 +34,13 @@ public class WorldGenerator : MonoBehaviour
             if (plane != null)
             {
                 float distance = GetDistance(plane, position);
-                //Debug.Log("Name: " + plane.name + " Distance: " + distance);
                 if (distance < planeRadius && plane != mainPlane)
                 {
-                    Vector3 currentPosition = mainPlane.transform.position;
-                    mainPlane.transform.position = new Vector3((position.x + (planeRadius * 2 * planes.Count)) * -1, 0, 0);
+                    Debug.Log(plane.name);
+                    Vector3 newPlanePosition = plane.transform.position;
+                    Debug.Log(lastPlane.transform.position.x + (planeRadius * -2));
+                    mainPlane.transform.position = new Vector3(lastPlane.transform.position.x + (planeRadius * -2), 0, 0);
+                    lastPlane = mainPlane;
                     mainPlane = plane;
                 }
             }
