@@ -1,48 +1,96 @@
 using UnityEngine;
 using UnityEngine.Splines;
-using Unity.Mathematics;  // Für float3 und math
+using Unity.Mathematics;
+using System.Collections.Generic;
+using System;
 
 public class ExtendableSpline : MonoBehaviour
 {
-    public SplineContainer splineContainer;  // Das SplineContainer-Objekt
-    public float addPointInterval = 5f;      // Intervall in Sekunden zum Hinzufügen neuer Punkte
-    public float extensionDistance = 10f;    // Entfernung, um die die Spline verlängert wird
-    private float timer;
+    // Spline Extension
+    public SplineContainer splineContainer;  
+    public float addPointInterval = 5f;   
+    // default value should be the length of one plane 
+    public float extensionDistance = 200f;    
 
+    // Plane Handling
+    public List<GameObject> planes;
+    public GameObject changePlane;
+
+    private GameObject train;
+    private GameObject mainPlane;
+    private GameObject lastPlane;
+    private float planeRadius;    
+   
     void Start()
     {
         if (splineContainer == null)
         {
             splineContainer = GetComponent<SplineContainer>();
         }
+        train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
+        mainPlane = planes[0];
+        lastPlane = planes[planes.Count - 1];
+        planeRadius = Math.Abs(extensionDistance) / 2;
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= addPointInterval)
+        if (train == null || planes == null || planes.Count == 0)
         {
-            AddControlPoint();
-            timer = 0f;
+            Debug.LogError("Train oder planes sind nicht richtig initialisiert.");
+            return;
+        }
+
+        Vector3 position = train.transform.position;
+
+        foreach (GameObject plane in planes)
+        {
+            if (plane != null)
+            {
+                float distance = GetDistance(plane, position);
+                Debug.Log(planeRadius);
+                if (distance < planeRadius && plane != mainPlane)
+                {
+                    changePlane.transform.position = new Vector3(lastPlane.transform.position.x + (planeRadius * -2), lastPlane.transform.position.y, lastPlane.transform.position.z);
+                    lastPlane = changePlane;
+                    changePlane = mainPlane;
+                    mainPlane = plane;
+                    AddControlPoint();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Ein Plane-GameObject in der Liste ist null.");
+            }
         }
     }
 
     void AddControlPoint()
     {
-        // Ermittle den letzten Kontrollpunkt der Spline
         int pointCount = splineContainer.Spline.Count;
         if (pointCount == 0) return;
 
         BezierKnot lastPoint = splineContainer.Spline[pointCount - 1];
 
-        // Bestimme die Position des neuen Kontrollpunkts basierend auf dem letzten Kontrollpunkt
         Vector3 lastPosition = (Vector3)lastPoint.Position;
+        // here to add dynamic track via z coordinate
         Vector3 newPointPosition = new Vector3(lastPosition.x + extensionDistance, lastPosition.y, lastPosition.z);
 
-        // Erstelle einen neuen Kontrollpunkt
         var newPoint = new BezierKnot(newPointPosition);
 
-        // Füge den neuen Kontrollpunkt zur Spline hinzu
         splineContainer.Spline.Add(newPoint);
+    }
+
+    private float GetDistance(GameObject plane, Vector3 trainPosition)
+    {
+        try
+        {
+            Vector3 direction = plane.transform.position - trainPosition;
+            return direction.magnitude;
+        }
+        catch
+        {
+            return -1;
+        }
     }
 }
