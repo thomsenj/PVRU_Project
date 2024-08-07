@@ -7,7 +7,9 @@ using System;
 public class ExtendableSpline : MonoBehaviour
 {
     // Spline Extension
-    public SplineContainer splineContainer;  
+    public SplineContainer splineContainer;
+    public List<SplineContainer> templates;
+
     public float addPointInterval = 5f;   
     // default value should be the length of one plane 
     public float extensionDistance = 200f;    
@@ -56,6 +58,7 @@ public class ExtendableSpline : MonoBehaviour
                     changePlane = mainPlane;
                     mainPlane = plane;
                     AddControlPoint();
+                    //AppendSplineTemplate();
                 }
             }
             else
@@ -81,6 +84,35 @@ public class ExtendableSpline : MonoBehaviour
         splineContainer.Spline.Add(newPoint);
     }
 
+    void AppendSplineTemplate()
+    {
+        SplineContainer template = GetRandomTemplate();
+        if (template == null) return;
+
+        int pointCount = splineContainer.Spline.Count;
+        if (pointCount == 0) return;
+
+        BezierKnot lastPoint = splineContainer.Spline[pointCount - 1];
+        Vector3 lastPosition = (Vector3)lastPoint.Position;
+
+        var spline = template.Spline;
+
+        Vector3 firstNode = spline[0].Position;
+        Vector3[] relativeCoordinates = new Vector3[spline.Count];
+        for (int i = 1; i < spline.Count; i++)
+        {
+            Vector3 nodePosition = spline[i].Position;
+            relativeCoordinates[i] = nodePosition - firstNode;
+            Vector3 newPosition = lastPosition + nodePosition;
+            splineContainer.Spline.Add(new BezierKnot(newPosition));
+        }   
+    }
+
+    SplineContainer GetRandomTemplate()
+    {
+        return templates.Count > 0 ? templates[0] : null;
+    }
+ 
     private float GetDistance(GameObject plane, Vector3 trainPosition)
     {
         try
