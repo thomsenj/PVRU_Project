@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class Pickaxe : MonoBehaviour
 {
@@ -50,7 +51,6 @@ public class Pickaxe : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         yield return new WaitForSeconds(0.05f);
 
         elapsedTime = 0;

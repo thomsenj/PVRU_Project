@@ -299,6 +299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 44672665}
+  templates:
+  - {fileID: 6770404217779332792, guid: f7cb6668e9462c44d8be0573a86bc9aa, type: 3}
   addPointInterval: 1
   extensionDistance: -200
   planes:
