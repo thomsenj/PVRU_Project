@@ -13,6 +13,8 @@ public class DreamTeckSplineGenerator : MonoBehaviour
     public float minZ = -50f;
     public float maxZ = 50f;
 
+    public bool test = false;   
+
     public SplineComputer splineComputer;
     public GameObject splineFollowerGameObject;
 
@@ -23,6 +25,17 @@ public class DreamTeckSplineGenerator : MonoBehaviour
 
         GenerateSnakeSpline();
         splineFollowerGameObject.SetActive(true);
+
+    }
+
+    void Update()
+    {
+
+        if (test)
+        {
+            test = false;
+            AddPoint(new Vector3(105, 0, 0));
+        }
 
     }
 
@@ -59,6 +72,31 @@ public class DreamTeckSplineGenerator : MonoBehaviour
         }
 
         splineComputer.SetPoints(points);
+
+        // test add single point
+        Vector3 vector3 = new Vector3(55, 0, 0);
+        AddPoint(vector3);
+    }
+
+    void AddPoint(Vector3 position)
+    {
+        if (splineComputer == null)
+        {
+            Debug.LogError("SplineComputer not assigned.");
+            return;
+        }
+
+        SplinePoint[] points = splineComputer.GetPoints();
+
+        SplinePoint newPoint = new SplinePoint(position);
+
+        var pointList = new System.Collections.Generic.List<SplinePoint>(points);
+
+        pointList.Add(newPoint);
+
+        splineComputer.SetPoints(pointList.ToArray());
+
+        splineComputer.Rebuild();
     }
 
 }
