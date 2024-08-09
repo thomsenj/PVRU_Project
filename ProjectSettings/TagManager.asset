@@ -16,6 +16,7 @@ TagManager:
   - DamageCollider
   - Weapon
   - Train
+  - TrainManager
   layers:
   - Default
   - TransparentFX

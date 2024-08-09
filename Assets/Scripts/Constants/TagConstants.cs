@@ -12,4 +12,6 @@ public class TagConstants : MonoBehaviour
     public const string PLAYER_DAMAGE_COLLIDER = "DamageCollider";
     public const string WEAPON = "Weapon";
     public const string TRAIN = "Train";
+    public const string TRAIN_MANAGER = "TrainManager";
+
 }

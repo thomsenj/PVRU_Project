@@ -31,6 +31,8 @@ public class Resource : MonoBehaviour
     {
         try
         {
+            Debug.Log("Trigger Enter");
+            Debug.Log(other.gameObject.tag);
             if (other.CompareTag(TagConstants.RESOURCE_TOOL))
             {
                 if (pickaxe.IsSwinging())
