@@ -1588,7 +1588,7 @@ MonoBehaviour:
   drawTripods: 0
   boneSize: 1
   tripodSize: 1
-  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  boneColor: {r: 1, g: 1, b: 1, a: 0.5}
   m_Transforms:
   - {fileID: 1013408505}
   - {fileID: 1013408506}
@@ -3645,10 +3645,10 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 1013408515}
     m_SourceObjects:
-      m_Length: 0
+      m_Length: 1
       m_Item0:
-        transform: {fileID: 0}
-        weight: 0
+        transform: {fileID: 1382707518}
+        weight: 1
       m_Item1:
         transform: {fileID: 0}
         weight: 0
