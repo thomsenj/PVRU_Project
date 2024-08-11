@@ -12,7 +12,7 @@ public class PeltierAdapter : MonoBehaviour
     {
         // Example usage
         StartCoroutine(GetTemperature());
-        StartCoroutine(SetPeltierState(true));
+        LazySetPeltierState(true);
         StartCoroutine(SetTemperatureLimit(30.0f));
     }
 
@@ -46,6 +46,7 @@ public class PeltierAdapter : MonoBehaviour
     IEnumerator SetPeltierState(bool state)
     {
         string url = state ? $"http://{microcontrollerIP}:{microcontrollerPort}/peltier/on" : $"http://{microcontrollerIP}:{microcontrollerPort}/peltier/off";
+        Debug.Log(url);
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -78,5 +79,48 @@ public class PeltierAdapter : MonoBehaviour
                 Debug.Log($"Temperature limit set to: {limit}°C");
             }
         }
+    }
+
+    // Coroutine to set the aim temperature
+    IEnumerator SetAimTemperature(float temperature)
+    {
+        string url = $"http://{microcontrollerIP}:{microcontrollerPort}/setTemperature?temperature={temperature}";
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error setting aim temperature: {request.error}");
+            }
+            else
+            {
+                Debug.Log($"Aim temperature set to: {temperature}°C");
+            }
+        }
+    }
+
+    // Lazy method to set the Peltier state
+    public void LazySetPeltierState(bool state)
+    {
+        StartCoroutine(SetPeltierState(state));
+    }
+
+    // Lazy method to get the temperature
+    public void LazyGetTemperature()
+    {
+        StartCoroutine(GetTemperature());
+    }
+
+    // Lazy method to set the temperature limit
+    public void LazySetTemperatureLimit(float limit)
+    {
+        StartCoroutine(SetTemperatureLimit(limit));
+    }
+
+    // Lazy method to set the aim temperature
+    public void LazySetAimTemperature(float temperature)
+    {
+        StartCoroutine(SetAimTemperature(temperature));
     }
 }
