@@ -17,6 +17,7 @@ TagManager:
   - Weapon
   - Train
   - TrainManager
+  - Carriage
   layers:
   - Default
   - TransparentFX

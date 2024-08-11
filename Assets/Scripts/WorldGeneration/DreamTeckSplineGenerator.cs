@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class DreamTeckSplineGenerator : MonoBehaviour
 {
-    public int numberOfPoints = 10;
+    public int numberOfPoints = 9;
     public float minX = -50f;
     public float maxX = 50f;
     public float minZ = -50f;
@@ -20,10 +20,9 @@ public class DreamTeckSplineGenerator : MonoBehaviour
 
     void Start()
     {
- 
-        //GenerateRandomSpline();
 
-        GenerateSnakeSpline();
+        // GenerateSnakeSpline();
+        GenerateStraightSpline();
         splineFollowerGameObject.SetActive(true);
 
     }
@@ -39,17 +38,16 @@ public class DreamTeckSplineGenerator : MonoBehaviour
 
     }
 
-    void GenerateRandomSpline()
+    void GenerateStraightSpline()
     {
         SplinePoint[] points = new SplinePoint[numberOfPoints];
-
+        float stepX = (maxX - minX) / (numberOfPoints - 1);
+        
         for (int i = 0; i < numberOfPoints; i++)
         {
-            float randomX = Random.Range(minX, maxX);
-            float randomZ = Random.Range(minZ, maxZ);
-
-            Vector3 newPosition = new Vector3(randomX, 0, randomZ);
-
+            float x = minX + i * stepX;
+          
+            Vector3 newPosition = new Vector3(x, 0, 0);
             points[i] = new SplinePoint(newPosition);
         }
 
@@ -98,5 +96,4 @@ public class DreamTeckSplineGenerator : MonoBehaviour
 
         splineComputer.Rebuild();
     }
-
 }

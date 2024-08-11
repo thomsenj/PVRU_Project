@@ -13,5 +13,6 @@ public class TagConstants : MonoBehaviour
     public const string WEAPON = "Weapon";
     public const string TRAIN = "Train";
     public const string TRAIN_MANAGER = "TrainManager";
+    public const string CARRIAGE = "Carriage";
 
 }
