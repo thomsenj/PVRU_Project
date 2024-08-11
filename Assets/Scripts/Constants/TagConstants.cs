@@ -14,5 +14,6 @@ public class TagConstants : MonoBehaviour
     public const string TRAIN = "Train";
     public const string TRAIN_MANAGER = "TrainManager";
     public const string CARRIAGE = "Carriage";
+    public const string JUNCTIION_CONTROLLER = "JunctionsController";
 
 }
