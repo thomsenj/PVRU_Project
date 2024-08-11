@@ -43,17 +43,17 @@ public class WorldGenerator : MonoBehaviour
                 float distance = GetDistance(plane, position);
                 if (distance < planeRadius && plane != mainPlane)
                 {
-                    SplineComputer newSpline = plane.GetComponent<SplineComputer>();
-                    if (newSpline != null)
-                    {
-                        splineFollower.spline = newSpline;
-                        splineFollower.SetPercent(0.0);
-                        foreach(GameObject carriage in carriages)
-                        {
-                            SplinePositioner splinePositioner = carriage.GetComponent<SplinePositioner>();
-                            splinePositioner.spline = newSpline;
-                        }
-                    }
+                    //SplineComputer newSpline = plane.GetComponent<SplineComputer>();
+                    //if (newSpline != null)
+                    //{
+                    //    splineFollower.spline = newSpline;
+                    //    splineFollower.SetPercent(0.0);
+                    //    foreach(GameObject carriage in carriages)
+                    //    {
+                    //        SplinePositioner splinePositioner = carriage.GetComponent<SplinePositioner>();
+                    //        splinePositioner.spline = newSpline;
+                    //    }
+                    //}
                     changePlane.transform.position = new Vector3(lastPlane.transform.position.x + (planeRadius * 2), lastPlane.transform.position.y, lastPlane.transform.position.z);
                     lastPlane = changePlane;
                     changePlane = mainPlane;
