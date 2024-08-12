@@ -72,6 +72,7 @@
 - [XR Interaction Toolkit 2.5.4](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.5/manual/index.html)
 - [XR Plugin Management 4.5.0](https://docs.unity3d.com/Packages/com.unity.xr.management@4.5/manual/index.html)
 - [Animation Rigging 1.3.0](https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.3/manual/index.html)
+- [Mono Cecil 1.11.4](https://docs.unity3d.com/Packages/com.unity.nuget.mono-cecil@1.11/manual/index.html)
 
 ## Additional Assets from Tutorials
 
