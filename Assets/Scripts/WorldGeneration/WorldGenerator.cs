@@ -54,6 +54,7 @@ public class WorldGenerator : MonoBehaviour
                 
                 if (distance < planeRadius && plane != mainPlane && !updateLock)
                 {
+                    // handle nodes
                     RemoveNode();
                     GameObject newLastPlane = planePool.GetAndRemoveRandomGameObject();
                     Vector3 newPosition = new Vector3(
@@ -63,6 +64,8 @@ public class WorldGenerator : MonoBehaviour
                     );  
                     newLastPlane.transform.position = newPosition;           
                     AddNode(newLastPlane);
+
+                    // handle planes
                     lastPlane = newLastPlane;
                     lastPlane.SetActive(true);
                     changePlane.SetActive(false);
@@ -70,7 +73,6 @@ public class WorldGenerator : MonoBehaviour
                     changePlane = mainPlane;
                     mainPlane = plane;
                     updateLock = true;
-                    Debug.Log("Main Plane Connections: " + mainPlane.GetComponent<SplineComputer>().GetJunctions(1));
                 }
             }
             else
@@ -117,9 +119,10 @@ public class WorldGenerator : MonoBehaviour
         Node node = newNode.AddComponent<Node>();
 
         // Use the AddConnection method to add connections to the node
-        node.transform.position = changePlaneSplineComputer.GetPoints()[0].position;
-        node.AddConnection(changePlaneSplineComputer, 0);
+        SplinePoint[] points = lastPlaneSplineComputer.GetPoints();
+        node.transform.position = points[points.Length - 1].position;
         node.AddConnection(lastPlaneSplineComputer, lastPlaneSplineComputer.pointCount - 1);
+        node.AddConnection(changePlaneSplineComputer, 0);
 
         // Create and configure the JunctionSwitch.Bridge
         JunctionSwitch.Bridge bridge = new JunctionSwitch.Bridge
@@ -153,5 +156,4 @@ public class WorldGenerator : MonoBehaviour
         }
         lastNodeCounter++;
     }
-
 }

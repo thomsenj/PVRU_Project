@@ -105,7 +105,7 @@ namespace Dreamteck.Splines.Examples
             }
         }
 
-        void SwitchSpline(Node.Connection from, Node.Connection to)
+        public void SwitchSpline(Node.Connection from, Node.Connection to)
         {
             //See how much units we have travelled past that Node in the last frame
             float excessDistance = from.spline.CalculateLength(from.spline.GetPointPercent(from.pointIndex), _tracer.UnclipPercent(_lastPercent));
