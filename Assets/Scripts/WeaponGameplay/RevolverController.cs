@@ -3,22 +3,23 @@ using System.Collections;
 
 public class RevolverController : MonoBehaviour
 {
-    public Transform muzzle;                   // Die Mündung des Revolvers, wo die Kugel herauskommt
-    public float recoilAmount = 0.25f;         // Die Stärke des Rückstoßes
-    public float recoilSpeed = 25f;            // Die Geschwindigkeit der Rückstoßbewegung
-    public BulletPoolManager bulletPool;       // Referenz zum Bullet-Pool-Manager
+    public Transform muzzle;                    // Die Mündung des Revolvers, wo die Kugel herauskommt
+    public float recoilAmount = 0.25f;          // Die Stärke des Rückstoßes
+    public float recoilSpeed = 25f;             // Die Geschwindigkeit der Rückstoßbewegung
+    public BulletPoolManager bulletPool;        // Referenz zum Bullet-Pool-Manager
+    public ParticleSystem shellEjectParticle;   // Partikelsystem für den Hülsenauswurf
 
     // Revolver-Teile
-    public Transform cylinder;                 // Zylinder des Revolvers
-    public Transform hammer;                   // Hammer des Revolvers
-    public Transform trigger;                  // Abzug des Revolvers
+    public Transform cylinder;                  // Zylinder des Revolvers
+    public Transform hammer;                    // Hammer des Revolvers
+    public Transform trigger;                   // Abzug des Revolvers
 
-    private Vector3 originalPosition;          // Die ursprüngliche Position des Revolvers
-    private Quaternion originalRotation;       // Die ursprüngliche Rotation des Revolvers
-    private bool isRecoiling = false;          // Gibt an, ob der Revolver sich im Rückstoß befindet
-    private Vector3 recoilPosition;            // Die Position, zu der der Revolver sich beim Rückstoß bewegt
-    private Quaternion recoilRotation;         // Die Rotation, zu der der Revolver sich beim Rückstoß dreht
-    private bool canShoot = true;              // Gibt an, ob ein Schuss abgegeben werden kann
+    private Vector3 originalPosition;           // Die ursprüngliche Position des Revolvers
+    private Quaternion originalRotation;        // Die ursprüngliche Rotation des Revolvers
+    private bool isRecoiling = false;           // Gibt an, ob der Revolver sich im Rückstoß befindet
+    private Vector3 recoilPosition;             // Die Position, zu der der Revolver sich beim Rückstoß bewegt
+    private Quaternion recoilRotation;          // Die Rotation, zu der der Revolver sich beim Rückstoß dreht
+    private bool canShoot = true;               // Gibt an, ob ein Schuss abgegeben werden kann
 
     void Start()
     {
@@ -66,6 +67,12 @@ public class RevolverController : MonoBehaviour
         // Hole eine Bullet aus dem Pool und feuere sie ab
         BulletController bullet = bulletPool.GetBullet();
         bullet.Shoot(muzzle.position, muzzle.forward);
+
+        // Spiele das Partikelsystem für den Hülsenauswurf ab
+        if (shellEjectParticle != null)
+        {
+            shellEjectParticle.Play();
+        }
 
         // Initialisiere den Rückstoß und die Animationen
         AnimateRevolver();
