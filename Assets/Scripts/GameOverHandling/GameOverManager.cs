@@ -6,10 +6,12 @@ public class GameOverManager : MonoBehaviour
 {
     public GameObject gameOverUI;
     public Text gameOverText;
+    private ScoreManager scoreManager;
 
     private void Start()
     {
         gameOverUI.SetActive(false);
+        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.SCORING_MANAGER).GetComponent<ScoreManager>();
     }
 
     void Update()
@@ -24,12 +26,12 @@ public class GameOverManager : MonoBehaviour
     {
         gameOverUI.SetActive(true);
         gameOverText.text = "Game Over!";
+        scoreManager.stopScoring();
         RestartGame();
     }
 
     private void RestartGame()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

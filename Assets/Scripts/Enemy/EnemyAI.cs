@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour
     private bool isDead = false;
     private int health = 100;
     private bool isAttacking = false;
+    private ScoreManager scoreManager;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class EnemyAI : MonoBehaviour
         {
             player = GameObject.FindWithTag(TagConstants.Player2Name).transform;
         }
+        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.SCORING_MANAGER).GetComponent<ScoreManager>();
     }
 
     void Update()
@@ -109,6 +111,7 @@ public class EnemyAI : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            scoreManager.AddBonusPoints(50);
         }
     }
 
