@@ -20,6 +20,7 @@ TagManager:
   - Carriage
   - JunctionsController
   - Plane Pool
+  - Scoring Manager
   layers:
   - Default
   - TransparentFX
