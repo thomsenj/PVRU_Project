@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Biomes/Mountain_Environment.prefab.meta
 guid: d404549cd79128f45a123b82de4985b1
 PrefabImporter:
+========
+guid: c09638933687649208ab47002afb860a
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> 038418fead4390e3d8e3cda53e2bfc99500c5b87:Assets/Prefabs/UI.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

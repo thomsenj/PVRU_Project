@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Dreamteck.Splines;
 using Dreamteck.Splines.Examples;
@@ -13,18 +14,22 @@ public class WorldGenerator : MonoBehaviour
     public float planeRadius;
 
     private GameObject train;
+    private PlanePool planePool;
     private GameObject mainPlane;
     private GameObject lastPlane;
     private int lastNodeCounter;
     private int nextNodeIndex;
+    bool updateLock;
 
     private void Start()
     {
+        planePool = GameObject.FindGameObjectWithTag(TagConstants.PLANE_POOL).GetComponent<PlanePool>();
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
         mainPlane = planes[0];
         lastPlane = planes[planes.Count - 1];
         lastNodeCounter = 0;
         nextNodeIndex = 3;
+        updateLock = false;
     }
 
     private void Update()
@@ -42,17 +47,32 @@ public class WorldGenerator : MonoBehaviour
             if (plane != null)
             {
                 float distance = GetDistance(plane, position);
-                if (distance < planeRadius && plane != mainPlane)
+
+                if(distance < planeRadius/2 && plane == mainPlane && updateLock) {
+                    updateLock = false;
+                }
+                
+                if (distance < planeRadius && plane != mainPlane && !updateLock)
                 {
+                    // handle nodes
                     RemoveNode();
-                    changePlane.transform.position = new Vector3(lastPlane.transform.position.x + (planeRadius * 2), lastPlane.transform.position.y, lastPlane.transform.position.z);
-                    lastPlane = changePlane;
-                    Debug.Log("Last Plane: " + lastPlane);
+                    GameObject newLastPlane = planePool.GetAndRemoveRandomGameObject();
+                    Vector3 newPosition = new Vector3(
+                        lastPlane.transform.position.x + (planeRadius * 2), 
+                        lastPlane.transform.position.y, 
+                        lastPlane.transform.position.z
+                    );  
+                    newLastPlane.transform.position = newPosition;           
+                    AddNode(newLastPlane);
+
+                    // handle planes
+                    lastPlane = newLastPlane;
+                    lastPlane.SetActive(true);
+                    changePlane.SetActive(false);
+                    planePool.AddPlane(changePlane);
                     changePlane = mainPlane;
-                    Debug.Log("Change Plane: " + mainPlane);
                     mainPlane = plane;
-                    Debug.Log("Main Plane: " + mainPlane);
-                    //AddNode();
+                    updateLock = true;
                 }
             }
             else
@@ -75,7 +95,7 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 
-    private void AddNode()
+    private void AddNode(GameObject incomingPlane)
     {
         // Find the junction controller by tag
         GameObject junctions = GameObject.FindGameObjectWithTag(TagConstants.JUNCTIION_CONTROLLER);
@@ -88,8 +108,8 @@ public class WorldGenerator : MonoBehaviour
         }
 
         // Get the spline computers and points
-        SplineComputer changePlaneSplineComputer = changePlane.GetComponent<SplineComputer>();
-        SplineComputer lastPlaneSplineComputer = lastPlane.GetComponent<SplineComputer>();
+        SplineComputer changePlaneSplineComputer = incomingPlane.GetComponent<SplineComputer>();
+        SplineComputer lastPlaneSplineComputer = lastPlane.GetComponent<SplineComputer>(); 
 
         // Create a new GameObject for the node
         GameObject newNode = new GameObject("Node " + nextNodeIndex);
@@ -99,8 +119,10 @@ public class WorldGenerator : MonoBehaviour
         Node node = newNode.AddComponent<Node>();
 
         // Use the AddConnection method to add connections to the node
-        node.AddConnection(changePlaneSplineComputer, 0);
+        SplinePoint[] points = lastPlaneSplineComputer.GetPoints();
+        node.transform.position = points[points.Length - 1].position;
         node.AddConnection(lastPlaneSplineComputer, lastPlaneSplineComputer.pointCount - 1);
+        node.AddConnection(changePlaneSplineComputer, 0);
 
         // Create and configure the JunctionSwitch.Bridge
         JunctionSwitch.Bridge bridge = new JunctionSwitch.Bridge
@@ -122,15 +144,11 @@ public class WorldGenerator : MonoBehaviour
         Debug.Log("New node added successfully to the junctions controller");
     }
 
-
-
-
     private void RemoveNode()
     {
         try
         {
             GameObject nodeToRemove = GameObject.Find("Node " + lastNodeCounter);
-            Debug.Log(nodeToRemove);
             Destroy(nodeToRemove);
         } catch
         {
@@ -138,5 +156,4 @@ public class WorldGenerator : MonoBehaviour
         }
         lastNodeCounter++;
     }
-
 }

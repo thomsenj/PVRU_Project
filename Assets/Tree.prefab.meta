@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Tree.prefab.meta
 guid: 8e38507f5bde40f4b87e59c10c12dc13
 PrefabImporter:
+========
+guid: ee2d9ddbff57110449b29a589d696f56
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> 038418fead4390e3d8e3cda53e2bfc99500c5b87:Assets/Asset Store/Low Poly Pistol Weapon Pack 1.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

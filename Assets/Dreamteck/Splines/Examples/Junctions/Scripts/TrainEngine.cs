@@ -61,6 +61,7 @@ namespace Dreamteck.Splines.Examples
         //Called when the tracer has passed a junction (a Node)
         private void OnJunction(List<SplineTracer.NodeConnection> passed)
         {
+            Debug.Log("Enter Trigger");
             Node node = passed[0].node; //Get the node of the junction
             JunctionSwitch junctionSwitch = node.GetComponent<JunctionSwitch>(); //Look for a JunctionSwitch component
             if (junctionSwitch == null) return; //No JunctionSwitch - ignore it - this isn't a real junction
@@ -86,6 +87,7 @@ namespace Dreamteck.Splines.Examples
                 }
                 //Skip the bridge if we are not on one of the splines that the switch connects
                 if (currentConnection != bridge.a && currentConnection != bridge.b) continue;
+                Debug.Log("Come until after validation.");
                 if (currentConnection == bridge.a)
                 {
                     if ((int)_tracer.direction != (int)bridge.bDirection) continue;
@@ -103,7 +105,7 @@ namespace Dreamteck.Splines.Examples
             }
         }
 
-        void SwitchSpline(Node.Connection from, Node.Connection to)
+        public void SwitchSpline(Node.Connection from, Node.Connection to)
         {
             //See how much units we have travelled past that Node in the last frame
             float excessDistance = from.spline.CalculateLength(from.spline.GetPointPercent(from.pointIndex), _tracer.UnclipPercent(_lastPercent));

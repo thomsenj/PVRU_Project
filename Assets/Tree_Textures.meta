@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Tree_Textures.meta
 guid: c9dd0bca5fb0abe429cb7cbb04549c0f
 folderAsset: yes
+========
+guid: 96c82eebb86464eae8110dcee3e46bdb
+>>>>>>>> 038418fead4390e3d8e3cda53e2bfc99500c5b87:Assets/Scenes/2D UI.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
