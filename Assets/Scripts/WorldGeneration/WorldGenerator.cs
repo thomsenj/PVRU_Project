@@ -13,6 +13,7 @@ public class WorldGenerator : MonoBehaviour
     public float planeRadius;
 
     private GameObject train;
+    private PlanePool planePool;
     private GameObject mainPlane;
     private GameObject lastPlane;
     private int lastNodeCounter;
@@ -20,6 +21,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void Start()
     {
+        planePool = GameObject.FindGameObjectWithTag(TagConstants.PLANE_POOL).GetComponent<PlanePool>();
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
         mainPlane = planes[0];
         lastPlane = planes[planes.Count - 1];
@@ -45,14 +47,16 @@ public class WorldGenerator : MonoBehaviour
                 if (distance < planeRadius && plane != mainPlane)
                 {
                     RemoveNode();
-                    changePlane.transform.position = new Vector3(lastPlane.transform.position.x + (planeRadius * 2), lastPlane.transform.position.y, lastPlane.transform.position.z);
-                    lastPlane = changePlane;
-                    Debug.Log("Last Plane: " + lastPlane);
+                    GameObject newLastPlane = planePool.GetAndRemoveRandomGameObject();
+                    Debug.Log(lastPlane.transform.position.x + (planeRadius * 2));
+                    newLastPlane.transform.position = new Vector3(lastPlane.transform.position.x + (planeRadius * 2), lastPlane.transform.position.y, lastPlane.transform.position.z);
+                    AddNode(newLastPlane);
+                    lastPlane = newLastPlane;
+                    lastPlane.SetActive(true);
+                    changePlane.SetActive(false);
+                    planePool.AddPlane(changePlane);
                     changePlane = mainPlane;
-                    Debug.Log("Change Plane: " + mainPlane);
                     mainPlane = plane;
-                    Debug.Log("Main Plane: " + mainPlane);
-                    //AddNode();
                 }
             }
             else
@@ -75,7 +79,7 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 
-    private void AddNode()
+    private void AddNode(GameObject incomingPlane)
     {
         // Find the junction controller by tag
         GameObject junctions = GameObject.FindGameObjectWithTag(TagConstants.JUNCTIION_CONTROLLER);
@@ -88,7 +92,7 @@ public class WorldGenerator : MonoBehaviour
         }
 
         // Get the spline computers and points
-        SplineComputer changePlaneSplineComputer = changePlane.GetComponent<SplineComputer>();
+        SplineComputer changePlaneSplineComputer = incomingPlane.GetComponent<SplineComputer>();
         SplineComputer lastPlaneSplineComputer = lastPlane.GetComponent<SplineComputer>();
 
         // Create a new GameObject for the node
@@ -130,7 +134,6 @@ public class WorldGenerator : MonoBehaviour
         try
         {
             GameObject nodeToRemove = GameObject.Find("Node " + lastNodeCounter);
-            Debug.Log(nodeToRemove);
             Destroy(nodeToRemove);
         } catch
         {

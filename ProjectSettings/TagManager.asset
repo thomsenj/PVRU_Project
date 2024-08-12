@@ -19,6 +19,7 @@ TagManager:
   - TrainManager
   - Carriage
   - JunctionsController
+  - Plane Pool
   layers:
   - Default
   - TransparentFX
