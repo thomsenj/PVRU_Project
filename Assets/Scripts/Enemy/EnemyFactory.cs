@@ -32,6 +32,6 @@ public class EnemyFactory : MonoBehaviour
         float distance = Random.Range(0f, radius);
         float xPos = playerPosition.x + distance * Mathf.Cos(angle * Mathf.Deg2Rad);
         float zPos = playerPosition.z + distance * Mathf.Sin(angle * Mathf.Deg2Rad);
-        return new Vector3(xPos, playerPosition.y, zPos);
+        return new Vector3(xPos, 0, zPos);
     }
 }
