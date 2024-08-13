@@ -80,7 +80,6 @@ public class EnemyAI : MonoBehaviour
         }
         if (other.CompareTag(TagConstants.WEAPON) && !isDead)
         {
-            Debug.Log("Weapon Trigger.");
             Weapon weapon = GameObject.FindWithTag(TagConstants.Player2Name).GetComponent<Weapon>();
             if (weapon.IsSwinging())
             {
@@ -103,18 +102,14 @@ public class EnemyAI : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("Health: " + health + " Damage: " + damage);
         if (isDead) return;
-
         health -= amount;
-        Debug.Log("Health: " + health);
         animator.SetTrigger(AnimationConstants.GET_HIT);
 
         if (health <= 0)
         {
             Die();
-            scoreManager.AddBonusPoints(50);
-            enemyFactory.EnemyDied();
+
         }
     }
 
@@ -128,5 +123,14 @@ public class EnemyAI : MonoBehaviour
     {
         isDead = true;
         animator.SetTrigger(AnimationConstants.DIE);
+        scoreManager.AddBonusPoints(10);
+        StartCoroutine(WaitForDeathAnimation());
+    }
+
+    IEnumerator WaitForDeathAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        gameObject.SetActive(false);
+        enemyFactory.EnemyDied(gameObject);
     }
 }

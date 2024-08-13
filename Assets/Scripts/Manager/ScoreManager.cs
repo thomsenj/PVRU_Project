@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
         return baseEnemyCount + additionalEnemies;
     }
 
-    public void stopScoring() {
+    public void stopScoring(){
         isScoring = false;
     }
 }

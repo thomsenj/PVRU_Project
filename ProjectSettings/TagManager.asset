@@ -17,10 +17,8 @@ TagManager:
   - Weapon
   - Train
   - TrainManager
-  - Carriage
-  - JunctionsController
-  - Plane Pool
-  - Scoring Manager
+  - Bullet
+  - World Manager
   layers:
   - Default
   - TransparentFX
