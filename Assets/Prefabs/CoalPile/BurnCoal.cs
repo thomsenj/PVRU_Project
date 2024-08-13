@@ -7,8 +7,8 @@ using UnityEngine;
 public class BurnCoal : MonoBehaviour
 {
     public float fuelstand = 100f;
-    public TrainManager trainManager;
 
+    private TrainManager trainManager;
     private float fuelModifier = 1.0f;
     private CoalPile coalPile;
 
@@ -16,7 +16,7 @@ public class BurnCoal : MonoBehaviour
     {
         try
         {
-            trainManager = GameObject.FindGameObjectWithTag(TagConstants.TRAIN_MANAGER).GetComponent<TrainManager>();
+            trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
             GameObject test  = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE);
             Debug.Log(test);
             coalPile = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE).GetComponent<CoalPile>();
