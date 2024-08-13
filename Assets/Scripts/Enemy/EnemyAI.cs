@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour
     private int health = 100;
     private bool isAttacking = false;
     private ScoreManager scoreManager;
+    private EnemyFactory enemyFactory;
 
     void Start()
     {
@@ -26,7 +27,8 @@ public class EnemyAI : MonoBehaviour
         {
             player = GameObject.FindWithTag(TagConstants.Player2Name).transform;
         }
-        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.SCORING_MANAGER).GetComponent<ScoreManager>();
+        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
+        enemyFactory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyFactory>();
     }
 
     void Update()
@@ -112,6 +114,7 @@ public class EnemyAI : MonoBehaviour
         {
             Die();
             scoreManager.AddBonusPoints(50);
+            enemyFactory.decrementEnemyCount();
         }
     }
 

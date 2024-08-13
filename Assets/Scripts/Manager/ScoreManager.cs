@@ -27,6 +27,12 @@ public class ScoreManager : MonoBehaviour
             score += bonusPoints;
         }
     }
+    public int GetEnemyCount()
+    {
+        int baseEnemyCount = 5;
+        int additionalEnemies = (int)(score / 100f);
+        return baseEnemyCount + additionalEnemies;
+    }
 
     public void stopScoring() {
         isScoring = false;

@@ -1,23 +1,37 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFactory : MonoBehaviour
 {
-    public GameObject enemyGameObject;
+    public List<GameObject> enemyGameObjects;
     public int enemyCount = 0;
     public int enemyMax = 5;
     public float spawnRadius = 10f;
-    public float spawnInterval = 1f; 
+    public float spawnInterval = 3f; 
+
+    private ScoreManager scoreManager;
 
     private void Start()
     {
+        scoreManager = GetComponent<ScoreManager>();
         StartCoroutine(SpawnEnemies());
+    }
+
+    private void Update() {
+        enemyMax = scoreManager.GetEnemyCount();
+    }
+
+    public void decrementEnemyCount() {
+        enemyCount--;
     }
 
     IEnumerator SpawnEnemies()
     {
         while (enemyCount < enemyMax)
         {
+            System.Random random = new System.Random();
+            GameObject enemyGameObject = enemyGameObjects[random.Next(enemyGameObjects.Count)];
             Vector3 spawnPoint = GetRandomPositionAroundPlayer(spawnRadius);
             Instantiate(enemyGameObject, spawnPoint, Quaternion.identity);
             enemyCount++;
