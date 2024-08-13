@@ -8,6 +8,7 @@ using System;
 using UnityEditor;
 using TMPro;
 using UnityEngine.Rendering;
+using Fusion.Addons.Physics;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -16,11 +17,15 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
 
+    private bool _mouseButton0;
+    private bool _mouseButton1;
+
     // Host 
-    async void GameStart(GameMode mode)
+    async void StartGame(GameMode mode)
     {
-        // Creating Runnter and saying user is giving input
+        // Creating Runner and saying user is giving input
         networkRunner = gameObject.AddComponent<NetworkRunner>();
+        gameObject.AddComponent<RunnerSimulatePhysics3D>().ClientPhysicsSimulation = ClientPhysicsSimulation.SimulateForward;
         networkRunner.ProvideInput = true;
 
         // Collecting Scene Information
@@ -42,22 +47,28 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         );
     }
 
+    void Update()
+    {
+        _mouseButton0 = _mouseButton0 | Input.GetMouseButtonDown(0);
+        _mouseButton1 = _mouseButton0 | Input.GetMouseButtonDown(1);
+    }
+
     private void OnGUI()
     {
         if (networkRunner == null)
         {
             if (GUI.Button(new Rect(0, 0, 200, 40), "Host"))
             {
-                GameStart(GameMode.Host);
+                StartGame(GameMode.Host);
             }
             if (GUI.Button(new Rect(0, 40, 200, 40), "Join"))
             {
-                GameStart(GameMode.Client);
+                StartGame(GameMode.Client);
             }
         }
     }
 
-    public void OnConnectedToServer(NetworkRunner runner)
+    void INetworkRunnerCallbacks.OnConnectedToServer(NetworkRunner runner)
     {
         // throw new NotImplementedException();
     }
@@ -77,7 +88,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         // throw new NotImplementedException();
     }
 
-    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
+    void INetworkRunnerCallbacks.OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
     {
         // throw new NotImplementedException();
     }
@@ -90,6 +101,33 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         // throw new NotImplementedException();
+        var data = new NetworkInputData();
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            data.direction += Vector3.forward;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            data.direction += Vector3.back;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            data.direction += Vector3.left;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            data.direction += Vector3.right;
+        }
+
+        // Add structure & Host
+        data.buttons.Set(NetworkInputData.MOUSEBUTTON0, _mouseButton0);
+        _mouseButton0 = false;
+
+        data.buttons.Set(NetworkInputData.MOUSEBUTTON1, _mouseButton1);
+        _mouseButton1 = false;
+
+        input.Set(data); // Passing to host
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
@@ -163,17 +201,5 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
     {
         // throw new NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

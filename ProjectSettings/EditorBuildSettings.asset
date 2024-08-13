@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/VR UI.unity
     guid: 218b848ff86dc41b4be2588f1c82c7e1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Photon Fusion 2/Photon Fusion 2 - Host Mode.unity
+    guid: 6842bdc2c1ef0b64b821f4489afef875
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 67a46c3402fd74e49b0d3b57f0f79334, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a6f17fe77f9f6fb4884a64b5a091cdd1, type: 2}

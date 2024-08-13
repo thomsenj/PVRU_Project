@@ -1240,6 +1240,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3679172096297398705, guid: 47e492fec7d311f48b7eabcbb4e2e47d, type: 3}
+      propertyPath: m_XRAllFingerShapesDebugUI
+      value: 
+      objectReference: {fileID: 2109554999}
     - target: {fileID: 3793396580057538083, guid: 47e492fec7d311f48b7eabcbb4e2e47d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1969,6 +1973,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47e492fec7d311f48b7eabcbb4e2e47d, type: 3}
+--- !u!1 &2091570427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5699917477243334179, guid: 5eccbf4be2c00e94689ee8062e4e7276, type: 3}
+  m_PrefabInstance: {fileID: 1509172594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2109554999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7382346719239079980, guid: 47e492fec7d311f48b7eabcbb4e2e47d, type: 3}
+  m_PrefabInstance: {fileID: 1986321451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff34dc1f6664bb981a9c41141706430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7674700660162576396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2024,11 +2044,11 @@ PrefabInstance:
     - target: {fileID: 3012907663159845989, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
       propertyPath: m_GestureEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358629113}
+      objectReference: {fileID: 2091570427}
     - target: {fileID: 3012907663159845989, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
       propertyPath: m_GesturePerformed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358629113}
+      objectReference: {fileID: 2091570427}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

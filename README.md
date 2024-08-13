@@ -43,6 +43,8 @@
 ### Multiplayer
 
 - [Photon Fusion 2](https://assetstore.unity.com/packages/tools/network/photon-fusion-267958)
+- [Photon Fusion 2 - Physics Addon](https://doc.photonengine.com/fusion/current/addons/physics/overview)
+-
 
 ### Paid
 

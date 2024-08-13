@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3843691585560005812}
   - component: {fileID: 5383129284637621794}
   - component: {fileID: 4558882353987620840}
+  - component: {fileID: -6457721487493629617}
   m_Layer: 0
   m_Name: NetworkPlayerPrefab
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 4558882353987620840}
+  - {fileID: -6457721487493629617}
 --- !u!143 &5383129284637621794
 CharacterController:
   m_ObjectHideFlags: 0
@@ -97,6 +99,20 @@ MonoBehaviour:
   braking: 10
   maxSpeed: 2
   rotationSpeed: 15
+--- !u!114 &-6457721487493629617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060151953849233463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6cce91a755db614c9c1be70f548d0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: -6279290624421348791, guid: f6eb86983df087d4eb7098d947f5b1ac, type: 3}
+  _physXBulletPrefab: {fileID: 2745240130451148854, guid: 59e92d4f4b10d2348a7d2ec9db136d6d, type: 3}
 --- !u!1 &4457906159991808383
 GameObject:
   m_ObjectHideFlags: 0

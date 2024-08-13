@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7557155275259673874
 Transform:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 7205007788053296821}
+  m_HandTrackingEvents: {fileID: 387130166948655898}
   m_HandShapeOrPose: {fileID: 11400000, guid: b53bf0ad6ce03214c989aed8257650cf, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &307571625613755406
 Transform:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 1890587025249153567}
+  m_HandTrackingEvents: {fileID: 8725437691761279268}
   m_HandShapeOrPose: {fileID: 11400000, guid: 8b21a490579f14243ac2c65d702d0621, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2118749026024255812
 Transform:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 7205007788053296821}
+  m_HandTrackingEvents: {fileID: 387130166948655898}
   m_HandShapeOrPose: {fileID: 11400000, guid: 7fdd2afa44a436446bdb55fa7872a77d, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 1890587025249153567}
+  m_HandTrackingEvents: {fileID: 8725437691761279268}
   m_HandShapeOrPose: {fileID: 11400000, guid: 539a43ef608bc384291a38b99e13751b, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4152950202681754581
 Transform:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 1890587025249153567}
+  m_HandTrackingEvents: {fileID: 8725437691761279268}
   m_HandShapeOrPose: {fileID: 11400000, guid: 7fdd2afa44a436446bdb55fa7872a77d, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3737764147463027810}
-  - component: {fileID: 7205007788053296821}
+  - component: {fileID: 387130166948655898}
   m_Layer: 0
   m_Name: Left Hand
   m_TagString: Untagged
@@ -615,7 +615,7 @@ Transform:
   - {fileID: 7557155275259673874}
   m_Father: {fileID: 2022574434841256213}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7205007788053296821
+--- !u!114 &387130166948655898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -653,7 +653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7090736396233566527}
-  - component: {fileID: 1890587025249153567}
+  - component: {fileID: 8725437691761279268}
   m_Layer: 0
   m_Name: Right Hand
   m_TagString: Untagged
@@ -681,7 +681,7 @@ Transform:
   - {fileID: 3183865902093324917}
   m_Father: {fileID: 2022574434841256213}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1890587025249153567
+--- !u!114 &8725437691761279268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -726,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2198844162005159954
 Transform:
   m_ObjectHideFlags: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 7205007788053296821}
+  m_HandTrackingEvents: {fileID: 387130166948655898}
   m_HandShapeOrPose: {fileID: 11400000, guid: 87f5041069438e74ba7bd94393a13072, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7792885156121467159
 Transform:
   m_ObjectHideFlags: 0
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 1890587025249153567}
+  m_HandTrackingEvents: {fileID: 8725437691761279268}
   m_HandShapeOrPose: {fileID: 11400000, guid: b53bf0ad6ce03214c989aed8257650cf, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1120113908817052668
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 7205007788053296821}
+  m_HandTrackingEvents: {fileID: 387130166948655898}
   m_HandShapeOrPose: {fileID: 11400000, guid: 8b21a490579f14243ac2c65d702d0621, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
@@ -936,7 +936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3129822216999673555
 Transform:
   m_ObjectHideFlags: 0
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93899325d5df74eb9176e097ee3d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandTrackingEvents: {fileID: 1890587025249153567}
+  m_HandTrackingEvents: {fileID: 8725437691761279268}
   m_HandShapeOrPose: {fileID: 11400000, guid: 87f5041069438e74ba7bd94393a13072, type: 2}
   m_TargetTransform: {fileID: 0}
   m_Background: {fileID: 0}
