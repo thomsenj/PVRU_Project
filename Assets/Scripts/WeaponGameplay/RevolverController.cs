@@ -62,7 +62,6 @@ public class RevolverController : MonoBehaviour
 
     public void Shoot()
     {
-        if(canShoot) {
             canShoot = false; // Verhindere weiteres Schießen während des Rückstoßes
             
             // Hole eine Bullet aus dem Pool und feuere sie ab
@@ -78,7 +77,7 @@ public class RevolverController : MonoBehaviour
             // Initialisiere den Rückstoß und die Animationen
             AnimateRevolver();
             StartRecoil();
-        }
+            canShoot = true;
     }
 
     private void StartRecoil()
