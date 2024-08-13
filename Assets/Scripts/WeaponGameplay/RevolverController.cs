@@ -60,23 +60,25 @@ public class RevolverController : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        canShoot = false; // Verhindere weiteres Schießen während des Rückstoßes
+        if(canShoot) {
+            canShoot = false; // Verhindere weiteres Schießen während des Rückstoßes
+            
+            // Hole eine Bullet aus dem Pool und feuere sie ab
+            BulletController bullet = bulletPool.GetBullet();
+            bullet.Shoot(muzzle.position, muzzle.forward);
 
-        // Hole eine Bullet aus dem Pool und feuere sie ab
-        BulletController bullet = bulletPool.GetBullet();
-        bullet.Shoot(muzzle.position, muzzle.forward);
+            // Spiele das Partikelsystem für den Hülsenauswurf ab
+            if (shellEjectParticle != null)
+            {
+                shellEjectParticle.Play();
+            }
 
-        // Spiele das Partikelsystem für den Hülsenauswurf ab
-        if (shellEjectParticle != null)
-        {
-            shellEjectParticle.Play();
+            // Initialisiere den Rückstoß und die Animationen
+            AnimateRevolver();
+            StartRecoil();
         }
-
-        // Initialisiere den Rückstoß und die Animationen
-        AnimateRevolver();
-        StartRecoil();
     }
 
     private void StartRecoil()
