@@ -25,6 +25,13 @@ public class ResourceFactory : MonoBehaviour
         return resourceCount;
     }
 
+    public void AddResourceToList(GameObject gameObject) {
+        resourceGameObjects.Add(gameObject);
+        if(resourceCount > 0){
+            resourceCount--;
+        }
+    }
+
     public void UpdateResourceFactory(GameObject plane) {
         PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().getPlaneInfo();
         spawnTarget = plane;

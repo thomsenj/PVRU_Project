@@ -14,10 +14,12 @@ public class Resource : MonoBehaviour
     private Pickaxe pickaxe;
     private Renderer resourceRenderer;
     private Color originalColor;
+    private ResourceFactory factory;
 
     void Start()
     {
         GameObject player = GameObject.FindWithTag(TagConstants.Player2Name);
+        factory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceFactory>();
         pickaxe = player.GetComponent<Pickaxe>();
         playerInventory = player .GetComponent<PlayerInventory>();
         resourceRenderer = GetComponent<Renderer>();
@@ -60,7 +62,8 @@ public class Resource : MonoBehaviour
         if (currentHits >= hitsToHarvest)
         {
             playerInventory.AddResource(resourceType, amount);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            factory.AddResourceToList(gameObject);
         }
     }
 
