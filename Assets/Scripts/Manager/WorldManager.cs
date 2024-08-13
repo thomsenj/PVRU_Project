@@ -39,7 +39,6 @@ public class WorldManager : MonoBehaviour
             mainPlane = planeInformation.nextPlane;
             UpdateEnemyFactory();
             UpdateResourceFactory();
-            Update
         }
     }
 

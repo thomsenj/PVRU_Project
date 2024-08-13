@@ -2,19 +2,27 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 20000f;
-    private float currentHealth;
+    public int maxHealth = 20000;
+    private int currentHealth;
+    private HealthbarController ui;
 
     void Start()
     {
         currentHealth = maxHealth;
+        ui = GameObject.Find(GeneralConstants.HEALTH_BAR).GetComponent<HealthbarController>();
+        ui.SetMaxValue(maxHealth);
+        ui.SetValue(maxHealth);
     }
 
     public void TakeDamage(float amount)
     {
-        Debug.Log("Take Damage: " + amount);
-        currentHealth -= amount;
-        Debug.Log("Current Health: " +  currentHealth);
+        int amountInt = (int) amount;
+        currentHealth -= amountInt;
+        if(currentHealth > 0) {
+            ui.ApplyDelta(-amountInt);
+        } else {
+            ui.SetValue(0);
+        }
         if (currentHealth <= 0)
         {
             Die();
