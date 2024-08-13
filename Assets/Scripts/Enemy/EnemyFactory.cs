@@ -19,7 +19,6 @@ public class EnemyFactory : MonoBehaviour
     private void Start()
     {
         scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
-        Debug.Log(scoreManager);
         enemyGameObjects = new List<GameObject>();
         StartCoroutine(SpawnEnemies());
     }
