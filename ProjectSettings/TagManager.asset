@@ -19,6 +19,7 @@ TagManager:
   - TrainManager
   - Bullet
   - World Manager
+  - Enemy
   layers:
   - Default
   - TransparentFX

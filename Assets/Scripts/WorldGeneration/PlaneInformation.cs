@@ -6,12 +6,13 @@ public class PlaneInformation : MonoBehaviour
 {
 
     public GameObject nextPlane;
-    public List<GameObject> resoucePrefabs;
+    public GameObject enemySpawner;
+    public List<GameObject> resourcePrefabs;
     public int resourceCount;
     public int resourceMax;
     public WeatherTypes weatherType;
     public PlaneInfo getPlaneInfo() {
-        return new PlaneInfo(resoucePrefabs, resourceCount, resourceMax, weatherType);
+        return new PlaneInfo(resourcePrefabs, resourceCount, resourceMax, weatherType);
     }
 }
 

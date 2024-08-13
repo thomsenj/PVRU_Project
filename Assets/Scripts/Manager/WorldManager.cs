@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    // TODO Add update rescource manager
-    // TODO Add update enemy factory
-
     // in the start the plane where the trains stands
     public GameObject mainPlane;
     public float planeRadius = 75f;
     public GameObject train;
     private ResourceFactory resourceFactory;
+    private EnemyFactory enemyFactory;
 
     private void Start()
     {
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
-        resourceFactory =  GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceFactory>();
+        GameObject worldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
+        resourceFactory =  worldManager.GetComponent<ResourceFactory>();
+        enemyFactory = worldManager.GetComponent<EnemyFactory>();
     }
 
      private void Update()
@@ -32,9 +33,13 @@ public class WorldManager : MonoBehaviour
         float distance = GetDistance(mainPlane, position);
         if(distance > planeRadius) {
             int resourceCount = resourceFactory.getLastPlaneInfo();
-            mainPlane.GetComponent<PlaneInformation>().resourceCount = resourceCount;
-            mainPlane = mainPlane.GetComponent<PlaneInformation>().nextPlane;
+            PlaneInformation planeInformation = mainPlane.GetComponent<PlaneInformation>();
+            planeInformation.resourceCount = resourceCount;
+            ClearEnemies();
+            mainPlane = planeInformation.nextPlane;
+            UpdateEnemyFactory();
             UpdateResourceFactory();
+            Update
         }
     }
 
@@ -55,4 +60,13 @@ public class WorldManager : MonoBehaviour
         resourceFactory.UpdateResourceFactory(mainPlane);
     }
 
+    private void ClearEnemies() {
+        List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(TagConstants.Enemy));
+        enemyFactory.UpdateEnemies(enemies);
+    }
+
+    private void UpdateEnemyFactory() {
+        GameObject spawner = mainPlane.GetComponent<PlaneInformation>().enemySpawner;
+        enemyFactory.ResetFactory(spawner);
+    }
 }

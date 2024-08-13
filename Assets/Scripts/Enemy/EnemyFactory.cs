@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyFactory : MonoBehaviour
@@ -32,6 +33,18 @@ public class EnemyFactory : MonoBehaviour
         if(enemyCount > 0) {
             enemyCount--;
         }
+    }
+
+    public void ResetFactory(GameObject spawner) {
+        spawnTarget = spawner;
+        enemyCount = 0; 
+    }
+
+    public void UpdateEnemies(List<GameObject> enemies) {
+        foreach (GameObject gameObject in enemies) {
+            gameObject.SetActive(false);
+        }
+        enemyGameObjects.AddRange(enemies);
     }
 
     IEnumerator SpawnEnemies()

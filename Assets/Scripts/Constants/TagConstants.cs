@@ -17,4 +17,5 @@ public class TagConstants : MonoBehaviour
     public const string JUNCTIION_CONTROLLER = "JunctionsController";
     public const string PLANE_POOL = "Plane Pool";
     public const string WORLD_MANAGER = "World Manager";
+    public const string Enemy = "Enemy";
 }
