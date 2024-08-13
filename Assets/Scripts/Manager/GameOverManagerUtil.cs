@@ -7,7 +7,7 @@ public class GameOverManagerUtil : MonoBehaviour
 {
     public static GameOverManager GetGameOverManager()
     {
-        GameOverManager gameOverManager = FindObjectOfType<GameOverManager>();
+        GameOverManager gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
         if (gameOverManager == null)
         {
             Debug.LogError("No GameOverManager found in the scene.");

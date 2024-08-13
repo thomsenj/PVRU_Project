@@ -14,8 +14,12 @@ public class ScoreManager : MonoBehaviour
     {
         isScoring = true;
         score = 0f;
-        scoreUI = GameObject.Find(GeneralConstants.SCORE_COUNTER).GetComponent<CollectableBankController>();
-        scoreUI.SetCount(0);
+        try {
+            scoreUI = GameObject.Find(GeneralConstants.SCORE_COUNTER).GetComponent<CollectableBankController>();
+            scoreUI.SetCount(0);
+        } catch {
+            //Debug.LogError("No Score UI");
+        }
     }
 
     void Update()
@@ -23,7 +27,11 @@ public class ScoreManager : MonoBehaviour
         if(isScoring)
         {
             score += scoreIncreaseRate * Time.deltaTime;
-            scoreUI.SetCount((int) score);
+            try {
+                scoreUI.SetCount((int) score);
+            } catch {
+                //Debug.LogError("No Score UI");
+            }
         }
     }
 

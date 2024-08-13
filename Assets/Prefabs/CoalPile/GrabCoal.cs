@@ -11,7 +11,7 @@ public class VRPlayerInteraction : MonoBehaviour
 
     void Start()
     {
-        // Versuche, den RightHand Controller zu finden
+        // Try to find the RightHand Controller
         GameObject rightHandControllerObject = GameObject.Find(rightHandControllerName);
         if (rightHandControllerObject != null)
         {
@@ -65,7 +65,7 @@ public class VRPlayerInteraction : MonoBehaviour
                     }
 
                     coal.transform.SetParent(rightHandController.transform);
-                    coal.tag = TagConstants.COAL;
+                    coal.tag = TagConstants.COAL;  
                     coal.transform.localPosition = Vector3.zero;
 
                     heldObject = coal;

@@ -84,7 +84,7 @@ public class EnemyFactory : MonoBehaviour
             pos.z = pos.z + 2;
             return pos;
         }
-        Vector3 playerPosition = GameObject.FindWithTag(TagConstants.Player2Name).transform.position;
+        Vector3 playerPosition = GameObject.FindWithTag(TagConstants.TRAIN).transform.position;
         float angle = Random.Range(0f, 360f);
         float distance = Random.Range(0f, radius);
         float xPos = playerPosition.x + distance * Mathf.Cos(angle * Mathf.Deg2Rad);

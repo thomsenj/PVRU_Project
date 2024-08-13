@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
         if (player == null)
         {
-            player = GameObject.FindWithTag(TagConstants.Player2Name).transform;
+            player = GameObject.FindWithTag(TagConstants.TRAIN).transform;
         }
         scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
         enemyFactory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyFactory>();

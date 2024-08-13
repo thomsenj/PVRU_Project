@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BurnCoal : MonoBehaviour
@@ -9,12 +10,16 @@ public class BurnCoal : MonoBehaviour
     public TrainManager trainManager;
 
     private float fuelModifier = 1.0f;
+    private CoalPile coalPile;
 
     private void Start()
     {
         try
         {
             trainManager = GameObject.FindGameObjectWithTag(TagConstants.TRAIN_MANAGER).GetComponent<TrainManager>();
+            GameObject test  = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE);
+            Debug.Log(test);
+            coalPile = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE).GetComponent<CoalPile>();
             fuelModifier = trainManager.getFuelModifier();
         }
         catch
@@ -26,8 +31,6 @@ public class BurnCoal : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        try
-        {
             if (other.CompareTag(TagConstants.COAL))
             {
                 addFuel();
@@ -38,19 +41,15 @@ public class BurnCoal : MonoBehaviour
                 {
                     Debug.LogError("This scene lacks a train manager.");
                 }
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
+                Debug.Log(coalPile);
+                coalPile.AddCoal(other.gameObject);
             }
-        }
-        catch
-        {
-            Debug.LogError("An error occurred during trigger handling.");
-        }
     }
 
     private void addFuel()
     {
         fuelstand = Mathf.Clamp(fuelstand + 10, 0, 100); 
-        Debug.Log(fuelstand);
     }
 
     private float getSpeed()
@@ -89,7 +88,6 @@ public class BurnCoal : MonoBehaviour
             try { trainManager.setSpeed(getSpeed()); }
             catch { Debug.LogError("Could not set train speed."); }
             yield return new WaitForSeconds(5f);
-            Debug.Log(fuelstand);
         }
     }
 }

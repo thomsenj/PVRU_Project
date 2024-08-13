@@ -12,6 +12,7 @@ public class WorldManager : MonoBehaviour
     public GameObject train;
     private ResourceFactory resourceFactory;
     private EnemyFactory enemyFactory;
+    private TrainManager trainManager;
 
     private void Start()
     {
@@ -19,6 +20,10 @@ public class WorldManager : MonoBehaviour
         GameObject worldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
         resourceFactory =  worldManager.GetComponent<ResourceFactory>();
         enemyFactory = worldManager.GetComponent<EnemyFactory>();
+        trainManager = worldManager.GetComponent<TrainManager>();
+        UpdateResourceFactory();
+        UpdateEnemyFactory();
+        UpdateTrainManager();
     }
 
      private void Update()
@@ -67,5 +72,9 @@ public class WorldManager : MonoBehaviour
     private void UpdateEnemyFactory() {
         GameObject spawner = mainPlane.GetComponent<PlaneInformation>().enemySpawner;
         enemyFactory.ResetFactory(spawner);
+    }
+
+    private void UpdateTrainManager() {
+        trainManager.weatherType = mainPlane.GetComponent<PlaneInformation>().getPlaneInfo().WeatherType;
     }
 }

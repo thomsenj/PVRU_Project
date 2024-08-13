@@ -6,7 +6,6 @@ public class GameOverCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("In Trigger Enter");
         if (other.CompareTag(TagConstants.GAME_OVER_COLLIDER) || other.CompareTag(TagConstants.TRAIN))
         {
             GameOverManager gameOverManager = GameOverManagerUtil.GetGameOverManager();
