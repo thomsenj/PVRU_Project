@@ -5,6 +5,11 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
     public List<GameObject> enemyGameObjects;
+
+    public List<GameObject> prefabs;
+
+    public 
+
     public int enemyCount = 0;
     public int enemyMax = 5;
     public float spawnRadius = 10f;
@@ -22,7 +27,7 @@ public class EnemyFactory : MonoBehaviour
         enemyMax = scoreManager.GetEnemyCount();
     }
 
-    public void decrementEnemyCount() {
+    public void EnemyDied() {
         enemyCount--;
     }
 
@@ -30,13 +35,26 @@ public class EnemyFactory : MonoBehaviour
     {
         while (enemyCount < enemyMax)
         {
-            System.Random random = new System.Random();
-            GameObject enemyGameObject = enemyGameObjects[random.Next(enemyGameObjects.Count)];
+            
             Vector3 spawnPoint = GetRandomPositionAroundPlayer(spawnRadius);
-            Instantiate(enemyGameObject, spawnPoint, Quaternion.identity);
+            if(enemyGameObjects.Count > 0) {
+                System.Random random = new System.Random();
+                int index = random.Next(enemyGameObjects.Count);
+                GameObject enemyGameObject = enemyGameObjects[index];
+                enemyGameObjects.RemoveAt(index);
+            } else {
+                SpawnRandomPrefab(spawnPoint);
+            }
             enemyCount++;
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    private void SpawnRandomPrefab(Vector3 spawnPoint)
+    {
+        int randomIndex = Random.Range(0, prefabs.Count);
+        GameObject selectedPrefab = prefabs[randomIndex];
+        Instantiate(selectedPrefab, spawnPoint, UnityEngine.Quaternion.identity);
     }
 
     private Vector3 GetRandomPositionAroundPlayer(float radius)

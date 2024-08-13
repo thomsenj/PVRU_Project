@@ -114,7 +114,7 @@ public class EnemyAI : MonoBehaviour
         {
             Die();
             scoreManager.AddBonusPoints(50);
-            enemyFactory.decrementEnemyCount();
+            enemyFactory.EnemyDied();
         }
     }
 

@@ -11,7 +11,7 @@ public class GameOverManager : MonoBehaviour
     private void Start()
     {
         gameOverUI.SetActive(false);
-        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.SCORING_MANAGER).GetComponent<ScoreManager>();
+        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
     }
 
     void Update()
