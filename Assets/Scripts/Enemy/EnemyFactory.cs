@@ -8,8 +8,6 @@ public class EnemyFactory : MonoBehaviour
 
     public List<GameObject> prefabs;
 
-    public 
-
     public int enemyCount = 0;
     public int enemyMax = 5;
     public float spawnRadius = 10f;
