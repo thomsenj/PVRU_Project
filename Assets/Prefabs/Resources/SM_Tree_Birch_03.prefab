@@ -181,6 +181,7 @@ MonoBehaviour:
   Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 457417900191686141}
   - {fileID: -7744996104372857877}
 --- !u!1 &1827421129180277761
 GameObject:

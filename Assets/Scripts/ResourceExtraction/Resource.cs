@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Fusion;
 
-public class Resource : MonoBehaviour
+public class Resource : NetworkBehaviour 
 {
     public ResourceType resourceType;
     public int amount = 1;
@@ -13,16 +14,10 @@ public class Resource : MonoBehaviour
     private PlayerInventory playerInventory;
     private Renderer resourceRenderer;
     private Color originalColor;
-    private ResourceFactory factory;
 
     void Start()
     {
         GameObject player = GameObject.FindWithTag(TagConstants.Player2Name);
-        try {
-            factory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceFactory>();
-        } catch {
-            Debug.Log("Add Worldmanager and or ResourceFactory to scene.");
-        }
         playerInventory = player.GetComponent<PlayerInventory>();
         resourceRenderer = GetComponent<Renderer>();
         if (resourceRenderer != null)
@@ -37,11 +32,7 @@ public class Resource : MonoBehaviour
         {
             if (other.CompareTag(TagConstants.RESOURCE_TOOL))
             {
-                //if (pickaxe.getIsSwinging())
-                //{
-                    Debug.Log("Start Harvest.");
-                    Harvest();
-                //}
+             Harvest();
             }
         }
         catch
@@ -63,9 +54,7 @@ public class Resource : MonoBehaviour
         if (currentHits >= hitsToHarvest)
         {
             playerInventory.AddResource(resourceType, amount);
-            gameObject.SetActive(false);
-            currentHits = hitsToHarvest;
-            factory.AddResourceToList(gameObject);
+            Runner.Despawn(Object);
         }
     }
 
