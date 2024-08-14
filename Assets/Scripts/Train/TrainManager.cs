@@ -17,7 +17,8 @@ public class TrainManager : MonoBehaviour
 
     public void setSpeed(float speed)
     {
-        splineFollower.followSpeed = speed;
+        // maybe in the future
+        //splineFollower.followSpeed = speed;
     }
 
     public float getFuelModifier()
