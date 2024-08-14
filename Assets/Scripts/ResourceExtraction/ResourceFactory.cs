@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
-public class ResourceFactory : MonoBehaviour
+public class ResourceFactory : NetworkBehaviour
 {
     public List<GameObject> prefabs;
 
@@ -21,19 +22,23 @@ public class ResourceFactory : MonoBehaviour
         StartCoroutine(SpawnResources());
     }
 
-    public int getLastPlaneInfo() {
+    public int GetLastPlaneInfo() 
+    {
         return resourceCount;
     }
 
-    public void AddResourceToList(GameObject gameObject) {
+    public void AddResourceToList(GameObject gameObject) 
+    {
         resourceGameObjects.Add(gameObject);
-        if(resourceCount > 0){
+        if (resourceCount > 0)
+        {
             resourceCount--;
         }
     }
 
-    public void UpdateResourceFactory(GameObject plane) {
-        PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().getPlaneInfo();
+    public void UpdateResourceFactory(GameObject plane) 
+    {
+        PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().GetPlaneInfo();
         spawnTarget = plane;
         resourceCount = planeInfo.ResourceCount;
         resourceMax = planeInfo.ResourceMax;
@@ -42,18 +47,22 @@ public class ResourceFactory : MonoBehaviour
 
     IEnumerator SpawnResources()
     {
-         while (true) {
+        while (true) 
+        {
             if (resourceCount < resourceMax)
             {
                 Vector3 spawnPoint = GetSpawnPoint(spawnRadius);
-                if(resourceGameObjects.Count > 0) {
+                if (resourceGameObjects.Count > 0) 
+                {
                     System.Random random = new System.Random();
                     int index = random.Next(resourceGameObjects.Count);
-                    GameObject enemyGameObject = resourceGameObjects[index];
+                    GameObject resourceGameObject = resourceGameObjects[index];
                     resourceGameObjects.RemoveAt(index);
-                    enemyGameObject.transform.position = spawnPoint;
-                    enemyGameObject.SetActive(true);
-                } else {
+                    resourceGameObject.transform.position = spawnPoint;
+                    resourceGameObject.SetActive(true);
+                } 
+                else 
+                {
                     SpawnRandomPrefab(spawnPoint);
                 }
                 resourceCount++;
@@ -66,7 +75,7 @@ public class ResourceFactory : MonoBehaviour
     {
         int randomIndex = Random.Range(0, prefabs.Count);
         GameObject selectedPrefab = prefabs[randomIndex];
-        Instantiate(selectedPrefab, spawnPoint, UnityEngine.Quaternion.identity);
+        Runner.Spawn(selectedPrefab, spawnPoint, Quaternion.identity);
     }
 
     private Vector3 GetSpawnPoint(float radius)
