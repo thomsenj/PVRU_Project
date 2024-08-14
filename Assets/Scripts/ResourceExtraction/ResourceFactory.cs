@@ -12,7 +12,7 @@ public class ResourceFactory : NetworkBehaviour
     public int resourceCount = 0;
     public int resourceMax = 5;
     public float spawnRadius = 50f;
-    public float spawnInterval = 4f; 
+    public float spawnInterval = 4f;
 
     private List<GameObject> resourceGameObjects;
 
@@ -22,12 +22,12 @@ public class ResourceFactory : NetworkBehaviour
         StartCoroutine(SpawnResources());
     }
 
-    public int GetLastPlaneInfo() 
+    public int GetLastPlaneInfo()
     {
         return resourceCount;
     }
 
-    public void AddResourceToList(GameObject gameObject) 
+    public void AddResourceToList(GameObject gameObject)
     {
         resourceGameObjects.Add(gameObject);
         if (resourceCount > 0)
@@ -36,9 +36,9 @@ public class ResourceFactory : NetworkBehaviour
         }
     }
 
-    public void UpdateResourceFactory(GameObject plane) 
+    public void UpdateResourceFactory(GameObject plane)
     {
-        PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().GetPlaneInfo();
+        PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().getPlaneInfo();
         spawnTarget = plane;
         resourceCount = planeInfo.ResourceCount;
         resourceMax = planeInfo.ResourceMax;
@@ -47,12 +47,12 @@ public class ResourceFactory : NetworkBehaviour
 
     IEnumerator SpawnResources()
     {
-        while (true) 
+        while (true)
         {
             if (resourceCount < resourceMax)
             {
                 Vector3 spawnPoint = GetSpawnPoint(spawnRadius);
-                if (resourceGameObjects.Count > 0) 
+                if (resourceGameObjects.Count > 0)
                 {
                     System.Random random = new System.Random();
                     int index = random.Next(resourceGameObjects.Count);
@@ -60,8 +60,8 @@ public class ResourceFactory : NetworkBehaviour
                     resourceGameObjects.RemoveAt(index);
                     resourceGameObject.transform.position = spawnPoint;
                     resourceGameObject.SetActive(true);
-                } 
-                else 
+                }
+                else
                 {
                     SpawnRandomPrefab(spawnPoint);
                 }

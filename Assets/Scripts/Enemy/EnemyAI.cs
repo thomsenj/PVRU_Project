@@ -1,18 +1,16 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.ReloadAttribute;
+using Fusion;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : NetworkBehaviour
 {
     public Transform player;
-    public float speed = 2.0f;
+    [SerializeField] private float speed = 2.0f;
     public int damage = 10;
     public float jumpForce = 5.0f;
     public LayerMask groundLayer;
     public int health = 100;
 
-
-    //private Rigidbody rb;
     private bool isGrounded;
     private Animator animator;
     private bool isDead = false;
@@ -21,9 +19,13 @@ public class EnemyAI : MonoBehaviour
 
     private float lastAttackTime = 0.0f;
 
+    [Networked]
+    public int NetworkedHealth { get; set; }
+
+    private int previousHealth;
+
     void Start()
     {
-        // rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         if (player == null)
         {
@@ -31,11 +33,21 @@ public class EnemyAI : MonoBehaviour
         }
         scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
         enemyFactory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyFactory>();
+
+        NetworkedHealth = health;
+        previousHealth = NetworkedHealth;
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
         if (isDead) return;
+
+        // Check if health has changed
+        if (NetworkedHealth != previousHealth)
+        {
+            OnHealthChanged();
+            previousHealth = NetworkedHealth;
+        }
 
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer);
 
@@ -43,14 +55,12 @@ public class EnemyAI : MonoBehaviour
         direction.y = 0;
         if (direction.magnitude > 0.5f)
         {
-            // move in direction of the player
             direction.Normalize();
-            transform.position += direction * speed * Time.deltaTime;
+            transform.position += direction * speed * Runner.DeltaTime;
             animator.SetBool(AnimationConstants.IS_RUNNING, true);
 
-            // turn model in the direction of player
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * speed);
         }
         else
         {
@@ -68,11 +78,20 @@ public class EnemyAI : MonoBehaviour
         if (Time.time - lastAttackTime > 1.0f)
         {
             lastAttackTime = Time.time;
-            PlayerHealth playerHealth = GameObject.FindWithTag(TagConstants.Player2Name).GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (Runner.IsServer)
             {
-                playerHealth.TakeDamage(damage);
+                RPC_TakeDamage(player.GetComponent<NetworkObject>().Id, damage);
             }
+        }
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_TakeDamage(NetworkId playerId, int damageAmount)
+    {
+        var playerHealth = Runner.FindObject(playerId).GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(damageAmount);
         }
     }
 
@@ -88,15 +107,23 @@ public class EnemyAI : MonoBehaviour
             if (weapon.IsSwinging())
             {
                 weapon.setSwinging(false);
-                TakeDamage(weapon.getDamage());
+                if (Runner.IsServer)
+                {
+                    RPC_TakeDamageFromWeapon(weapon.getDamage());
+                }
             }
         }
+    }
 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_TakeDamageFromWeapon(int damageAmount)
+    {
+        TakeDamage(damageAmount);
     }
 
     void Jump()
     {
-        //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        // Handle Jump logic (e.g., apply force)
     }
 
     bool IsObstacleAhead()
@@ -107,13 +134,19 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int amount)
     {
         if (isDead) return;
-        health -= amount;
-        animator.SetTrigger(AnimationConstants.GET_HIT);
 
-        if (health <= 0)
+        NetworkedHealth -= amount;
+    }
+
+    private void OnHealthChanged()
+    {
+        if (NetworkedHealth <= 0)
         {
             Die();
-
+        }
+        else
+        {
+            animator.SetTrigger(AnimationConstants.GET_HIT);
         }
     }
 
@@ -122,7 +155,7 @@ public class EnemyAI : MonoBehaviour
         animator.SetTrigger(AnimationConstants.ATTACK);
     }
 
-     void Die()
+    void Die()
     {
         isDead = true;
         animator.SetTrigger(AnimationConstants.DIE);
@@ -133,7 +166,7 @@ public class EnemyAI : MonoBehaviour
     IEnumerator WaitForDeathAnimation()
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        gameObject.SetActive(false);
+        Runner.Despawn(Object);
         enemyFactory.EnemyDied(gameObject);
     }
 }

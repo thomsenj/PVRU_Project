@@ -18,7 +18,7 @@ public class WorldManager : MonoBehaviour
     {
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
         GameObject worldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
-        resourceFactory =  worldManager.GetComponent<ResourceFactory>();
+        resourceFactory = worldManager.GetComponent<ResourceFactory>();
         enemyFactory = worldManager.GetComponent<EnemyFactory>();
         trainManager = worldManager.GetComponent<TrainManager>();
         UpdateResourceFactory();
@@ -26,7 +26,7 @@ public class WorldManager : MonoBehaviour
         UpdateTrainManager();
     }
 
-     private void Update()
+    private void Update()
     {
         if (train == null || mainPlane == null)
         {
@@ -36,8 +36,9 @@ public class WorldManager : MonoBehaviour
 
         Vector3 position = train.transform.position;
         float distance = GetDistance(mainPlane, position);
-        if(distance > planeRadius) {
-            int resourceCount = resourceFactory.getLastPlaneInfo();
+        if (distance > planeRadius)
+        {
+            int resourceCount = resourceFactory.GetLastPlaneInfo();
             PlaneInformation planeInformation = mainPlane.GetComponent<PlaneInformation>();
             planeInformation.resourceCount = resourceCount;
             ClearEnemies();
@@ -60,21 +61,25 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    private void UpdateResourceFactory() {
+    private void UpdateResourceFactory()
+    {
         resourceFactory.UpdateResourceFactory(mainPlane);
     }
 
-    private void ClearEnemies() {
+    private void ClearEnemies()
+    {
         List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(TagConstants.Enemy));
         enemyFactory.UpdateEnemies(enemies);
     }
 
-    private void UpdateEnemyFactory() {
+    private void UpdateEnemyFactory()
+    {
         GameObject spawner = mainPlane.GetComponent<PlaneInformation>().enemySpawner;
         enemyFactory.ResetFactory(spawner);
     }
 
-    private void UpdateTrainManager() {
+    private void UpdateTrainManager()
+    {
         trainManager.weatherType = mainPlane.GetComponent<PlaneInformation>().getPlaneInfo().WeatherType;
     }
 }
