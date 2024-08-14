@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Fusion;
 using UnityEngine;
 
-public class EnemyFactory : MonoBehaviour
+public class EnemyFactory : NetworkBehaviour
 {
     public List<GameObject> prefabs;
 
@@ -12,7 +12,7 @@ public class EnemyFactory : MonoBehaviour
     public int enemyCount = 0;
     public int enemyMax = 5;
     public float spawnRadius = 10f;
-    public float spawnInterval = 4f; 
+    public float spawnInterval = 8f; 
 
     private ScoreManager scoreManager;
     private List<GameObject> enemyGameObjects;
@@ -24,24 +24,30 @@ public class EnemyFactory : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
-    private void Update() {
+    private void Update() 
+    {
         enemyMax = scoreManager.GetEnemyCount();
     }
 
-    public void EnemyDied(GameObject enemy) {
+    public void EnemyDied(GameObject enemy) 
+    {
         enemyGameObjects.Add(enemy);
-        if(enemyCount > 0) {
+        if(enemyCount > 0) 
+        {
             enemyCount--;
         }
     }
 
-    public void ResetFactory(GameObject spawner) {
+    public void ResetFactory(GameObject spawner) 
+    {
         spawnTarget = spawner;
         enemyCount = 0; 
     }
 
-    public void UpdateEnemies(List<GameObject> enemies) {
-        foreach (GameObject gameObject in enemies) {
+    public void UpdateEnemies(List<GameObject> enemies) 
+    {
+        foreach (GameObject gameObject in enemies) 
+        {
             gameObject.SetActive(false);
         }
         enemyGameObjects.AddRange(enemies);
@@ -49,11 +55,13 @@ public class EnemyFactory : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-         while (true) {
+        while (true) 
+        {
             if (enemyCount < enemyMax)
             {
                 Vector3 spawnPoint = GetSpawnPoint(spawnRadius);
-                if(enemyGameObjects.Count > 0) {
+                if (enemyGameObjects.Count > 0) 
+                {
                     System.Random random = new System.Random();
                     int index = random.Next(enemyGameObjects.Count);
                     GameObject enemyGameObject = enemyGameObjects[index];
@@ -61,7 +69,9 @@ public class EnemyFactory : MonoBehaviour
                     enemyGameObject.transform.position = spawnPoint;
                     enemyGameObject.GetComponent<EnemyAI>().health = 100;
                     enemyGameObject.SetActive(true);
-                } else {
+                } 
+                else 
+                {
                     SpawnRandomPrefab(spawnPoint);
                 }
                 enemyCount++;
@@ -74,17 +84,19 @@ public class EnemyFactory : MonoBehaviour
     {
         int randomIndex = Random.Range(0, prefabs.Count);
         GameObject selectedPrefab = prefabs[randomIndex];
-        Instantiate(selectedPrefab, spawnPoint, UnityEngine.Quaternion.identity);
+        Runner.Spawn(selectedPrefab, spawnPoint, Quaternion.identity);
     }
 
     private Vector3 GetSpawnPoint(float radius)
     {
-        if(spawnTarget != null) {
+        if(spawnTarget != null) 
+        {
             Vector3 pos = spawnTarget.transform.position;
             pos.y = 0;
             pos.z = pos.z + 2;
             return pos;
         }
+
         Vector3 playerPosition = GameObject.FindWithTag(TagConstants.TRAIN).transform.position;
         float angle = Random.Range(0f, 360f);
         float distance = Random.Range(0f, radius);
