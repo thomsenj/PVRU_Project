@@ -13,10 +13,16 @@ public class BulletController : MonoBehaviour
     private Vector3 velocity;                // Geschwindigkeit der Bullet
     private float distanceTraveled = 0f;     // Zurückgelegte Distanz
     private BulletPoolManager poolManager;   // Referenz zum Bullet-Pool-Manager
+    private TrailRenderer trail;            // Referenz zum Trail-Renderer
+
+
 
     void Start()
     {
-        poolManager = BulletPoolManager.Instance; // Holen Sie sich die Singleton-Instanz des Bullet-Pool-Managers
+        poolManager = BulletPoolManager.Instance; 
+        trail = GetComponent<TrailRenderer>();
+        // Deaktiviere den Trail-Renderer, um die Bullet unsichtbar zu machen
+        trail.enabled = false;
     }
 
     void Update()
@@ -53,6 +59,11 @@ public class BulletController : MonoBehaviour
         velocity = shootDirection.normalized * speed; // Setzt die Anfangsgeschwindigkeit
         gameObject.transform.position = startPosition;
         distanceTraveled = 0f; // Setzt die zurückgelegte Distanz zurück
+        if(trail != null)
+        {
+            trail.enabled = true; // Aktiviert den Trail-Renderer
+            trail.Clear(); // Löscht den Trail
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -70,5 +81,6 @@ public class BulletController : MonoBehaviour
     {
         gameObject.SetActive(false); // Deaktiviert die Bullet
         poolManager.ReturnBulletToPool(this); // Gibt die Bullet zurück in den Pool
+        trail.enabled = false; // Deaktiviert den Trail-Renderer
     }
 }
