@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2986121770298876074, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: resourceBagTransform
+      value: 
+      objectReference: {fileID: 1434809412}
     - target: {fileID: 3568651523429395302, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
       propertyPath: m_Name
       value: Suitcase_Item_Teleport
@@ -597,6 +601,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &1434809412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7001797882101864585, guid: 5eccbf4be2c00e94689ee8062e4e7276, type: 3}
+  m_PrefabInstance: {fileID: 2134657055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1455228479
 PrefabInstance:
   m_ObjectHideFlags: 0

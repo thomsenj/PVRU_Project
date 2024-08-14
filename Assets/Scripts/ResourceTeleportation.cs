@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourceTeleportation : MonoBehaviour
@@ -12,6 +13,7 @@ public class ResourceTeleportation : MonoBehaviour
     [SerializeField] private string[] _AdditionalFuelTags = null;
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private CoalPile coalPile;
+    [SerializeField] private Transform resourceBagTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,8 @@ public class ResourceTeleportation : MonoBehaviour
         {
             HandleCoal();
             other.gameObject.SetActive(false);
+            other.gameObject.transform.position = resourceBagTransform.position;
+            other.gameObject.SetActive(true);
             return;
         }
         
