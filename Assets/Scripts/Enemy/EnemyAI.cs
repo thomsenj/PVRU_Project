@@ -9,12 +9,13 @@ public class EnemyAI : MonoBehaviour
     public int damage = 10;
     public float jumpForce = 5.0f;
     public LayerMask groundLayer;
+    public int health = 100;
+
 
     //private Rigidbody rb;
     private bool isGrounded;
     private Animator animator;
     private bool isDead = false;
-    private int health = 100;
     private bool isAttacking = false;
     private ScoreManager scoreManager;
     private EnemyFactory enemyFactory;

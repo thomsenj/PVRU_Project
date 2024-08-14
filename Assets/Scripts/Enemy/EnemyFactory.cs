@@ -59,6 +59,7 @@ public class EnemyFactory : MonoBehaviour
                     GameObject enemyGameObject = enemyGameObjects[index];
                     enemyGameObjects.RemoveAt(index);
                     enemyGameObject.transform.position = spawnPoint;
+                    enemyGameObject.GetComponent<EnemyAI>().health = 100;
                     enemyGameObject.SetActive(true);
                 } else {
                     SpawnRandomPrefab(spawnPoint);
