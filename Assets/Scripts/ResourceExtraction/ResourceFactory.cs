@@ -57,8 +57,8 @@ public class ResourceFactory : MonoBehaviour
                     SpawnRandomPrefab(spawnPoint);
                 }
                 resourceCount++;
-                yield return new WaitForSeconds(spawnInterval);
             }
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 

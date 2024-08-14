@@ -67,6 +67,7 @@ public class Resource : MonoBehaviour
         {
             playerInventory.AddResource(resourceType, amount);
             gameObject.SetActive(false);
+            currentHits = hitsToHarvest;
             factory.AddResourceToList(gameObject);
         }
     }

@@ -65,8 +65,8 @@ public class EnemyFactory : MonoBehaviour
                     SpawnRandomPrefab(spawnPoint);
                 }
                 enemyCount++;
-                yield return new WaitForSeconds(spawnInterval);
             }
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 

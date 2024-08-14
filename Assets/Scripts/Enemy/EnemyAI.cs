@@ -16,9 +16,10 @@ public class EnemyAI : MonoBehaviour
     private bool isGrounded;
     private Animator animator;
     private bool isDead = false;
-    private bool isAttacking = false;
     private ScoreManager scoreManager;
     private EnemyFactory enemyFactory;
+
+    private float lastAttackTime = 0.0f;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
         if (player == null)
         {
-            player = GameObject.FindWithTag(TagConstants.TRAIN).transform;
+            player = GameObject.FindWithTag(TagConstants.Player2Name).transform;
         }
         scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
         enemyFactory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyFactory>();
@@ -43,7 +44,6 @@ public class EnemyAI : MonoBehaviour
         if (direction.magnitude > 0.5f)
         {
             // move in direction of the player
-            isAttacking = false;
             direction.Normalize();
             transform.position += direction * speed * Time.deltaTime;
             animator.SetBool(AnimationConstants.IS_RUNNING, true);
@@ -54,22 +54,25 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            isAttacking = true;
             animator.SetBool("isRunning", false);
+            AttemptAttackOnPlayer();
         }
-
-        if (isAttacking) {
-            PlayerHealth playerHealth = GameObject.FindWithTag(TagConstants.Player2Name).GetComponent<PlayerHealth>();
-            Debug.Log("Player Health: " +  playerHealth);
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage * 0.001f);
-            }
-        }
-
         if (isGrounded && IsObstacleAhead())
         {
             Jump();
+        }
+    }
+
+    private void AttemptAttackOnPlayer()
+    {
+        if (Time.time - lastAttackTime > 1.0f)
+        {
+            lastAttackTime = Time.time;
+            PlayerHealth playerHealth = GameObject.FindWithTag(TagConstants.Player2Name).GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
         }
     }
 
@@ -117,7 +120,6 @@ public class EnemyAI : MonoBehaviour
     void Attack()
     {
         animator.SetTrigger(AnimationConstants.ATTACK);
-        this.isAttacking = true;
     }
 
      void Die()
