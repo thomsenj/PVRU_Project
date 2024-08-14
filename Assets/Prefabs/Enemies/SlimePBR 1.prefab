@@ -409,6 +409,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  health: 100
 --- !u!1 &6798957333601027388
 GameObject:
   m_ObjectHideFlags: 0
