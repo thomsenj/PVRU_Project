@@ -9,13 +9,21 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-        woodController = GameObject.Find(GeneralConstants.WOOD_COUNTER).GetComponent<CollectableBankController>();
-        stoneController = GameObject.Find(GeneralConstants.STONE_COUNTER).GetComponent<CollectableBankController>();
+        try {
+            woodController = GameObject.Find(GeneralConstants.WOOD_COUNTER).GetComponent<CollectableBankController>();
+            stoneController = GameObject.Find(GeneralConstants.STONE_COUNTER).GetComponent<CollectableBankController>();
+        } catch {
+            Debug.LogError("Missing Player Inventory UI.");
+        }
         foreach (ResourceType resourceType in System.Enum.GetValues(typeof(ResourceType)))
         {
-            resources[resourceType] = 0;
-            SetUI(resourceType, 0);
+            resources[resourceType] = 6;
+            SetUI(resourceType, resources[resourceType]);
         }
+    }
+
+    public Dictionary<ResourceType, int> getResources() {
+        return resources;
     }
 
     public void AddResource(ResourceType resourceType, int amount)
@@ -31,6 +39,17 @@ public class PlayerInventory : MonoBehaviour
         SetUI(resourceType, amount);
         Debug.Log($"{resourceType}: {resources[resourceType]}");
     }
+
+    public void RemoveResource(ResourceType resourceType, int amount)
+    {
+        if (resources.ContainsKey(resourceType))
+        {
+            resources[resourceType] -= amount;
+        }
+        SetUI(resourceType, amount);
+        Debug.Log($"{resourceType}: {resources[resourceType]}");
+    }
+
 
     public int GetResourceAmount(ResourceType resourceType)
     {

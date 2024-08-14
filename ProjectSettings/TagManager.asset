@@ -21,6 +21,7 @@ TagManager:
   - World Manager
   - Enemy
   - CoalPile
+  - Resource
   layers:
   - Default
   - TransparentFX
