@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8948631088851646839}
   - component: {fileID: 6841485157434379382}
   - component: {fileID: 4878510646295422421}
+  - component: {fileID: 1035477563530037189}
+  - component: {fileID: -2815682222879005777}
   m_Layer: 0
   m_Name: SM_Rock_01
   m_TagString: Untagged
@@ -165,3 +167,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18b9176dd3ff7c4380cff7f2655dd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1035477563530037189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372682234561897770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _interpolationTarget: {fileID: 0}
+  UsePreciseRotation: 0
+  UseRenderSleepThresholds: 1
+  RenderThresholds:
+    UseEnergy: 1
+    Position: 0.01
+    Rotation: 0.01
+    Scale: 0.01
+--- !u!114 &-2815682222879005777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372682234561897770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 35263474
+  ObjectInterest: 1
+  Flags: 524289
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1035477563530037189}
