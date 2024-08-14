@@ -11,7 +11,6 @@ public class Resource : MonoBehaviour
 
     private int currentHits = 0;
     private PlayerInventory playerInventory;
-    private PickaxeSwing pickaxe;
     private Renderer resourceRenderer;
     private Color originalColor;
     private ResourceFactory factory;
@@ -24,7 +23,6 @@ public class Resource : MonoBehaviour
         } catch {
             Debug.Log("Add Worldmanager and or ResourceFactory to scene.");
         }
-        pickaxe = player.GetComponent<PickaxeSwing>();
         playerInventory = player.GetComponent<PlayerInventory>();
         resourceRenderer = GetComponent<Renderer>();
         if (resourceRenderer != null)
@@ -37,14 +35,13 @@ public class Resource : MonoBehaviour
     {
         try
         {
-            Debug.Log("PickAxe is triggering with tag. " + other.gameObject.tag);
             if (other.CompareTag(TagConstants.RESOURCE_TOOL))
             {
-                if (pickaxe.getIsSwinging())
-                {
+                //if (pickaxe.getIsSwinging())
+                //{
                     Debug.Log("Start Harvest.");
                     Harvest();
-                }
+                //}
             }
         }
         catch
