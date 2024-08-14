@@ -44,7 +44,8 @@
 
 - [Photon Fusion 2](https://assetstore.unity.com/packages/tools/network/photon-fusion-267958)
 - [Photon Fusion 2 - Physics Addon](https://doc.photonengine.com/fusion/current/addons/physics/overview)
--
+- [Photon Fusion 2 - XR Addons 2.0.0](https://doc.photonengine.com/arvr/current/fusion-xr-addons/fusion-xr-addons-overview)
+- [Photon Voice 2 (as some scripts depend on it)](https://assetstore.unity.com/packages/tools/audio/photon-voice-2-130518)
 
 ### Paid
 

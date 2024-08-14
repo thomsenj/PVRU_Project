@@ -1071,9 +1071,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!65 &1841878775145009844
@@ -1731,6 +1731,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5158391663297580394}
     m_Modifications:
+    - target: {fileID: 764181521468336811, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 764181521468336811, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764181521468336811, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764181521468336811, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764181521468336811, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605329240977037540, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605329240977037540, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605329240977037540, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2986121770298876074, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
       propertyPath: _ItemTeleportTarget
       value: 
@@ -1739,13 +1771,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suitcase_Item_Teleport
       objectReference: {fileID: 0}
+    - target: {fileID: 3568651523429395302, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3571503712498164496, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.88
       objectReference: {fileID: 0}
     - target: {fileID: 3571503712498164496, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5930007
+      value: 1.649
       objectReference: {fileID: 0}
     - target: {fileID: 3571503712498164496, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1887,17 +1923,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood_Pile
       objectReference: {fileID: 0}
+    - target: {fileID: 420829022730975098, guid: 72137bbf9879fdc4180444067bbeeff0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7430569117342955481, guid: 72137bbf9879fdc4180444067bbeeff0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.96209335
+      value: -0.794
       objectReference: {fileID: 0}
     - target: {fileID: 7430569117342955481, guid: 72137bbf9879fdc4180444067bbeeff0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.986
+      value: 1.918
       objectReference: {fileID: 0}
     - target: {fileID: 7430569117342955481, guid: 72137bbf9879fdc4180444067bbeeff0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.4703426
+      value: 5.961
       objectReference: {fileID: 0}
     - target: {fileID: 7430569117342955481, guid: 72137bbf9879fdc4180444067bbeeff0, type: 3}
       propertyPath: m_LocalRotation.w
