@@ -15,18 +15,17 @@ public class EnemyFactory : NetworkBehaviour
     public float spawnInterval = 8f; 
 
     private ScoreManager scoreManager;
-    private List<GameObject> enemyGameObjects;
+    public List<GameObject> enemyGameObjects;
 
     private void Start()
     {
         scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
-        enemyGameObjects = new List<GameObject>();
         StartCoroutine(SpawnEnemies());
     }
 
     private void Update() 
     {
-        enemyMax = scoreManager.GetEnemyCount();
+      //  enemyMax = scoreManager.GetEnemyCount();
     }
 
     public void EnemyDied(GameObject enemy) 
@@ -60,16 +59,18 @@ public class EnemyFactory : NetworkBehaviour
             if (enemyCount < enemyMax)
             {
                 Vector3 spawnPoint = GetSpawnPoint(spawnRadius);
+                Debug.Log(enemyGameObjects.Count > 0);
                 if (enemyGameObjects.Count > 0) 
                 {
                     System.Random random = new System.Random();
                     int index = random.Next(enemyGameObjects.Count);
                     GameObject enemyGameObject = enemyGameObjects[index];
                     enemyGameObjects.RemoveAt(index);
-                    enemyGameObject.transform.position = spawnPoint;
-                    enemyGameObject.GetComponent<EnemyAI>().health = 100;
-                    enemyGameObject.SetActive(true);
-                } 
+                    Debug.Log("Step test");
+                    Runner.Spawn(enemyGameObject, spawnPoint);
+                    Debug.Log("Step test 2");
+                    // Add reset health
+                }
                 else 
                 {
                     SpawnRandomPrefab(spawnPoint);
@@ -82,8 +83,9 @@ public class EnemyFactory : NetworkBehaviour
 
     private void SpawnRandomPrefab(Vector3 spawnPoint)
     {
-        int randomIndex = Random.Range(0, prefabs.Count);
+        int randomIndex = Random.Range(0, prefabs.Count-1);
         GameObject selectedPrefab = prefabs[randomIndex];
+        Debug.Log("Selected prefab: " + selectedPrefab);
         Runner.Spawn(selectedPrefab, spawnPoint, Quaternion.identity);
     }
 

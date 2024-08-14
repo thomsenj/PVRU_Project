@@ -1,40 +1,45 @@
+using System.Linq;
 using System.Collections;
 using UnityEngine;
 using Fusion;
 
 public class EnemyAI : NetworkBehaviour
 {
-    public Transform player;
-    [SerializeField] private float speed = 2.0f;
-    public int damage = 10;
+    [Header("Settings")]
+    public string[] targetTags;
+    public float moveSpeed = 2.0f;
+    public int attackDamage = 10;
     public float jumpForce = 5.0f;
     public LayerMask groundLayer;
-    public int health = 100;
-
-    private bool isGrounded;
-    private Animator animator;
-    private bool isDead = false;
-    private ScoreManager scoreManager;
-    private EnemyFactory enemyFactory;
-
-    private float lastAttackTime = 0.0f;
+    public int maxHealth = 100;
 
     [Networked]
     public int NetworkedHealth { get; set; }
 
+    private int currentHealth;
     private int previousHealth;
+    private bool isGrounded;
+    private bool isDead;
+    private Animator animator;
+    private ScoreManager scoreManager;
+    private EnemyFactory enemyFactory;
+    private Transform currentTarget;
+    private float lastAttackTime;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        if (player == null)
-        {
-            player = GameObject.FindWithTag(TagConstants.Player2Name).transform;
-        }
-        scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
-        enemyFactory = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyFactory>();
+        scoreManager = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<ScoreManager>();
+        enemyFactory = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<EnemyFactory>();
+        currentHealth = maxHealth;
 
-        NetworkedHealth = health;
+        NetworkedHealth = maxHealth;
+        previousHealth = NetworkedHealth;
+    }
+
+    public void ResetHealth()
+    {
+        NetworkedHealth = maxHealth;
         previousHealth = NetworkedHealth;
     }
 
@@ -50,67 +55,127 @@ public class EnemyAI : NetworkBehaviour
         }
 
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer);
+        UpdateCurrentTarget();
+        HandleMovement();
 
-        Vector3 direction = player.position - transform.position;
-        direction.y = 0;
-        if (direction.magnitude > 0.5f)
-        {
-            direction.Normalize();
-            transform.position += direction * speed * Runner.DeltaTime;
-            animator.SetBool(AnimationConstants.IS_RUNNING, true);
-
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * speed);
-        }
-        else
-        {
-            animator.SetBool("isRunning", false);
-            AttemptAttackOnPlayer();
-        }
         if (isGrounded && IsObstacleAhead())
         {
             Jump();
         }
     }
 
-    private void AttemptAttackOnPlayer()
+    private void UpdateCurrentTarget()
+    {
+        currentTarget = FindClosestTarget();
+    }
+
+    private Transform FindClosestTarget()
+    {
+        Transform closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (string tag in targetTags)
+        {
+            GameObject[] potentialTargets = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject potentialTarget in potentialTargets)
+            {
+                float distance = Vector3.Distance(transform.position, potentialTarget.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestTarget = potentialTarget.transform;
+                }
+            }
+        }
+
+        return closestTarget;
+    }
+
+    private void HandleMovement()
+    {
+        if (currentTarget == null) return;
+
+        Vector3 direction = currentTarget.position - transform.position;
+        direction.y = 0;
+
+        if (direction.magnitude > 0.5f)
+        {
+            MoveTowardsTarget(direction);
+        }
+        else
+        {
+            animator.SetBool(AnimationConstants.IS_RUNNING, false);
+            TryAttackTarget();
+        }
+    }
+
+    private void MoveTowardsTarget(Vector3 direction)
+    {
+        direction.Normalize();
+        transform.position += direction * moveSpeed * Runner.DeltaTime;
+        animator.SetBool(AnimationConstants.IS_RUNNING, true);
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * moveSpeed);
+    }
+
+    private void TryAttackTarget()
     {
         if (Time.time - lastAttackTime > 1.0f)
         {
             lastAttackTime = Time.time;
             if (Runner.IsServer)
             {
-                RPC_TakeDamage(player.GetComponent<NetworkObject>().Id, damage);
+                RPC_TakeDamage(currentTarget.GetComponent<NetworkObject>().Id, attackDamage);
             }
         }
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_TakeDamage(NetworkId playerId, int damageAmount)
+    private void RPC_TakeDamage(NetworkId targetId, int damageAmount)
     {
-        var playerHealth = Runner.FindObject(playerId).GetComponent<PlayerHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(damageAmount);
-        }
+        var targetHealth = Runner.FindObject(targetId).GetComponent<PlayerHealth>();
+        targetHealth?.TakeDamage(damageAmount);
+    }
+
+    private void Jump()
+    {
+        // Implement jump logic (e.g., apply force)
+    }
+
+    private bool IsObstacleAhead()
+    {
+        return Physics.Raycast(transform.position, transform.forward, 1.0f);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(TagConstants.PLAYER_DAMAGE_COLLIDER) && !isDead)
+        if (isDead) return;
+
+        if (other.CompareTag(TagConstants.PLAYER_DAMAGE_COLLIDER))
         {
-            Attack();
+            PerformAttack();
         }
-        if (other.CompareTag(TagConstants.WEAPON) && !isDead)
+        else if (other.CompareTag(TagConstants.WEAPON))
         {
-            Weapon weapon = GameObject.FindWithTag(TagConstants.Player2Name).GetComponent<Weapon>();
-            if (weapon.IsSwinging())
+            HandleWeaponHit();
+        }
+    }
+
+    private void PerformAttack()
+    {
+        animator.SetTrigger(AnimationConstants.ATTACK);
+    }
+
+    private void HandleWeaponHit()
+    {
+        Weapon weapon = currentTarget.GetComponent<Weapon>();
+        if (weapon?.IsSwinging() == true)
+        {
+            weapon.setSwinging(false);
+            if (Runner.IsServer)
             {
-                weapon.setSwinging(false);
-                if (Runner.IsServer)
-                {
-                    RPC_TakeDamageFromWeapon(weapon.getDamage());
-                }
+                RPC_TakeDamageFromWeapon(weapon.getDamage());
             }
         }
     }
@@ -121,21 +186,11 @@ public class EnemyAI : NetworkBehaviour
         TakeDamage(damageAmount);
     }
 
-    void Jump()
-    {
-        // Handle Jump logic (e.g., apply force)
-    }
-
-    bool IsObstacleAhead()
-    {
-        return Physics.Raycast(transform.position, transform.forward, 1.0f);
-    }
-
-    public void TakeDamage(int amount)
+    public void TakeDamage(int damageAmount)
     {
         if (isDead) return;
 
-        NetworkedHealth -= amount;
+        NetworkedHealth -= damageAmount;
     }
 
     private void OnHealthChanged()
@@ -150,23 +205,18 @@ public class EnemyAI : NetworkBehaviour
         }
     }
 
-    void Attack()
-    {
-        animator.SetTrigger(AnimationConstants.ATTACK);
-    }
-
-    void Die()
+    private void Die()
     {
         isDead = true;
         animator.SetTrigger(AnimationConstants.DIE);
-        scoreManager.AddBonusPoints(10);
-        StartCoroutine(WaitForDeathAnimation());
+        scoreManager?.AddBonusPoints(10);
+        StartCoroutine(HandleDeath());
     }
 
-    IEnumerator WaitForDeathAnimation()
+    private IEnumerator HandleDeath()
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Runner.Despawn(Object);
-        enemyFactory.EnemyDied(gameObject);
+        enemyFactory?.EnemyDied(gameObject);
     }
 }
