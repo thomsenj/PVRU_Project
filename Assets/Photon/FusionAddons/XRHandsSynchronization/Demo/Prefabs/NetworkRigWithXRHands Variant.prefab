@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkRigWithXRHands Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2549000073306557745, guid: e263782ae517b5e46a1d6228d8ee88b7, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2549000073306557773, guid: e263782ae517b5e46a1d6228d8ee88b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
