@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class RevolverController : MonoBehaviour
 {
@@ -20,32 +21,50 @@ public class RevolverController : MonoBehaviour
     private Vector3 recoilPosition;             // Die Position, zu der der Revolver sich beim Rückstoß bewegt
     private Quaternion recoilRotation;          // Die Rotation, zu der der Revolver sich beim Rückstoß dreht
     private bool canShoot = true;               // Gibt an, ob ein Schuss abgegeben werden kann
+    private XRGrabInteractable grabInteractable;
+
 
     void Start()
     {
-        // UpdateOriginalPositionAndRotation();
+        grabInteractable = GetComponent<XRGrabInteractable>();
+
+        grabInteractable.selectEntered.AddListener(OnGrabbed);
+
+        grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    void Update()
+    private void OnGrabbed(SelectEnterEventArgs args)
     {
-        if (Input.GetMouseButtonDown(0) && canShoot) // Linksklick zum Schießen
-        {
-            Shoot();
-        }
+        canShoot = true;    
+    }
 
-        if (isRecoiling)
-        {
-            // Bewege den Revolver zu seiner Rückstoßposition
-            transform.localPosition = Vector3.Lerp(transform.localPosition, recoilPosition, Time.deltaTime * recoilSpeed);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, recoilRotation, Time.deltaTime * recoilSpeed);
+    // Wird aufgerufen, wenn das Objekt losgelassen wird
+    private void OnReleased(SelectExitEventArgs args)
+    {
+        canShoot = false;    
+    }
 
-            // Wenn der Revolver die Rückstoßposition erreicht hat, bewege ihn zurück
-            if (Vector3.Distance(transform.localPosition, recoilPosition) < 0.01f && Quaternion.Angle(transform.localRotation, recoilRotation) < 0.1f)
-            {
-                isRecoiling = false; // Rückstoß ist abgeschlossen
-                canShoot = true;
-            }
-        }
+
+    // void Update()
+    // {
+    //     if (Input.GetMouseButtonDown(0) && canShoot) // Linksklick zum Schießen
+    //     {
+    //         Shoot();
+    //     }
+
+        // if (isRecoiling)
+        // {
+        //     // Bewege den Revolver zu seiner Rückstoßposition
+        //     transform.localPosition = Vector3.Lerp(transform.localPosition, recoilPosition, Time.deltaTime * recoilSpeed);
+        //     transform.localRotation = Quaternion.Slerp(transform.localRotation, recoilRotation, Time.deltaTime * recoilSpeed);
+
+        //     // Wenn der Revolver die Rückstoßposition erreicht hat, bewege ihn zurück
+        //     if (Vector3.Distance(transform.localPosition, recoilPosition) < 0.01f && Quaternion.Angle(transform.localRotation, recoilRotation) < 0.1f)
+        //     {
+        //         isRecoiling = false; // Rückstoß ist abgeschlossen
+        //         canShoot = true;
+        //     }
+        // }
         // else
         // {
         //     // Bewege den Revolver zurück zu seiner ursprünglichen Position
@@ -58,7 +77,7 @@ public class RevolverController : MonoBehaviour
         //         canShoot = true;
         //     }
         // }
-    }
+   // }
 
     // public void UpdateOriginalPositionAndRotation()
     // {
@@ -82,7 +101,7 @@ public class RevolverController : MonoBehaviour
 
         // Initialisiere den Rückstoß und die Animationen
         AnimateRevolver();
-        StartRecoil();
+        //StartRecoil();
         canShoot = true;
     }
 
