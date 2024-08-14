@@ -44,12 +44,16 @@ public class PlayerInventory : MonoBehaviour
     private void SetUI(ResourceType type, int amount) {
         switch(type) {
             case ResourceType.Wood:
-                woodController.SetCount(amount);
-                Debug.Log("Set Wood");
+                if(woodController != null) {
+                    woodController.SetCount(amount);
+                    Debug.Log("Set Wood");
+                }
                 break;
             case ResourceType.Stone:
-                stoneController.SetCount(amount);
-                Debug.Log("Set Stone: " + amount);
+                if(stoneController != null) {
+                    stoneController.SetCount(amount);
+                    Debug.Log("Set Stone: " + amount);
+                }
                 break;
             default:
                 throw new InvalidResourceTypeException("Invalid Resource Type. How Could That Happen!");
