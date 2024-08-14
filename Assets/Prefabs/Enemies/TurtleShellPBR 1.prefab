@@ -655,7 +655,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 100
-  _NetworkedHealth: 0
 --- !u!114 &9012884958951729890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +694,6 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 2763252100305396333}
   - {fileID: 9012884958951729890}
   - {fileID: 5192481510909773301}
 --- !u!114 &5192481510909773301

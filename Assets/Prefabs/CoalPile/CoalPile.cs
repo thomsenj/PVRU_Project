@@ -16,7 +16,7 @@ public class CoalPile : NetworkBehaviour
         coalPrefab.SetActive(false);
         for (int i = 0; i < 2; i++) 
         {
-            GameObject coal = Runner.Spawn(coalPrefab);
+            GameObject coal = Runner.Spawn(coalPrefab).gameObject;
             coal.SetActive(false);  
             list.Add(coal);
         }
@@ -41,7 +41,7 @@ public class CoalPile : NetworkBehaviour
             } 
             else 
             {
-                GameObject coal = Runner.Spawn(coalPrefab);
+                GameObject coal = Runner.Spawn(coalPrefab).gameObject;
                 coal.SetActive(true); 
                 return coal;
             }
