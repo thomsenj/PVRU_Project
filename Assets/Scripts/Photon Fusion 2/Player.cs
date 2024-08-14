@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Fusion;
+using TMPro;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -13,9 +15,74 @@ public class Player : NetworkBehaviour
 
     [Networked] private TickTimer delay { get; set; }
 
-    private void Start()
+    [Networked] private bool spawnedProjectile { get; set; }
+
+    private ChangeDetector _ChangeDetector;
+
+    private Material _material;
+
+    public TMP_Text messageText;
+
+    private void Update()
+    {
+        if (Object.HasInputAuthority && Input.GetKeyDown(KeyCode.R))
+        {
+            RPC_SendMessage("Hello");
+        }
+    }
+
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    private void RPC_SendMessage(string message, RpcInfo rpcInfo = default)
+    {
+        // throw new NotImplementedException();
+        RPC_RelayMessage(message, rpcInfo.Source);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    private void RPC_RelayMessage(string message, PlayerRef messageSource)
+    {
+        // throw new NotImplementedException();
+        if (messageText == null)
+        {
+            messageText = FindObjectOfType<TMP_Text>();
+        }
+
+        if (messageSource == Runner.LocalPlayer)
+        {
+            message = $"You said: {message}\n";
+        }
+        else
+        {
+
+            message = $"Other said: {message}\n";
+        }
+        messageText.text += message;
+    }
+
+    private void Awake()
     {
         characterController = GetComponent<NetworkCharacterController>();
+        _material = GetComponentInChildren<MeshRenderer>().material;
+    }
+
+    public override void Spawned()
+    {
+        _ChangeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+    }
+
+    public override void Render()
+    {
+        foreach (var changes in _ChangeDetector.DetectChanges(this))
+        {
+            switch (changes)
+            {
+                case nameof(spawnedProjectile):
+                    _material.color = Color.white;
+                    break;
+            }
+        }
+        _material.color = Color.Lerp(_material.color, Color.blue, Time.deltaTime);
     }
 
     public override void FixedUpdateNetwork()
@@ -43,6 +110,8 @@ public class Player : NetworkBehaviour
                         O.GetComponent<Bullet>().Init();
                     }
                     );
+                    spawnedProjectile = !spawnedProjectile;
+
                 }
                 else if (data.buttons.IsSet(NetworkInputData.MOUSEBUTTON1))
                 {
@@ -52,6 +121,7 @@ public class Player : NetworkBehaviour
                         O.GetComponent<PhysXBullet>().Init(10 * _forward);
                     }
                     );
+                    spawnedProjectile = !spawnedProjectile;
                 }
             }
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -9,13 +10,22 @@ public class ButtonOpensDoor : MonoBehaviour
     // public string boolName = "Open";
 
     [SerializeField] private bool doorOpen;
-    public GameObject door1;
+    [SerializeField] private List<GameObject> _doorsAndWindows = new List<GameObject>();
+    [SerializeField] private TextMeshPro statusText;
+    private XRSimpleInteractable interactable;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(x => ToggleDoorOpen());
+        // GetComponent<XRSimpleInteractable>().selectEntered.AddListener(x => ToggleDoorOpen());
+        interactable = GetComponent<XRSimpleInteractable>();
+
+        if (interactable != null)
+        {
+            interactable.selectEntered.AddListener(x => ToggleDoorOpen());
+        }
         doorOpen = false;
+        UpdateStatusText();
     }
 
     // Update is called once per frame
@@ -28,15 +38,22 @@ public class ButtonOpensDoor : MonoBehaviour
     {
         // bool isOpen = animator.GetBool(boolName);
         // animator.SetBool(boolName, !isOpen);
-        if (!doorOpen)
+        doorOpen = !doorOpen;
+
+        foreach (var door in _doorsAndWindows)
         {
-            door1.SetActive(false);
-            doorOpen = true;
+            door.SetActive(!doorOpen);
         }
-        else if (doorOpen)
+
+        UpdateStatusText();
+    }
+
+    private void UpdateStatusText()
+    {
+        if (statusText != null)
         {
-            door1.SetActive(true);
-            doorOpen = false;
+            string status = doorOpen ? "<color=green>Open</color>" : "<color=red>Closed</color>";
+            statusText.text = $"Windows:\n{status}";
         }
     }
 }

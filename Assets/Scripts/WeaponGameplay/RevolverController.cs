@@ -14,8 +14,8 @@ public class RevolverController : MonoBehaviour
     public Transform hammer;                    // Hammer des Revolvers
     public Transform trigger;                   // Abzug des Revolvers
 
-    private Vector3 originalPosition;           // Die ursprüngliche Position des Revolvers
-    private Quaternion originalRotation;        // Die ursprüngliche Rotation des Revolvers
+    // private Vector3 originalPosition;           // Die ursprüngliche Position des Revolvers
+    // private Quaternion originalRotation;        // Die ursprüngliche Rotation des Revolvers
     private bool isRecoiling = false;           // Gibt an, ob der Revolver sich im Rückstoß befindet
     private Vector3 recoilPosition;             // Die Position, zu der der Revolver sich beim Rückstoß bewegt
     private Quaternion recoilRotation;          // Die Rotation, zu der der Revolver sich beim Rückstoß dreht
@@ -23,8 +23,7 @@ public class RevolverController : MonoBehaviour
 
     void Start()
     {
-        originalPosition = transform.localPosition;
-        originalRotation = transform.localRotation;
+        // UpdateOriginalPositionAndRotation();
     }
 
     void Update()
@@ -44,49 +43,60 @@ public class RevolverController : MonoBehaviour
             if (Vector3.Distance(transform.localPosition, recoilPosition) < 0.01f && Quaternion.Angle(transform.localRotation, recoilRotation) < 0.1f)
             {
                 isRecoiling = false; // Rückstoß ist abgeschlossen
-            }
-        }
-        else
-        {
-            // Bewege den Revolver zurück zu seiner ursprünglichen Position
-            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * recoilSpeed);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, originalRotation, Time.deltaTime * recoilSpeed);
-
-            // Wenn der Revolver zurück in seiner Ursprungsposition ist, erlaube den nächsten Schuss
-            if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f && Quaternion.Angle(transform.localRotation, originalRotation) < 0.1f)
-            {
                 canShoot = true;
             }
         }
+        // else
+        // {
+        //     // Bewege den Revolver zurück zu seiner ursprünglichen Position
+        //     transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * recoilSpeed);
+        //     transform.localRotation = Quaternion.Slerp(transform.localRotation, originalRotation, Time.deltaTime * recoilSpeed);
+
+        //     // Wenn der Revolver zurück in seiner Ursprungsposition ist, erlaube den nächsten Schuss
+        //     if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f && Quaternion.Angle(transform.localRotation, originalRotation) < 0.1f)
+        //     {
+        //         canShoot = true;
+        //     }
+        // }
     }
+
+    // public void UpdateOriginalPositionAndRotation()
+    // {
+    //     originalPosition = transform.localPosition;
+    //     originalRotation = transform.localRotation;
+    // }
 
     public void Shoot()
     {
-            canShoot = false; // Verhindere weiteres Schießen während des Rückstoßes
-            
-            // Hole eine Bullet aus dem Pool und feuere sie ab
-            BulletController bullet = bulletPool.GetBullet();
-            bullet.Shoot(muzzle.position, muzzle.forward);
+        canShoot = false; // Verhindere weiteres Schießen während des Rückstoßes
 
-            // Spiele das Partikelsystem für den Hülsenauswurf ab
-            if (shellEjectParticle != null)
-            {
-                shellEjectParticle.Play();
-            }
+        // Hole eine Bullet aus dem Pool und feuere sie ab
+        BulletController bullet = bulletPool.GetBullet();
+        bullet.Shoot(muzzle.position, muzzle.forward);
 
-            // Initialisiere den Rückstoß und die Animationen
-            AnimateRevolver();
-            StartRecoil();
-            canShoot = true;
+        // Spiele das Partikelsystem für den Hülsenauswurf ab
+        if (shellEjectParticle != null)
+        {
+            shellEjectParticle.Play();
+        }
+
+        // Initialisiere den Rückstoß und die Animationen
+        AnimateRevolver();
+        StartRecoil();
+        canShoot = true;
     }
 
     private void StartRecoil()
     {
+        // UpdateOriginalPositionAndRotation();
+
         isRecoiling = true;
 
         // Setze die Rückstoßposition und -rotation basierend auf den Recoil-Werten
-        recoilPosition = originalPosition + new Vector3(0, 0, -recoilAmount * 0.5f);
-        recoilRotation = originalRotation * Quaternion.Euler(-recoilAmount * 100f, 0, 0); // Leichte Drehung nach oben (X-Achse)
+        // recoilPosition = originalPosition + new Vector3(0, 0, -recoilAmount * 0.5f);
+        // recoilRotation = originalRotation * Quaternion.Euler(-recoilAmount * 100f, 0, 0); // Leichte Drehung nach oben (X-Achse)
+        recoilPosition = transform.localPosition + new Vector3(0, 0, -recoilAmount * 0.5f);
+        recoilRotation = transform.localRotation * Quaternion.Euler(-recoilAmount * 100f, 0, 0); // Leichte Drehung nach oben (X-Achse)
     }
 
     private void AnimateRevolver()
