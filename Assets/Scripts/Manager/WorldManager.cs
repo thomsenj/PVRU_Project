@@ -10,19 +10,13 @@ public class WorldManager : MonoBehaviour
     public GameObject mainPlane;
     public float planeRadius = 75f;
     public GameObject train;
-    private ResourceFactory resourceFactory;
-    private EnemyFactory enemyFactory;
     private TrainManager trainManager;
 
     private void Start()
     {
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
         GameObject worldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
-        resourceFactory = worldManager.GetComponent<ResourceFactory>();
-        enemyFactory = worldManager.GetComponent<EnemyFactory>();
         trainManager = worldManager.GetComponent<TrainManager>();
-        UpdateResourceFactory();
-        UpdateEnemyFactory();
         UpdateTrainManager();
     }
 
@@ -38,13 +32,15 @@ public class WorldManager : MonoBehaviour
         float distance = GetDistance(mainPlane, position);
         if (distance > planeRadius)
         {
-            int resourceCount = resourceFactory.GetLastPlaneInfo();
+            Debug.Log("Train change works");
+            //int resourceCount = resourceFactory.GetLastPlaneInfo();
             PlaneInformation planeInformation = mainPlane.GetComponent<PlaneInformation>();
-            planeInformation.resourceCount = resourceCount;
-            ClearEnemies();
+            //planeInformation.resourceCount = resourceCount;
+            //ClearEnemies();
             mainPlane = planeInformation.nextPlane;
-            UpdateEnemyFactory();
-            UpdateResourceFactory();
+            Debug.Log(mainPlane.name);
+            //UpdateEnemyFactory();
+            //UpdateResourceFactory();
         }
     }
 
@@ -61,22 +57,22 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    private void UpdateResourceFactory()
-    {
-        resourceFactory.UpdateResourceFactory(mainPlane);
-    }
+    //private void UpdateResourceFactory()
+    //{
+    //    resourceFactory.UpdateResourceFactory(mainPlane);
+    //}
 
-    private void ClearEnemies()
-    {
-        List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(TagConstants.Enemy));
-        enemyFactory.UpdateEnemies(enemies);
-    }
+    //private void ClearEnemies()
+    //{
+    //    List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(TagConstants.Enemy));
+    //    enemyFactory.UpdateEnemies(enemies);
+    //}
 
-    private void UpdateEnemyFactory()
-    {
-        GameObject spawner = mainPlane.GetComponent<PlaneInformation>().enemySpawner;
-        enemyFactory.ResetFactory(spawner);
-    }
+    //private void UpdateEnemyFactory()
+    //{
+    //    GameObject spawner = mainPlane.GetComponent<PlaneInformation>().enemySpawner;
+    //    enemyFactory.ResetFactory(spawner);
+    //}
 
     private void UpdateTrainManager()
     {
