@@ -50,5 +50,12 @@ namespace Fusion.XRShared.Demo
             float zPos = pos.z + distance * Mathf.Sin(angle * Mathf.Deg2Rad);
             return new Vector3(xPos, 0, zPos);
         }
+
+        public void UpdateResourceFactory(GameObject plane)
+        {
+            PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().getPlaneInfo();
+            spawnTarget = plane;
+            currentCount = 0;
+        }
     }
 }

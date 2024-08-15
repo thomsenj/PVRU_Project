@@ -67,6 +67,18 @@ namespace Fusion.XRShared.Demo
         float zPos = playerPosition.z + distance * Mathf.Sin(angle * Mathf.Deg2Rad);
         return new Vector3(xPos, 0, zPos);
     }
+
+        public void UpdateEnemies(List<GameObject> enemies, GameObject plane)
+        {
+            foreach(GameObject e in enemies)
+            {
+                Runner.Despawn(e.GetComponent<NetworkObject>());
+            }
+            PlaneInformation planeInfo = plane.GetComponent<PlaneInformation>();
+            spawnTarget = planeInfo.enemySpawner;
+            currentCount = 0;
+        }
+
     }
 
 }
