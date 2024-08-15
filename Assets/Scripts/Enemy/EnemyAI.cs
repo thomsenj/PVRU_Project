@@ -18,7 +18,6 @@ public class EnemyAI : NetworkBehaviour
     private bool isDead;
     private Animator animator;
     private ScoreManager scoreManager;
-    private EnemyFactory enemyFactory;
     private Transform currentTarget;
     private float lastAttackTime;
 
@@ -26,7 +25,6 @@ public class EnemyAI : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
         scoreManager = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<ScoreManager>();
-        enemyFactory = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<EnemyFactory>();
         currentHealth = maxHealth;
         previousHealth = currentHealth;
     }
@@ -203,6 +201,5 @@ public class EnemyAI : NetworkBehaviour
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Runner.Despawn(Object);
-        enemyFactory?.EnemyDied(gameObject);
     }
 }
