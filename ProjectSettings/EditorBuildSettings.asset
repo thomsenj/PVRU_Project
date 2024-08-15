@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/VRWeapon Multiplayer.unity
     guid: 561e2c6a96ba5584a99f78b23f660441
   - enabled: 1
-    path: Assets/Scenes/Net_TestSceneManagers 1.unity
+    path: Assets/Scenes/Net_TestSceneManagers.unity
     guid: 7b76b4b18e951da4d8faa5f34f060f0b
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 67a46c3402fd74e49b0d3b57f0f79334, type: 2}

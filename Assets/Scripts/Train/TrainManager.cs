@@ -6,20 +6,20 @@ using UnityEngine;
 public class TrainManager : MonoBehaviour
 {
     public WeatherTypes weatherType = WeatherTypes.DEFAULT;
-    private GameObject train;
-    private SplineFollower splineFollower;
+    //private GameObject train;
+    //private SplineFollower splineFollower;
 
-    private void Start()
-    {
-        train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
-        splineFollower = train.GetComponent<SplineFollower>();
-    }
+    //private void Start()
+    //{
+    //    train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
+    //    splineFollower = train.GetComponent<SplineFollower>();
+    //}
 
-    public void setSpeed(float speed)
-    {
+    //public void setSpeed(float speed)
+    //{
         // maybe in the future
         //splineFollower.followSpeed = speed;
-    }
+    //}
 
     public float getFuelModifier()
     {

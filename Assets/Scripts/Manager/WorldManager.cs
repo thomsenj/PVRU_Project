@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
+using Fusion.XRShared.Demo;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,40 +11,37 @@ public class WorldManager : MonoBehaviour
     public GameObject mainPlane;
     public float planeRadius = 75f;
     public GameObject train;
-    private ResourceFactory resourceFactory;
-    private EnemyFactory enemyFactory;
     private TrainManager trainManager;
+    private ResourceSpawnerPrefab ResourceSpawnerPrefab;
+    private EnemyPrefabSpawner EnemyPrefabSpawner;
+    private bool safetyLock = false; 
 
     private void Start()
     {
         train = GameObject.FindGameObjectWithTag(TagConstants.TRAIN);
         GameObject worldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
-        resourceFactory = worldManager.GetComponent<ResourceFactory>();
-        enemyFactory = worldManager.GetComponent<EnemyFactory>();
         trainManager = worldManager.GetComponent<TrainManager>();
-        UpdateResourceFactory();
-        UpdateEnemyFactory();
-        UpdateTrainManager();
+        ResourceSpawnerPrefab = worldManager.GetComponent<ResourceSpawnerPrefab>();
+        EnemyPrefabSpawner = worldManager.GetComponent<EnemyPrefabSpawner>();
     }
 
     private void Update()
     {
-        if (train == null || mainPlane == null)
-        {
-            Debug.LogError("Train oder Mainplane not initialized.");
-            return;
-        }
-
         Vector3 position = train.transform.position;
         float distance = GetDistance(mainPlane, position);
-        if (distance > planeRadius)
+        if (distance < planeRadius/2)
         {
-            int resourceCount = resourceFactory.GetLastPlaneInfo();
+            safetyLock = true;
+        }
+        if (distance > planeRadius && safetyLock)
+        {
+            safetyLock = false;
+            Debug.Log("Train change works");
             PlaneInformation planeInformation = mainPlane.GetComponent<PlaneInformation>();
-            planeInformation.resourceCount = resourceCount;
-            ClearEnemies();
             mainPlane = planeInformation.nextPlane;
-            UpdateEnemyFactory();
+            Debug.Log("New Mainplane: " + mainPlane.name);
+            ClearEnemies();
+            UpdateTrainManager();
             UpdateResourceFactory();
         }
     }
@@ -63,19 +61,13 @@ public class WorldManager : MonoBehaviour
 
     private void UpdateResourceFactory()
     {
-        resourceFactory.UpdateResourceFactory(mainPlane);
+       ResourceSpawnerPrefab.UpdateResourceFactory(mainPlane);
     }
 
     private void ClearEnemies()
     {
         List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(TagConstants.Enemy));
-        enemyFactory.UpdateEnemies(enemies);
-    }
-
-    private void UpdateEnemyFactory()
-    {
-        GameObject spawner = mainPlane.GetComponent<PlaneInformation>().enemySpawner;
-        enemyFactory.ResetFactory(spawner);
+        EnemyPrefabSpawner.UpdateEnemies(enemies, mainPlane);
     }
 
     private void UpdateTrainManager()

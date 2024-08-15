@@ -1,17 +1,17 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class VRPlayerInteraction : MonoBehaviour
+public class VRPlayerInteraction : NetworkBehaviour
 {
     public string rightHandControllerName = "RightHand Controller";
     private ActionBasedController rightHandController;
-    private GameObject heldObject;
+    private NetworkObject heldObjectNetworked;
     private bool isGrabbing;
 
     void Start()
     {
-        // Try to find the RightHand Controller
         GameObject rightHandControllerObject = GameObject.Find(rightHandControllerName);
         if (rightHandControllerObject != null)
         {
@@ -37,11 +37,11 @@ public class VRPlayerInteraction : MonoBehaviour
 
         isGrabbing = rightHandController.selectAction.action.ReadValue<float>() > 0.1f;
 
-        if (isGrabbing && heldObject == null)
+        if (isGrabbing && heldObjectNetworked == null)
         {
             TryGrab();
         }
-        else if (!isGrabbing && heldObject != null)
+        else if (!isGrabbing && heldObjectNetworked != null)
         {
             DropHeldObject();
         }
@@ -49,44 +49,63 @@ public class VRPlayerInteraction : MonoBehaviour
 
     void TryGrab()
     {
+        if (!HasStateAuthority) return;  // Nur der Spieler mit der Zustandsautorität kann Objekte greifen
+
         RaycastHit hit;
         if (Physics.Raycast(rightHandController.transform.position, rightHandController.transform.forward, out hit, 5f))
         {
-            CoalPile coalPile = hit.collider.GetComponent<CoalPile>();
-            if (coalPile != null)
+            NetworkObject networkObject = hit.collider.GetComponent<NetworkObject>();
+            if (networkObject != null && networkObject.HasStateAuthority)
             {
-                GameObject coal = coalPile.TakeCoal();
-                if (coal != null)
-                {
-                    Rigidbody rb = coal.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        rb.isKinematic = true;
-                    }
-
-                    coal.transform.SetParent(rightHandController.transform);
-                    coal.tag = TagConstants.COAL;  
-                    coal.transform.localPosition = Vector3.zero;
-
-                    heldObject = coal;
-                }
+                RPC_TakeOwnershipAndGrab(networkObject);
             }
+        }
+    }
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    void RPC_TakeOwnershipAndGrab(NetworkObject targetObject)
+    {
+        targetObject.RequestStateAuthority();  // Übernimmt die Kontrolle über das Objekt
+        heldObjectNetworked = targetObject;
+
+        Rigidbody rb = heldObjectNetworked.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
+
+        heldObjectNetworked.transform.SetParent(rightHandController.transform);
+        heldObjectNetworked.transform.localPosition = Vector3.zero;
+
+        RPC_SyncGrabbedObject(heldObjectNetworked.Id);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    void RPC_SyncGrabbedObject(NetworkId objectId)
+    {
+        NetworkObject networkObject = Runner.FindObject(objectId);
+        if (networkObject != null)
+        {
+            heldObjectNetworked = networkObject;
+            heldObjectNetworked.transform.SetParent(rightHandController.transform);
+            heldObjectNetworked.transform.localPosition = Vector3.zero;
         }
     }
 
     void DropHeldObject()
     {
-        if (heldObject != null)
+        if (heldObjectNetworked != null)
         {
-            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+            Rigidbody rb = heldObjectNetworked.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = false;
 
                 rb.velocity = rightHandController.transform.forward * 3f;
             }
-            heldObject.transform.SetParent(null);
-            heldObject = null;
+
+            heldObjectNetworked.transform.SetParent(null);
+            heldObjectNetworked = null;
         }
     }
 }

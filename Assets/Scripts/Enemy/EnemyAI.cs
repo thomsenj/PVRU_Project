@@ -12,17 +12,12 @@ public class EnemyAI : NetworkBehaviour
     public float jumpForce = 5.0f;
     public LayerMask groundLayer;
     public int maxHealth = 100;
-
-    [Networked]
-    public int NetworkedHealth { get; set; }
-
     private int currentHealth;
     private int previousHealth;
     private bool isGrounded;
     private bool isDead;
     private Animator animator;
     private ScoreManager scoreManager;
-    private EnemyFactory enemyFactory;
     private Transform currentTarget;
     private float lastAttackTime;
 
@@ -30,28 +25,18 @@ public class EnemyAI : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
         scoreManager = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<ScoreManager>();
-        enemyFactory = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<EnemyFactory>();
         currentHealth = maxHealth;
-
-        NetworkedHealth = maxHealth;
-        previousHealth = NetworkedHealth;
-    }
-
-    public void ResetHealth()
-    {
-        NetworkedHealth = maxHealth;
-        previousHealth = NetworkedHealth;
+        previousHealth = currentHealth;
     }
 
     public override void FixedUpdateNetwork()
     {
         if (isDead) return;
 
-        // Check if health has changed
-        if (NetworkedHealth != previousHealth)
+        if (currentHealth != previousHealth)
         {
             OnHealthChanged();
-            previousHealth = NetworkedHealth;
+            previousHealth = currentHealth;
         }
 
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer);
@@ -73,7 +58,6 @@ public class EnemyAI : NetworkBehaviour
     {
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
-
         foreach (string tag in targetTags)
         {
             GameObject[] potentialTargets = GameObject.FindGameObjectsWithTag(tag);
@@ -190,12 +174,12 @@ public class EnemyAI : NetworkBehaviour
     {
         if (isDead) return;
 
-        NetworkedHealth -= damageAmount;
+        currentHealth -= damageAmount;
     }
 
     private void OnHealthChanged()
     {
-        if (NetworkedHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -217,6 +201,5 @@ public class EnemyAI : NetworkBehaviour
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Runner.Despawn(Object);
-        enemyFactory?.EnemyDied(gameObject);
     }
 }

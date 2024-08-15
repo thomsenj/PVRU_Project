@@ -297,6 +297,9 @@ GameObject:
   - component: {fileID: 6318443887094439819}
   - component: {fileID: 2004991116664908599}
   - component: {fileID: 2115861322174997582}
+  - component: {fileID: -5775226674086009453}
+  - component: {fileID: -8268931785257463295}
+  - component: {fileID: -5471436868338595187}
   m_Layer: 0
   m_Name: SlimePBR 1
   m_TagString: Enemy
@@ -402,14 +405,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6288a862347234083ad04758ca69fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 2
-  damage: 10
+  targetTags:
+  - Train
+  - Player2
+  moveSpeed: 2
+  attackDamage: 10
   jumpForce: 5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  health: 100
+  maxHealth: 100
+--- !u!114 &-5775226674086009453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383241796071162761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 542652022
+  ObjectInterest: 1
+  Flags: 524289
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 2115861322174997582}
+  - {fileID: -8268931785257463295}
+  - {fileID: -5471436868338595187}
+--- !u!114 &-8268931785257463295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383241796071162761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _interpolationTarget: {fileID: 0}
+  UsePreciseRotation: 0
+  UseRenderSleepThresholds: 1
+  RenderThresholds:
+    UseEnergy: 1
+    Position: 0.01
+    Rotation: 0.01
+    Scale: 0.01
+--- !u!114 &-5471436868338595187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383241796071162761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 7948082947186796255}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 00000000738e8b49403dae7eedb25a4ff72360a59e810ff81aa2d91732edce8b7143fd8837b935014e73a6a7
+  TriggerHashes: 000000003b2dc047d7ff783904e8628c
 --- !u!1 &6798957333601027388
 GameObject:
   m_ObjectHideFlags: 0

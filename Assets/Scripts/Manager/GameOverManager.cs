@@ -1,32 +1,43 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
-public class GameOverManager : MonoBehaviour
+public class GameOverManager : NetworkBehaviour
 {
-    public GameObject gameOverUI;
-    public Text gameOverText;
+
     private ScoreManager scoreManager;
+
+    public bool testTrigger = false;
 
     private void Start()
     {
-        gameOverUI.SetActive(false);
         scoreManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ScoreManager>();
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        base.FixedUpdateNetwork();
+        if (testTrigger)
         {
-            RestartGame();
+            testTrigger = false;
+            TriggerGameOver(); 
         }
     }
 
     public void TriggerGameOver()
     {
-        gameOverUI.SetActive(true);
-        gameOverText.text = "Game Over!";
-        scoreManager.stopScoring();
+        if (HasStateAuthority) // should be true for all players as we are in shared mode
+        {
+            scoreManager.stopScoring();
+            Invoke("RpcRestartGameForAll", 3f); 
+        }
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RpcRestartGameForAll()
+    {
         RestartGame();
     }
 

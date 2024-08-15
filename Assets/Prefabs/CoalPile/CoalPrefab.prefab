@@ -98,6 +98,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5739167122777580396}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4443786845840345638}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6361600155069712310}
   m_SourcePrefab: {fileID: 100100000, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
 --- !u!1 &4433009467096039110 stripped
 GameObject:
@@ -367,3 +373,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coalPileGO: {fileID: 3843075629056083258, guid: 0435c3d0a7f263549bce32df778c3c24, type: 3}
+--- !u!114 &4443786845840345638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433009467096039110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _interpolationTarget: {fileID: 0}
+  UsePreciseRotation: 0
+  UseRenderSleepThresholds: 1
+  RenderThresholds:
+    UseEnergy: 1
+    Position: 0.01
+    Rotation: 0.01
+    Scale: 0.01
+--- !u!114 &-6361600155069712310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433009467096039110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1657343593
+  ObjectInterest: 1
+  Flags: 524289
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 4443786845840345638}
