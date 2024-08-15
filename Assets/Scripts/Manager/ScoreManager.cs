@@ -1,29 +1,35 @@
+using Fusion;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : NetworkBehaviour
 {
-    public string scoreText; 
-    public float score;     
-    public float scoreIncreaseRate = 1f;  
+    public string scoreText;
+
+    [Networked]
+    public float score { get; set; } = 0;
+    public float scoreIncreaseRate = 2f;  
 
     private CollectableBankController scoreUI;
     private bool isScoring;
 
-    void Start()
+    public void Start()
     {
         isScoring = true;
-        score = 0f;
-        try {
+        try
+        {
             scoreUI = GameObject.Find(GeneralConstants.SCORE_COUNTER).GetComponent<CollectableBankController>();
             scoreUI.SetCount(0);
-        } catch {
-            //Debug.LogError("No Score UI");
+        }
+        catch
+        {
+            // Debug.LogError("No Score UI");
         }
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
-        if(isScoring)
+        base.FixedUpdateNetwork();
+        if (isScoring)
         {
             score += scoreIncreaseRate * Time.deltaTime;
             try {
@@ -40,6 +46,7 @@ public class ScoreManager : MonoBehaviour
             score += bonusPoints;
         }
     }
+
     public int GetEnemyCount()
     {
         int baseEnemyCount = 5;

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: 
-  score: 0
+  _score: 0
   scoreIncreaseRate: 1
 --- !u!114 &8288495739952894321
 MonoBehaviour:
@@ -97,6 +97,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 2002249804374501539}
   - {fileID: 6808984122391471847}
   - {fileID: 2169637751953694753}
 --- !u!114 &6808984122391471847
@@ -117,6 +118,7 @@ MonoBehaviour:
   spawnTarget: {fileID: 0}
   _currentCount: 0
   maxCount: 4
+  spawnInterval: 5
 --- !u!114 &2169637751953694753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,3 +137,4 @@ MonoBehaviour:
   spawnTarget: {fileID: 0}
   _currentCount: 0
   maxCount: 3
+  radius: 10

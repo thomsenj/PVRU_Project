@@ -11,14 +11,15 @@ public class BurnCoal : MonoBehaviour
     private TrainManager trainManager;
     private float fuelModifier = 1.0f;
     private CoalPile coalPile;
+    private GameOverManager gameOverManager;
 
     private void Start()
     {
         try
         {
             trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
-            GameObject test  = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE);
-            Debug.Log(test);
+            gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
+            GameObject test = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE);
             coalPile = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE).GetComponent<CoalPile>();
             fuelModifier = trainManager.getFuelModifier();
         }
@@ -31,25 +32,25 @@ public class BurnCoal : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-            if (other.CompareTag(TagConstants.COAL))
-            {
-                addFuel();
-                if (trainManager != null)
-                {
-                    trainManager.setSpeed(getSpeed());
-                } else
-                {
-                    Debug.LogError("This scene lacks a train manager.");
-                }
-                other.gameObject.SetActive(false);
-                Debug.Log(coalPile);
-                coalPile.AddCoal(other.gameObject);
-            }
+        if (other.CompareTag(TagConstants.COAL))
+        {
+            addFuel();
+            //if (trainManager != null)
+            //{
+            //    trainManager.setSpeed(getSpeed());
+            //} else
+            //{
+            //    Debug.LogError("This scene lacks a train manager.");
+            //}
+            other.gameObject.SetActive(false);
+            Debug.Log(coalPile);
+            coalPile.AddCoal(other.gameObject);
+        }
     }
 
     private void addFuel()
     {
-        fuelstand = Mathf.Clamp(fuelstand + 10, 0, 100); 
+        fuelstand = Mathf.Clamp(fuelstand + 10, 0, 100);
     }
 
     private float getSpeed()
@@ -77,16 +78,21 @@ public class BurnCoal : MonoBehaviour
         else if (fuelstand > 90 && fuelstand <= 100)
             return 10;
         else
-            return 0; 
+            return 0;
     }
 
     private IEnumerator BurnFuelOverTime()
     {
         while (true)
         {
-            fuelstand = Mathf.Clamp(fuelstand - (1 *  fuelModifier), 0, 100);
-            try { trainManager.setSpeed(getSpeed()); }
-            catch { Debug.LogError("Could not set train speed."); }
+            fuelstand = Mathf.Clamp(fuelstand - (1 * fuelModifier), 0, 100);
+            //try { trainManager.setSpeed(getSpeed()); }
+            //catch { Debug.LogError("Could not set train speed."); }
+            if (fuelstand < 1)
+            {
+                gameOverManager.TriggerGameOver();
+                break;
+            }
             yield return new WaitForSeconds(5f);
         }
     }
