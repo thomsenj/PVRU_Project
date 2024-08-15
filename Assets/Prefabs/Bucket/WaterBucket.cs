@@ -50,7 +50,7 @@ public class WaterBucket : MonoBehaviour
             }
 
            
-            currentWaterAmount -= pourRate * Time.deltaTime;
+            //currentWaterAmount -= pourRate * Time.deltaTime;
             if (currentWaterAmount <= 0)
             {
                 currentWaterAmount = 0;
