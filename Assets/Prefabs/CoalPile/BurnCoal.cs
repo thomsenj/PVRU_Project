@@ -4,7 +4,7 @@ using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BurnCoal : MonoBehaviour
+public class BurnCoal : NetworkBehaviour
 {
     public float fuelstand = 100f;
 
@@ -42,9 +42,15 @@ public class BurnCoal : MonoBehaviour
             //{
             //    Debug.LogError("This scene lacks a train manager.");
             //}
-            other.gameObject.SetActive(false);
-            Debug.Log(coalPile);
-            coalPile.AddCoal(other.gameObject);
+            NetworkObject networkObject = other.GetComponent<NetworkObject>();
+            if (networkObject != null)
+            {
+                Runner.Despawn(networkObject);
+            }
+            else
+            {
+                Debug.LogError("No NetworkObject component found on the colliding GameObject.");
+            }
         }
     }
 
