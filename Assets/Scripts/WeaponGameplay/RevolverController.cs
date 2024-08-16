@@ -21,28 +21,28 @@ public class RevolverController : MonoBehaviour
     private Vector3 recoilPosition;             // Die Position, zu der der Revolver sich beim Rückstoß bewegt
     private Quaternion recoilRotation;          // Die Rotation, zu der der Revolver sich beim Rückstoß dreht
     private bool canShoot = true;               // Gibt an, ob ein Schuss abgegeben werden kann
-    private XRGrabInteractable grabInteractable;
+    // private XRGrabInteractable grabInteractable;
 
 
     void Start()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
+        // grabInteractable = GetComponent<XRGrabInteractable>();
 
-        grabInteractable.selectEntered.AddListener(OnGrabbed);
+        // grabInteractable.selectEntered.AddListener(OnGrabbed);
 
-        grabInteractable.selectExited.AddListener(OnReleased);
+        // grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    private void OnGrabbed(SelectEnterEventArgs args)
-    {
-        canShoot = true;    
-    }
+    // private void OnGrabbed(SelectEnterEventArgs args)
+    // {
+    //     canShoot = true;
+    // }
 
     // Wird aufgerufen, wenn das Objekt losgelassen wird
-    private void OnReleased(SelectExitEventArgs args)
-    {
-        canShoot = false;    
-    }
+    // private void OnReleased(SelectExitEventArgs args)
+    // {
+    //     canShoot = false;
+    // }
 
 
     // void Update()
@@ -52,32 +52,32 @@ public class RevolverController : MonoBehaviour
     //         Shoot();
     //     }
 
-        // if (isRecoiling)
-        // {
-        //     // Bewege den Revolver zu seiner Rückstoßposition
-        //     transform.localPosition = Vector3.Lerp(transform.localPosition, recoilPosition, Time.deltaTime * recoilSpeed);
-        //     transform.localRotation = Quaternion.Slerp(transform.localRotation, recoilRotation, Time.deltaTime * recoilSpeed);
+    // if (isRecoiling)
+    // {
+    //     // Bewege den Revolver zu seiner Rückstoßposition
+    //     transform.localPosition = Vector3.Lerp(transform.localPosition, recoilPosition, Time.deltaTime * recoilSpeed);
+    //     transform.localRotation = Quaternion.Slerp(transform.localRotation, recoilRotation, Time.deltaTime * recoilSpeed);
 
-        //     // Wenn der Revolver die Rückstoßposition erreicht hat, bewege ihn zurück
-        //     if (Vector3.Distance(transform.localPosition, recoilPosition) < 0.01f && Quaternion.Angle(transform.localRotation, recoilRotation) < 0.1f)
-        //     {
-        //         isRecoiling = false; // Rückstoß ist abgeschlossen
-        //         canShoot = true;
-        //     }
-        // }
-        // else
-        // {
-        //     // Bewege den Revolver zurück zu seiner ursprünglichen Position
-        //     transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * recoilSpeed);
-        //     transform.localRotation = Quaternion.Slerp(transform.localRotation, originalRotation, Time.deltaTime * recoilSpeed);
+    //     // Wenn der Revolver die Rückstoßposition erreicht hat, bewege ihn zurück
+    //     if (Vector3.Distance(transform.localPosition, recoilPosition) < 0.01f && Quaternion.Angle(transform.localRotation, recoilRotation) < 0.1f)
+    //     {
+    //         isRecoiling = false; // Rückstoß ist abgeschlossen
+    //         canShoot = true;
+    //     }
+    // }
+    // else
+    // {
+    //     // Bewege den Revolver zurück zu seiner ursprünglichen Position
+    //     transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * recoilSpeed);
+    //     transform.localRotation = Quaternion.Slerp(transform.localRotation, originalRotation, Time.deltaTime * recoilSpeed);
 
-        //     // Wenn der Revolver zurück in seiner Ursprungsposition ist, erlaube den nächsten Schuss
-        //     if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f && Quaternion.Angle(transform.localRotation, originalRotation) < 0.1f)
-        //     {
-        //         canShoot = true;
-        //     }
-        // }
-   // }
+    //     // Wenn der Revolver zurück in seiner Ursprungsposition ist, erlaube den nächsten Schuss
+    //     if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f && Quaternion.Angle(transform.localRotation, originalRotation) < 0.1f)
+    //     {
+    //         canShoot = true;
+    //     }
+    // }
+    // }
 
     // public void UpdateOriginalPositionAndRotation()
     // {
