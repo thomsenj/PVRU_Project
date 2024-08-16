@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Fusion;
+using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class BulletController : NetworkBehaviour
 {
     public float speed = 20f;                // Anfangsgeschwindigkeit der Bullet
     public float maxDistance = 100f;         // Maximale Distanz, die die Bullet zurücklegen kann
@@ -12,22 +13,21 @@ public class BulletController : MonoBehaviour
 
     private Vector3 velocity;                // Geschwindigkeit der Bullet
     private float distanceTraveled = 0f;     // Zurückgelegte Distanz
-    private BulletPoolManager poolManager;   // Referenz zum Bullet-Pool-Manager
     private TrailRenderer trail;            // Referenz zum Trail-Renderer
-
-
+    private NetworkObject bulletPrefab;
 
     void Start()
     {
-        poolManager = BulletPoolManager.Instance; 
         trail = GetComponent<TrailRenderer>();
-        // Deaktiviere den Trail-Renderer, um die Bullet unsichtbar zu machen
         trail.enabled = false;
     }
 
-    void Update()
-    {
-        if (gameObject.activeSelf)
+
+        public override void FixedUpdateNetwork()
+        {
+            base.FixedUpdateNetwork();
+
+          if (gameObject.activeSelf)
         {
             float deltaTime = Time.deltaTime;
 
@@ -50,12 +50,12 @@ public class BulletController : MonoBehaviour
                 ResetBullet(); // Bullet zurücksetzen und in den Pool zurückgeben
             }
         }
-    }
+        }
 
     // Methode zum Starten des Bullet-Flugs
     public void Shoot(Vector3 startPosition, Vector3 shootDirection)
     {
-        gameObject.SetActive(true); // Aktiviert die Bullet
+        Runner.Spawn(gameObject, startPosition);
         velocity = shootDirection.normalized * speed; // Setzt die Anfangsgeschwindigkeit
         gameObject.transform.position = startPosition;
         distanceTraveled = 0f; // Setzt die zurückgelegte Distanz zurück
@@ -79,8 +79,9 @@ public class BulletController : MonoBehaviour
 
     private void ResetBullet()
     {
-        gameObject.SetActive(false); // Deaktiviert die Bullet
-        poolManager.ReturnBulletToPool(this); // Gibt die Bullet zurück in den Pool
+        Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         trail.enabled = false; // Deaktiviert den Trail-Renderer
     }
+
+
 }
