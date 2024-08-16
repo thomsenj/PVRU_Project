@@ -10,8 +10,9 @@ public class BurnCoal : NetworkBehaviour
 
     private TrainManager trainManager;
     private float fuelModifier = 1.0f;
-    private CoalPile coalPile;
     private GameOverManager gameOverManager;
+    [SerializeField] private float spawnInterval = 5.0f; 
+    private float spawnTimer;
 
     private void Start()
     {
@@ -19,15 +20,34 @@ public class BurnCoal : NetworkBehaviour
         {
             trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
             gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
-            GameObject test = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE);
-            coalPile = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE).GetComponent<CoalPile>();
             fuelModifier = trainManager.getFuelModifier();
         }
         catch
         {
             Debug.LogError("This scene lacks a train manager.");
         }
-        StartCoroutine(BurnFuelOverTime());
+    }
+
+
+    public override void FixedUpdateNetwork()
+    {
+        base.FixedUpdateNetwork();
+
+        if (Object.HasStateAuthority)
+        {
+            spawnTimer += Time.fixedDeltaTime;
+
+            if (spawnTimer >= spawnInterval)
+            {
+                fuelstand = Mathf.Clamp(fuelstand - (1 * fuelModifier), 0, 100);
+                //try { trainManager.setSpeed(getSpeed()); }
+                //catch { Debug.LogError("Could not set train speed."); }
+                if (fuelstand < 1)
+                {
+                    gameOverManager.TriggerGameOver();
+                }
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -85,21 +105,5 @@ public class BurnCoal : NetworkBehaviour
             return 10;
         else
             return 0;
-    }
-
-    private IEnumerator BurnFuelOverTime()
-    {
-        while (true)
-        {
-            fuelstand = Mathf.Clamp(fuelstand - (1 * fuelModifier), 0, 100);
-            //try { trainManager.setSpeed(getSpeed()); }
-            //catch { Debug.LogError("Could not set train speed."); }
-            if (fuelstand < 1)
-            {
-                gameOverManager.TriggerGameOver();
-                break;
-            }
-            yield return new WaitForSeconds(5f);
-        }
     }
 }
