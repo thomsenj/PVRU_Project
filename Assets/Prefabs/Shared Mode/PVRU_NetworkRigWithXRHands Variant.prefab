@@ -43,6 +43,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hand Gesture Detection
       objectReference: {fileID: 0}
+    - target: {fileID: 1205733376480513269, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 1283115564499822316, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 1283115564499822316, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_GesturePerformed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_text
+      objectReference: {fileID: 0}
     - target: {fileID: 2022574434841256213, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -83,6 +95,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3613057420135663203, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 4536780350285524953, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 4588613405983088436, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 5654757956149031476, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 5852979504269635528, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 6078725473240241240, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 6140892389424045834, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 6612874245650271372, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 7320677547477783496, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 7623263924334053925, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 7623263924334053925, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_GesturePerformed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660909508887017750, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 8216706943514269998, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 8739871756793768264, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
+    - target: {fileID: 8779625779984640763, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
+      propertyPath: m_Background
+      value: 
+      objectReference: {fileID: 8368967003076707015, guid: 927915d2ed3bb5d479caa5c8b32180c4, type: 3}
     - target: {fileID: 8779625779984640763, guid: 2a9c6d3ef905a1c4ca37f9e439ae88b8, type: 3}
       propertyPath: m_GesturePerformed.m_PersistentCalls.m_Calls.Array.size
       value: 1
