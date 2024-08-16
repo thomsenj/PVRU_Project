@@ -8,6 +8,7 @@ namespace Fusion.XRShared.Demo
     public class ResourceSpawnerPrefab : NetworkBehaviour
     {
         [SerializeField] private List<NetworkObject> prefab;
+         [SerializeField] private NetworkObject pickaxe;
         private NetworkObject currentInstance;
         [SerializeField] public GameObject spawnTarget;
 
@@ -56,6 +57,7 @@ namespace Fusion.XRShared.Demo
             PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().getPlaneInfo();
             spawnTarget = plane;
             currentCount = 0;
+            Runner.Spawn(pickaxe, plane.transform.position);
         }
 
         public void Despawn(GameObject resource)
@@ -63,5 +65,6 @@ namespace Fusion.XRShared.Demo
             Runner.Despawn(resource.GetComponent<NetworkObject>());
             currentCount--;
         }
+
     }
 }
