@@ -7,6 +7,7 @@ public class HeatUpObject: MonoBehaviour
     public float heatRate = 1f;         
     public float coolRate = 10f;
     private TrainManager trainManager;
+    private  GameOverManager gameOverManager;
 
     private float heatModifier = 1.0f;
 
@@ -14,7 +15,8 @@ public class HeatUpObject: MonoBehaviour
     {
         try
         {
-            trainManager = GameObject.FindGameObjectWithTag(TagConstants.TRAIN_MANAGER).GetComponent<TrainManager>();
+            trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
+            gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
             heatModifier = trainManager.getHeatModifier();
         }
         catch
@@ -35,6 +37,9 @@ public class HeatUpObject: MonoBehaviour
             temperature = maxTemperature;
         }
         UpdateColor();
+        if(temperature == maxTemperature) {
+            gameOverManager.TriggerGameOver();
+        }
     }
 
     public void CoolDown(float amount)
