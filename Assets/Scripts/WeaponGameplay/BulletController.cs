@@ -58,6 +58,7 @@ public class BulletController : NetworkBehaviour
         Runner.Spawn(gameObject, startPosition);
         velocity = shootDirection.normalized * speed; // Setzt die Anfangsgeschwindigkeit
         gameObject.transform.position = startPosition;
+        gameObject.transform.SetParent(bulletParent.transform);
         distanceTraveled = 0f; // Setzt die zurückgelegte Distanz zurück
         if(trail != null)
         {

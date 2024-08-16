@@ -15,6 +15,8 @@ public class WaterBucket : MonoBehaviour
 
     public HeatUpObject heatUpObject; 
 
+    private Vector3 startPos;
+
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
@@ -24,6 +26,7 @@ public class WaterBucket : MonoBehaviour
         grabInteractable.selectExited.AddListener(StopPouring);
 
         currentWaterAmount = maxWaterAmount;
+        startPos = gameObject.transform.position;
     }
 
     void Update()
@@ -82,9 +85,9 @@ public class WaterBucket : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isPouring && collision.gameObject.CompareTag("Ground"))
+        if ( collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ground"))
         {
-            waterParticles.Stop();
+            gameObject.transform.position = startPos;
             isPouring = false;
         }
     }

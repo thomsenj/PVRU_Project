@@ -7,7 +7,7 @@ public class RevolverController : MonoBehaviour
     public Transform muzzle;                    // Die Mündung des Revolvers, wo die Kugel herauskommt
     public float recoilAmount = 0.25f;          // Die Stärke des Rückstoßes
     public float recoilSpeed = 25f;             // Die Geschwindigkeit der Rückstoßbewegung
-    public BulletPoolManager bulletPool;        // Referenz zum Bullet-Pool-Manager
+    public BulletController bulletPool;        // Referenz zum Bullet-Pool-Manager
     public ParticleSystem shellEjectParticle;   // Partikelsystem für den Hülsenauswurf
 
     // Revolver-Teile
@@ -90,8 +90,7 @@ public class RevolverController : MonoBehaviour
         canShoot = false; // Verhindere weiteres Schießen während des Rückstoßes
 
         // Hole eine Bullet aus dem Pool und feuere sie ab
-        BulletController bullet = bulletPool.GetBullet();
-        bullet.Shoot(muzzle.position, muzzle.forward);
+        bulletPool.Shoot(muzzle.position, muzzle.forward);
 
         // Spiele das Partikelsystem für den Hülsenauswurf ab
         if (shellEjectParticle != null)

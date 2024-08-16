@@ -6,7 +6,7 @@ public class HeatUpObject: MonoBehaviour
     public float maxTemperature = 100f; 
     public float heatRate = 1f;         
     public float coolRate = 10f;
-    public TrainManager trainManager;
+    private TrainManager trainManager;
 
     private float heatModifier = 1.0f;
 
@@ -19,7 +19,7 @@ public class HeatUpObject: MonoBehaviour
         }
         catch
         {
-            Debug.LogError("This scene lacks a train manager.");
+            //Debug.LogError("This scene lacks a train manager.");
         }
     }
 
