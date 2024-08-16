@@ -649,7 +649,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags:
   - Player2
-  - Train
   moveSpeed: 2
   attackDamage: 10
   jumpForce: 1
@@ -657,7 +656,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   maxHealth: 100
-  _NetworkedHealth: 0
 --- !u!114 &9012884958951729890
 MonoBehaviour:
   m_ObjectHideFlags: 0
