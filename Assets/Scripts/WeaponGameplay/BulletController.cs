@@ -14,18 +14,20 @@ public class BulletController : NetworkBehaviour
     private Vector3 velocity;
     private float distanceTraveled = 0f;
     private TrailRenderer trail;
+    private bool isShooting;
 
     void Start()
     {
         trail = GetComponent<TrailRenderer>();
         trail.enabled = false;
+        isShooting = false;
     }
 
     public override void FixedUpdateNetwork()
     {
         base.FixedUpdateNetwork();
 
-        if (gameObject.activeSelf)
+        if (isShooting)
         {
             float deltaTime = Time.deltaTime;
 
@@ -50,7 +52,7 @@ public class BulletController : NetworkBehaviour
         velocity = shootDirection.normalized * speed;
         gameObject.transform.position = startPosition;
         distanceTraveled = 0f;
-
+        isShooting = true;
         if (trail != null)
         {
             trail.enabled = true;
@@ -70,6 +72,7 @@ public class BulletController : NetworkBehaviour
 
     private void ResetBullet()
     {
+        isShooting = false;
         Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         trail.enabled = false;
     }
