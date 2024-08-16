@@ -32,6 +32,7 @@ public class GameOverManager : NetworkBehaviour
         {
             scoreManager.stopScoring();
             Invoke("RpcRestartGameForAll", 3f); 
+            
         }
     }
 
@@ -43,6 +44,6 @@ public class GameOverManager : NetworkBehaviour
 
     private void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -57,5 +57,11 @@ namespace Fusion.XRShared.Demo
             spawnTarget = plane;
             currentCount = 0;
         }
+
+        public void Despawn(GameObject resource)
+        {
+            Runner.Despawn(resource.GetComponent<NetworkObject>());
+            currentCount--;
+        }
     }
 }
