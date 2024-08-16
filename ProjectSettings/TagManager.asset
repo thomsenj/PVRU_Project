@@ -22,6 +22,8 @@ TagManager:
   - Enemy
   - CoalPile
   - Resource
+  - Carriage
+  - OnTrain
   layers:
   - Default
   - TransparentFX

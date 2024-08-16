@@ -408,7 +408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags:
   - Train
-  - Player2
   moveSpeed: 2
   attackDamage: 10
   jumpForce: 5

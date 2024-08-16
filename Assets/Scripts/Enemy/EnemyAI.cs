@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections;
 using UnityEngine;
 using Fusion;
+using Fusion.XRShared.Demo;
 
 public class EnemyAI : NetworkBehaviour
 {
@@ -142,7 +143,7 @@ public class EnemyAI : NetworkBehaviour
         }
         else if (other.CompareTag(TagConstants.WEAPON))
         {
-            HandleWeaponHit();
+            TakeDamage(10);
         }
     }
 
@@ -151,30 +152,13 @@ public class EnemyAI : NetworkBehaviour
         animator.SetTrigger(AnimationConstants.ATTACK);
     }
 
-    private void HandleWeaponHit()
-    {
-        Weapon weapon = currentTarget.GetComponent<Weapon>();
-        if (weapon?.IsSwinging() == true)
-        {
-            weapon.setSwinging(false);
-            if (Runner.IsServer)
-            {
-                RPC_TakeDamageFromWeapon(weapon.getDamage());
-            }
-        }
-    }
-
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_TakeDamageFromWeapon(int damageAmount)
-    {
-        TakeDamage(damageAmount);
-    }
 
     public void TakeDamage(int damageAmount)
     {
         if (isDead) return;
 
         currentHealth -= damageAmount;
+        OnHealthChanged();
     }
 
     private void OnHealthChanged()
@@ -200,6 +184,7 @@ public class EnemyAI : NetworkBehaviour
     private IEnumerator HandleDeath()
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        Runner.Despawn(Object);
+        EnemyPrefabSpawner spawner = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<EnemyPrefabSpawner>();
+        spawner.Despawn(this.gameObject);
     }
 }

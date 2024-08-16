@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 13b8e3391bf003048bf856cd4ed7f5a1, type: 2}
     - target: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_Name
-      value: CoalPrefab
+      value: Coal Container
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_IsActive
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       propertyPath: m_TagString
-      value: Coal
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -103,10 +103,7 @@ PrefabInstance:
       addedObject: {fileID: -6361600155069712310}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 432882917350781704}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2754396649055057374}
+      addedObject: {fileID: -1820444055344222810}
   m_SourcePrefab: {fileID: 100100000, guid: 0f946d25ed37a46f6a26aa767346e9a1, type: 3}
 --- !u!1 &4433009467096039110 stripped
 GameObject:
@@ -397,14 +394,14 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 1657343593
+  SortKey: 3483618268
   ObjectInterest: 1
   Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 4443786845840345638}
-  - {fileID: 2754396649055057374}
---- !u!114 &432882917350781704
+  - {fileID: -1820444055344222810}
+--- !u!114 &-1820444055344222810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,51 +410,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4433009467096039110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4290acb83d51f7448a942794de0756e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b3be90ec18c74fcca2709dfd56cbffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPositionOffset: {x: 0, y: 0, z: 0}
-  localRotationOffset: {x: 0, y: 0, z: 0, w: 0}
-  currentGrabber: {fileID: 0}
-  expectedIsKinematic: 1
-  allowedClosedHandGrabing: 1
-  networkGrabbable: {fileID: 0}
-  rb: {fileID: 0}
-  applyVelocityOnRelease: 0
-  onWillGrab:
-    m_PersistentCalls:
-      m_Calls: []
-  onUngrab:
-    m_PersistentCalls:
-      m_Calls: []
-  onGrab:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2754396649055057374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4433009467096039110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e29a5da46f946a43a21a0c03ef7d768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  networkTransform: {fileID: 0}
-  networkRigidbody: {fileID: 0}
-  _InitialIsKinematicState:
-    _value: 0
-  _CurrentGrabber: {fileID: 0}
-  _LocalPositionOffset: {x: 0, y: 0, z: 0}
-  _LocalRotationOffset: {x: 0, y: 0, z: 0, w: 0}
-  onDidUngrab:
-    m_PersistentCalls:
-      m_Calls: []
-  onDidGrab:
-    m_PersistentCalls:
-      m_Calls: []
-  extrapolateWhileTakingAuthority: 1
-  isTakingAuthority: 0
-  grabbable: {fileID: 0}
+  addCoal: {fileID: 0}
+  resourceSpawnerPrefab: {fileID: 0}
+  maxHitsToKill: 1

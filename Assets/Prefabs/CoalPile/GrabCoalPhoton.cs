@@ -27,8 +27,8 @@ public class GrabCoalPhoton : NetworkBehaviour
             return;
         }
 
-        Vector3 spawnPosition = transform.position; // Beispielposition, die du nach Bedarf ändern kannst
-        Quaternion spawnRotation = transform.rotation; // Beispielrotation, die du nach Bedarf ändern kannst
+        Vector3 spawnPosition = transform.position; 
+        Quaternion spawnRotation = transform.rotation; 
 
         NetworkObject coalObject = Runner.Spawn(coalPrefab, spawnPosition, spawnRotation);
 

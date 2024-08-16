@@ -1,21 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
-public class AttachPlayer2Train : MonoBehaviour
+public class AttachPlayer2Train : NetworkBehaviour
 {
     public Transform _TrainTransform;
     private bool _IsPlayerOnTrain = false;
     private Vector3 _LocalOffset;
-    private Transform _PlayerTransform;
+    private NetworkTransform _PlayerNetworkTransform;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _PlayerTransform = other.transform;
-            _LocalOffset = _PlayerTransform.position - _TrainTransform.position;
-            _IsPlayerOnTrain = true;
+            _PlayerNetworkTransform = other.GetComponent<NetworkTransform>();
+            if (_PlayerNetworkTransform != null)
+            {
+                _LocalOffset = _PlayerNetworkTransform.transform.position - _TrainTransform.position;
+                _IsPlayerOnTrain = true;
+            }
         }
     }
 
@@ -24,17 +26,22 @@ public class AttachPlayer2Train : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _IsPlayerOnTrain = false;
-            _PlayerTransform = null;
+            _PlayerNetworkTransform = null;
         }
     }
 
-    public void FixedUpdateNetwork()
+    public override void FixedUpdateNetwork()
     {
-        if (_IsPlayerOnTrain && _PlayerTransform != null)
+        if (_IsPlayerOnTrain && _PlayerNetworkTransform != null)
         {
-            _PlayerTransform.position = _TrainTransform.position + _LocalOffset;
+            Vector3 newPosition = _TrainTransform.position + _LocalOffset;
+            Quaternion newRotation = _TrainTransform.rotation;
 
-            _PlayerTransform.rotation = _TrainTransform.rotation;
+            _PlayerNetworkTransform.transform.position = newPosition;
+            _PlayerNetworkTransform.transform.rotation = newRotation;
+
+            // Optionally, sync the position and rotation manually
+            // Runner.Move(_PlayerNetworkTransform, newPosition, newRotation);
         }
     }
 }

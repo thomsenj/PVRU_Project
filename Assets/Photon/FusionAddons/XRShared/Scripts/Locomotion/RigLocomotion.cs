@@ -41,11 +41,14 @@ namespace Fusion.XR.Shared.Locomotion
         float timeStarted = 0;
 
         HardwareRig rig;
+        NetworkRig networkRig; // not part of package
 
         public LayerMask locomotionLayerMask = 0;
 
         // If locomotion constraints are needed, a ILocomotionValidationHandler can restrict them
         ILocomotionValidationHandler locomotionValidationHandler;
+
+        private Transform currentTrainTransform = null; // Not part of package
 
         private void Awake()
         {
@@ -76,6 +79,7 @@ namespace Fusion.XR.Shared.Locomotion
         protected virtual void Update()
         {
             CheckSnapTurn();
+            EnsureNetworkRigReference();
         }
 
         protected virtual void CheckSnapTurn()
@@ -142,5 +146,55 @@ namespace Fusion.XR.Shared.Locomotion
                 StartCoroutine(rig.FadedTeleport(position));
             }
         }
+
+        public void AttachRigToCarriage(Transform carriageTransform)
+        {
+            rig.transform.SetParent(carriageTransform, worldPositionStays: true);
+
+            if (networkRig != null)
+            {
+                networkRig.transform.SetParent(carriageTransform, worldPositionStays: true);
+            }
+
+            currentTrainTransform = carriageTransform;
+        }
+
+        public void DetachRigFromCarriage()
+        {
+            rig.transform.SetParent(null);
+
+            if (networkRig != null)
+            {
+                networkRig.transform.SetParent(null);
+            }
+
+            currentTrainTransform = null;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("OnTrain"))
+            {
+                AttachRigToCarriage(other.transform);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("OnTrain"))
+            {
+                DetachRigFromCarriage();
+            }
+        }
+
+        private void EnsureNetworkRigReference()
+        {
+            if (networkRig == null)
+            {
+                networkRig = FindObjectOfType<NetworkRig>();
+            }
+        }
+
+
     }
 }

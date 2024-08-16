@@ -79,6 +79,11 @@ namespace Fusion.XRShared.Demo
             currentCount = 0;
         }
 
+
+        public void Despawn(GameObject gameObject) {
+            Runner.Despawn(gameObject.GetComponent<NetworkObject>());
+            currentCount--;
+        }
     }
 
 }

@@ -3,31 +3,31 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class WaterBucket : MonoBehaviour
 {
-    public ParticleSystem waterParticles; 
+    public ParticleSystem waterParticles;
     private bool isPouring = false;
 
-    public float maxWaterAmount = 100f; 
-    private float currentWaterAmount;   
-    public float pourRate = 10f;        
+    public float maxWaterAmount = 100f;
+    private float currentWaterAmount;
+    public float pourRate = 10f;
 
-    private XRGrabInteractable grabInteractable;
     private Rigidbody rb;
 
-    public HeatUpObject heatUpObject; 
+    public HeatUpObject heatUpObject;
+
+    private Vector3 startPos;
 
     void Start()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
         rb = GetComponent<Rigidbody>();
-
-        grabInteractable.selectEntered.AddListener(StartPouring);
-        grabInteractable.selectExited.AddListener(StopPouring);
-
         currentWaterAmount = maxWaterAmount;
+        startPos = transform.localPosition;
     }
 
     void Update()
     {
+        if(!isPouring && transform.position != startPos){
+            isPouring = true;
+        }
         if (isPouring && IsBucketTilted())
         {
             PourWater();
@@ -36,7 +36,7 @@ public class WaterBucket : MonoBehaviour
 
     private bool IsBucketTilted()
     {
-       
+
         return Vector3.Dot(transform.up, Vector3.up) < 0.5f;
     }
 
@@ -49,7 +49,7 @@ public class WaterBucket : MonoBehaviour
                 waterParticles.Play();
             }
 
-           
+
             //currentWaterAmount -= pourRate * Time.deltaTime;
             if (currentWaterAmount <= 0)
             {
@@ -58,7 +58,7 @@ public class WaterBucket : MonoBehaviour
                 isPouring = false;
             }
 
-            
+
             if (heatUpObject != null)
             {
                 heatUpObject.CoolDown(pourRate * Time.deltaTime);
@@ -66,26 +66,17 @@ public class WaterBucket : MonoBehaviour
         }
     }
 
-    private void StartPouring(SelectEnterEventArgs args)
-    {
-        if (currentWaterAmount > 0)
-        {
-            isPouring = true;
-        }
-    }
-
-    private void StopPouring(SelectExitEventArgs args)
-    {
-        isPouring = false;
-        waterParticles.Stop();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (isPouring && collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ground"))
         {
-            waterParticles.Stop();
+            ResetBucketPosition();
             isPouring = false;
         }
+    }
+
+    private void ResetBucketPosition()
+    {
+        transform.localPosition = startPos;
     }
 }

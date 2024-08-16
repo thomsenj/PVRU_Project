@@ -6,7 +6,8 @@ public class HeatUpObject: MonoBehaviour
     public float maxTemperature = 100f; 
     public float heatRate = 1f;         
     public float coolRate = 10f;
-    public TrainManager trainManager;
+    private TrainManager trainManager;
+    private  GameOverManager gameOverManager;
 
     private float heatModifier = 1.0f;
 
@@ -14,12 +15,13 @@ public class HeatUpObject: MonoBehaviour
     {
         try
         {
-            trainManager = GameObject.FindGameObjectWithTag(TagConstants.TRAIN_MANAGER).GetComponent<TrainManager>();
+            trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
+            gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
             heatModifier = trainManager.getHeatModifier();
         }
         catch
         {
-            Debug.LogError("This scene lacks a train manager.");
+            //Debug.LogError("This scene lacks a train manager.");
         }
     }
 
@@ -34,7 +36,9 @@ public class HeatUpObject: MonoBehaviour
         {
             temperature = maxTemperature;
         }
-        UpdateColor();
+        if(temperature == maxTemperature) {
+            gameOverManager.TriggerGameOver();
+        }
     }
 
     public void CoolDown(float amount)
@@ -45,12 +49,5 @@ public class HeatUpObject: MonoBehaviour
         {
             temperature = 0;
         }
-        UpdateColor();
-    }
-
-    private void UpdateColor()
-    {
-        Color color = Color.Lerp(Color.blue, Color.red, temperature / maxTemperature);
-        GetComponent<Renderer>().material.color = color;
     }
 }

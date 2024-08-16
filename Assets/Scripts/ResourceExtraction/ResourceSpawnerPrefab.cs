@@ -8,7 +8,6 @@ namespace Fusion.XRShared.Demo
     public class ResourceSpawnerPrefab : NetworkBehaviour
     {
         [SerializeField] private List<NetworkObject> prefab;
-        private NetworkObject currentInstance;
         [SerializeField] public GameObject spawnTarget;
 
         [Networked]
@@ -16,46 +15,71 @@ namespace Fusion.XRShared.Demo
 
         [SerializeField] private int maxCount;
 
-        [SerializeField] private float radius = 10.0f;
+        [SerializeField] private AddCoal addCoal;
 
+        [SerializeField] private float spawnInterval = 5.0f; // seconds
+        private float spawnTimer;
 
         public override void FixedUpdateNetwork()
         {
             base.FixedUpdateNetwork();
+
             if (Object.HasStateAuthority)
             {
-                if (currentCount < maxCount)
+                spawnTimer += Time.fixedDeltaTime;
+
+                if (spawnTimer >= spawnInterval)
                 {
-                    Spawn();
-                    currentCount++;
+                    if (currentCount < maxCount)
+                    {
+                        Vector3 pos = GameObject.FindGameObjectWithTag(TagConstants.TRAIN).transform.position;
+                        Spawn(pos);
+                        currentCount++;
+                    }
+                    spawnTimer = 0f;
                 }
             }
         }
 
-        void Spawn()
+        void Spawn(Vector3 pos)
         {
             if (prefab == null || prefab.Count == 0) return;
-            System.Random random = new System.Random();
-            int index = random.Next(prefab.Count);
-            NetworkObject resourceGameObject = prefab[index];
-            currentInstance = Runner.Spawn(resourceGameObject, GetSpawnPoint());
+            NetworkObject resourceGameObject = prefab[0];
+            Runner.Spawn(resourceGameObject, GetSpawnPoint(pos));
         }
 
-        private Vector3 GetSpawnPoint()
-        {
-            Vector3 pos = spawnTarget.transform.position;
-            float angle = Random.Range(0f, 360f);
-            float distance = Random.Range(0f, radius);
-            float xPos = pos.x + distance * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float zPos = pos.z + distance * Mathf.Sin(angle * Mathf.Deg2Rad);
-            return new Vector3(xPos, 0, zPos);
-        }
+    private Vector3 GetSpawnPoint(Vector3 pos)
+    {
+        Vector3 forwardDirection = spawnTarget.transform.forward;
+
+        float angleOffset = Random.value < 0.5f ? -45f : 45f;
+
+        float angleRad = angleOffset * Mathf.Deg2Rad;
+
+        Vector3 offset = new Vector3(
+            forwardDirection.x * Mathf.Cos(angleRad) - forwardDirection.z * Mathf.Sin(angleRad),
+            0,
+            forwardDirection.x * Mathf.Sin(angleRad) + forwardDirection.z * Mathf.Cos(angleRad)
+        );
+
+        offset = offset.normalized * 5f;
+
+        Vector3 spawnPoint = pos + offset;
+
+        return new Vector3(spawnPoint.x, 0, spawnPoint.z);
+    }
+
 
         public void UpdateResourceFactory(GameObject plane)
         {
-            PlaneInfo planeInfo = plane.GetComponent<PlaneInformation>().getPlaneInfo();
-            spawnTarget = plane;
             currentCount = 0;
         }
+
+        public void Despawn(GameObject resource)
+        {
+            Runner.Despawn(resource.GetComponent<NetworkObject>());
+            currentCount--;
+        }
+
     }
 }

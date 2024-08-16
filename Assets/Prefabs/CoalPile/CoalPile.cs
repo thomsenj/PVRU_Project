@@ -7,45 +7,33 @@ public class CoalPile : NetworkBehaviour
     [Networked]
     public int coalAmount { get; set; } = 10;
 
-    public GameObject coalPrefab; 
-    private List<GameObject> list;
+    public GameObject coalPrefab;
 
-    void Start() 
+    private void OnTriggerEnter(Collider other)
     {
-        list = new List<GameObject>();
-        coalPrefab.SetActive(false);
-        for (int i = 0; i < 2; i++) 
+        if (other.CompareTag(TagConstants.COAL_PILE))
         {
-            GameObject coal = Runner.Spawn(coalPrefab).gameObject;
-            coal.SetActive(false);  
-            list.Add(coal);
-        }
-    }
-
-    public void AddCoal(GameObject gameObject) 
-    {
-        list.Add(gameObject);
-    }
-
-    public GameObject TakeCoal()
-    {
-        if (coalAmount > 0)
-        {
-            coalAmount--;
-            if (list.Count > 0) 
+            if (HasStateAuthority)
             {
-                GameObject coal = list[0];
-                list.RemoveAt(0);
-                coal.SetActive(true);  
-                return coal;
-            } 
-            else 
-            {
-                GameObject coal = Runner.Spawn(coalPrefab).gameObject;
-                coal.SetActive(true); 
-                return coal;
+                SpawnCoalInHand(other.gameObject.transform);
             }
         }
-        return null;
     }
+
+    private void SpawnCoalInHand(Transform hand)
+    {
+        if (coalPrefab == null)
+        {
+            Debug.LogWarning("Coal Prefab ist nicht zugewiesen.");
+            return;
+        }
+
+        Vector3 spawnPosition = hand.position;
+        Quaternion spawnRotation = hand.rotation;
+
+        NetworkObject coalObject = Runner.Spawn(coalPrefab, spawnPosition, spawnRotation);
+
+        coalObject.transform.SetParent(hand);
+    }
+
 }
