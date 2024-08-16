@@ -143,7 +143,7 @@ public class EnemyAI : NetworkBehaviour
         }
         else if (other.CompareTag(TagConstants.WEAPON))
         {
-            OnHealthChanged();
+            TakeDamage(10);
         }
     }
 
@@ -158,6 +158,7 @@ public class EnemyAI : NetworkBehaviour
         if (isDead) return;
 
         currentHealth -= damageAmount;
+        OnHealthChanged();
     }
 
     private void OnHealthChanged()

@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using Fusion;
 using Fusion.XRShared.Demo;
-using Unity.PlasticSCM.Editor.WebApi;
 
 public class CoalContainer : NetworkBehaviour
 {
