@@ -8,20 +8,26 @@ public class CoalContainer : NetworkBehaviour
 {
     private AddCoal addCoal;
     private ResourceSpawnerPrefab resourceSpawnerPrefab;
-    private int currentHits;
+    private int currentHits = 0;
     [SerializeField] private int maxHitsToKill;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
-            if (maxHitsToKill == currentHits) {
-                AddCoal addCoal = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE).GetComponent<AddCoal>();
-                ResourceSpawnerPrefab resourceSpawnerPrefab = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceSpawnerPrefab>();
-                addCoal.spawnCoal();
+            Debug.Log("if (other.CompareTag('Bullet'))");
+            if (maxHitsToKill == currentHits)
+            {
+                Debug.Log("if (maxHitsToKill == currentHits)");
+                addCoal = GameObject.FindGameObjectWithTag(TagConstants.COAL_PILE).GetComponent<AddCoal>();
+                resourceSpawnerPrefab = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceSpawnerPrefab>();
+                // addCoal.spawnCoal();
                 resourceSpawnerPrefab.Despawn(gameObject);
-            } else {
+            }
+            else
+            {
                 currentHits++;
+                Debug.Log($"Current Hits: {currentHits}");
             }
         }
     }
