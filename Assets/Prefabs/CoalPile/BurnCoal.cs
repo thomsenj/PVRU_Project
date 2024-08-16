@@ -15,6 +15,7 @@ namespace Fusion.XRShared.Demo
         private GameOverManager gameOverManager;
         [SerializeField] private float spawnInterval = 5.0f;
         private float spawnTimer;
+        public AddCoal addCoal;
 
         private void Start()
         {
@@ -67,7 +68,7 @@ namespace Fusion.XRShared.Demo
                 NetworkObject networkObject = other.GetComponent<NetworkObject>();
                 if (networkObject != null)
                 {
-                    Runner.Despawn(networkObject);
+                    addCoal.DespawnCoal(networkObject);
                 }
                 else
                 {
