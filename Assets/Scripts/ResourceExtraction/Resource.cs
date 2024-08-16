@@ -54,6 +54,7 @@ public class Resource : NetworkBehaviour
         if (currentHits >= hitsToHarvest)
         {
             playerInventory.AddResource(resourceType, amount);
+            Debug.Log("Should Despawn now.");
             Runner.Despawn(Object);
         }
     }
