@@ -9,10 +9,14 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        ui = GameObject.Find(GeneralConstants.HEALTH_BAR).GetComponent<HealthbarController>();
-        if(ui != null){
-            ui.SetMaxValue(maxHealth);
-            ui.SetValue(maxHealth);
+        try {
+            ui = GameObject.Find(GeneralConstants.HEALTH_BAR).GetComponent<HealthbarController>();
+            if(ui != null){
+                ui.SetMaxValue(maxHealth);
+                ui.SetValue(maxHealth);
+            }
+        } catch {
+            
         }
     }
 
