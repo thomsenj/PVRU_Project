@@ -36,7 +36,6 @@ public class HeatUpObject: MonoBehaviour
         {
             temperature = maxTemperature;
         }
-        UpdateColor();
         if(temperature == maxTemperature) {
             gameOverManager.TriggerGameOver();
         }
@@ -50,12 +49,5 @@ public class HeatUpObject: MonoBehaviour
         {
             temperature = 0;
         }
-        UpdateColor();
-    }
-
-    private void UpdateColor()
-    {
-        Color color = Color.Lerp(Color.blue, Color.red, temperature / maxTemperature);
-        GetComponent<Renderer>().material.color = color;
     }
 }
