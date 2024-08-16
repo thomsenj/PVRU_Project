@@ -19,18 +19,21 @@ public class RevolverController : NetworkBehaviour
 
     public void Shoot()
     {
-        canShoot = false;
-
-        bulletPrefab.Shoot(muzzle.position, muzzle.forward);
-
-        if (shellEjectParticle != null)
+        if(canShoot)
         {
-            shellEjectParticle.Play();
-        }
+            canShoot = false;
+            BulletController bullet = gameObject.GetComponent<BulletPoolManager>().SpawnBullet(muzzle.position);
+            bullet.Shoot(muzzle.position, muzzle.forward);
 
-        AnimateRevolver();
-        // wait for the animation to finish before allowing the player to shoot again
-        StartCoroutine(ResetCanShoot());
+            if (shellEjectParticle != null)
+            {
+                shellEjectParticle.Play();
+            }
+
+            AnimateRevolver();
+            // wait for the animation to finish before allowing the player to shoot again
+            StartCoroutine(ResetCanShoot());
+        }
     }
 
     private IEnumerator ResetCanShoot()

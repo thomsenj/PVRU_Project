@@ -1,64 +1,30 @@
 using UnityEngine;
-using System.Collections.Generic;
+using Fusion;
 
-public class BulletPoolManager : MonoBehaviour
+public class BulletPoolManager : NetworkBehaviour
 {
-    public static BulletPoolManager Instance { get; private set; }
-
-    public GameObject bulletPrefab;         // Prefab der Bullet
-    public int initialPoolSize = 5;        // Anfangsgröße des Pools
-
-    private Queue<BulletController> bulletPool = new Queue<BulletController>();
+    public GameObject bulletPrefab;
     private GameObject bulletParent;
 
     void Awake()
     {
-        // Singleton-Instanz initialisieren
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        // Pool initialisieren
-        for (int i = 0; i < initialPoolSize; i++)
-        {
-            CreateNewBullet();
-        }
         // create a parent object for the bullets
         bulletParent = new GameObject("BulletParent");
         bulletParent.transform.SetParent(null);
     }
 
     // Methode zum Erstellen einer neuen Bullet
-    private void CreateNewBullet()
+    public BulletController SpawnBullet(Vector3 startPosition)
     {
-        GameObject bulletObject = Instantiate(bulletPrefab);
+        NetworkObject bulletObject = Runner.Spawn(bulletPrefab, startPosition);
         BulletController bulletController = bulletObject.GetComponent<BulletController>();
-        bulletObject.SetActive(false);
-        bulletPool.Enqueue(bulletController);
         bulletObject.transform.SetParent(bulletParent.transform);
-    }
-
-    // Methode zum Abrufen einer Bullet aus dem Pool
-    public BulletController GetBullet()
-    {
-        if (bulletPool.Count == 0)
-        {
-            CreateNewBullet();
-        }
-
-        BulletController bullet = bulletPool.Dequeue();
-        return bullet;
+        return bulletController;
     }
 
     // Methode zum Zurückgeben einer Bullet in den Pool
-    public void ReturnBulletToPool(BulletController bullet)
+    public void Despawn(BulletController bullet)
     {
-        bulletPool.Enqueue(bullet);
+        Runner.Despawn(bullet.GetComponent<NetworkObject>());
     }
 }

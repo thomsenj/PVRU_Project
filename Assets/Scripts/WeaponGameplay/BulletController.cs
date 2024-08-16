@@ -35,7 +35,6 @@ public class BulletController : NetworkBehaviour
 
     public void Shoot(Vector3 startPosition, Vector3 shootDirection)
     {
-        Runner.Spawn(gameObject, startPosition);
         velocity = shootDirection.normalized * speed;
         gameObject.transform.position = startPosition;
         distanceTraveled = 0f;
