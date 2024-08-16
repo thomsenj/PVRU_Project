@@ -9,19 +9,26 @@ public class RevolverController : NetworkBehaviour
     public float recoilAmount = 0.25f;          
     public float recoilSpeed = 25f;             
     public BulletController bulletPrefab;        
-    public ParticleSystem shellEjectParticle;   
+    public ParticleSystem shellEjectParticle;
+    public AudioSource gunshotSound;
 
     public Transform cylinder;                  
     public Transform hammer;                    
     public Transform trigger;                   
 
-    private bool canShoot = true;               
+    private bool canShoot = true;
 
     public void Shoot()
     {
         if(canShoot)
         {
             canShoot = false;
+
+            if (gunshotSound != null)
+            {
+                gunshotSound.Play();
+            }
+
             BulletController bullet = gameObject.GetComponent<BulletPoolManager>().SpawnBullet(muzzle.position);
             bullet.Shoot(muzzle.position, muzzle.forward);
 

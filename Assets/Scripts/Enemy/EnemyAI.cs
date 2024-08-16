@@ -13,6 +13,8 @@ public class EnemyAI : NetworkBehaviour
     public float jumpForce = 5.0f;
     public LayerMask groundLayer;
     public int maxHealth = 100;
+    public AudioSource damageAudioSource;
+
     private int currentHealth;
     private int previousHealth;
     private bool isGrounded;
@@ -156,6 +158,11 @@ public class EnemyAI : NetworkBehaviour
     public void TakeDamage(int damageAmount)
     {
         if (isDead) return;
+
+        if (damageAudioSource != null)
+        {
+            damageAudioSource.Play();
+        }
 
         currentHealth -= damageAmount;
         OnHealthChanged();
