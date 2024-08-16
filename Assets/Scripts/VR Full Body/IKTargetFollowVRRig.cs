@@ -9,8 +9,11 @@ public class VRMap
     public Vector3 trackingRotationOffset;
     public void Map()
     {
-        ikTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
-        ikTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        if (vrTarget != null && ikTarget != null)
+        {
+            ikTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
+            ikTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        }
     }
 }
 
@@ -25,16 +28,42 @@ public class IKTargetFollowVRRig : MonoBehaviour
     public Vector3 headBodyPositionOffset;
     public float headBodyYawOffset;
 
+
+    void Start()
+    {
+        AssignVRTargets();
+        // head.vrTarget = GameObject.Find("Head VR Target")?.transform;
+        // leftHand.vrTarget = GameObject.Find("Left Hand VR Target")?.transform;
+        // rightHand.vrTarget = GameObject.Find("Right Hand VR Target")?.transform;
+    }
+
     // LateUpdate is used when calculating the camera position
     // LateUpdate is called after all calculations for the player movement are done
     void LateUpdate()
     {
-        transform.position = head.ikTarget.position + headBodyPositionOffset;
-        float yaw = head.vrTarget.eulerAngles.y;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, yaw, transform.eulerAngles.z), turnSmoothness);
+        if (head.vrTarget != null && head.ikTarget != null)
+        {
+            transform.position = head.ikTarget.position + headBodyPositionOffset;
+            float yaw = head.vrTarget.eulerAngles.y;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, yaw, transform.eulerAngles.z), turnSmoothness);
+        }
 
         head.Map();
         leftHand.Map();
         rightHand.Map();
+    }
+
+    private void AssignVRTargets()
+    {
+        int playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
+
+        head.vrTarget = GameObject.Find($"Head VR Target {playerCount}")?.transform;
+        leftHand.vrTarget = GameObject.Find($"Left Hand VR Target {playerCount}")?.transform;
+        rightHand.vrTarget = GameObject.Find($"Right Hand VR Target {playerCount}")?.transform;
+
+        Debug.Log($"Assigned VR Targets for Player {playerCount}:");
+        Debug.Log($"Head: {head.vrTarget?.name}");
+        Debug.Log($"Left Hand: {leftHand.vrTarget?.name}");
+        Debug.Log($"Right Hand: {rightHand.vrTarget?.name}");
     }
 }

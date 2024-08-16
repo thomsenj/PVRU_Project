@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 449118821}
   - component: {fileID: 449118817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Magnetic plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetLayer: Magnets
   isPlaneMagnet: 1
+  planeAxis: 1
+  localOffset: {x: 0, y: 0, z: 0}
   alignOnAllAxis: 0
+  alignAxis: 1
 --- !u!4 &449118821
 Transform:
   m_ObjectHideFlags: 0
@@ -748,7 +750,7 @@ GameObject:
   - component: {fileID: 1215999684}
   - component: {fileID: 1215999683}
   - component: {fileID: 1215999682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
