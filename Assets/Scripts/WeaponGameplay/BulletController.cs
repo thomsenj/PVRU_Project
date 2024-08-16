@@ -13,22 +13,10 @@ public class BulletController : NetworkBehaviour
 
     private Vector3 velocity;
     private float distanceTraveled = 0f;
-    private TrailRenderer trail;
-    private bool isShooting;
-
-    void Start()
-    {
-        trail = GetComponent<TrailRenderer>();
-        trail.enabled = false;
-        isShooting = false;
-    }
 
     public override void FixedUpdateNetwork()
     {
         base.FixedUpdateNetwork();
-
-        if (isShooting)
-        {
             float deltaTime = Time.deltaTime;
 
             Vector3 dragForce = -0.5f * dragCoefficient * airDensity * crossSectionalArea * velocity.sqrMagnitude * velocity.normalized;
@@ -43,7 +31,6 @@ public class BulletController : NetworkBehaviour
             {
                 ResetBullet();
             }
-        }
     }
 
     public void Shoot(Vector3 startPosition, Vector3 shootDirection)
@@ -52,12 +39,6 @@ public class BulletController : NetworkBehaviour
         velocity = shootDirection.normalized * speed;
         gameObject.transform.position = startPosition;
         distanceTraveled = 0f;
-        isShooting = true;
-        if (trail != null)
-        {
-            trail.enabled = true;
-            trail.Clear();
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -72,8 +53,6 @@ public class BulletController : NetworkBehaviour
 
     private void ResetBullet()
     {
-        isShooting = false;
         Runner.Despawn(gameObject.GetComponent<NetworkObject>());
-        trail.enabled = false;
     }
 }

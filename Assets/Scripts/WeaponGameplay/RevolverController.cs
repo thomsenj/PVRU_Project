@@ -1,29 +1,27 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit;
+using Fusion; 
 
-public class RevolverController : MonoBehaviour
+public class RevolverController : NetworkBehaviour
 {
     public Transform muzzle;                    
     public float recoilAmount = 0.25f;          
     public float recoilSpeed = 25f;             
-    public BulletController bulletPool;        
+    public BulletController bulletPrefab;        
     public ParticleSystem shellEjectParticle;   
 
     public Transform cylinder;                  
     public Transform hammer;                    
     public Transform trigger;                   
 
-    private bool isRecoiling = false;           
-    private Vector3 recoilPosition;             
-    private Quaternion recoilRotation;          
     private bool canShoot = true;               
 
     public void Shoot()
     {
         canShoot = false;
 
-        bulletPool.Shoot(muzzle.position, muzzle.forward);
+        bulletPrefab.Shoot(muzzle.position, muzzle.forward);
 
         if (shellEjectParticle != null)
         {
@@ -31,15 +29,14 @@ public class RevolverController : MonoBehaviour
         }
 
         AnimateRevolver();
-        canShoot = true;
+        // wait for the animation to finish before allowing the player to shoot again
+        StartCoroutine(ResetCanShoot());
     }
 
-    private void StartRecoil()
+    private IEnumerator ResetCanShoot()
     {
-        isRecoiling = true;
-
-        recoilPosition = transform.localPosition + new Vector3(0, 0, -recoilAmount * 0.5f);
-        recoilRotation = transform.localRotation * Quaternion.Euler(-recoilAmount * 100f, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        canShoot = true;
     }
 
     private void AnimateRevolver()
