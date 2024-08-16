@@ -32,7 +32,7 @@ public class Resource : NetworkBehaviour
         {
             if (other.CompareTag(TagConstants.RESOURCE_TOOL))
             {
-             Harvest();
+             Harvest(other.gameObject.GetComponent<NetworkObject>());
             }
         }
         catch
@@ -41,7 +41,7 @@ public class Resource : NetworkBehaviour
         }
     }
 
-    public void Harvest()
+    public void Harvest(NetworkObject networkObject)
     {
         currentHits++;
         Debug.Log($"Resource hit {currentHits} times.");
@@ -55,7 +55,7 @@ public class Resource : NetworkBehaviour
         {
             playerInventory.AddResource(resourceType, amount);
             Debug.Log("Should Despawn now.");
-            Runner.Despawn(Object);
+            Runner.Despawn(networkObject);
         }
     }
 
