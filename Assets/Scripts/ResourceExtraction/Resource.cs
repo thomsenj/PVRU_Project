@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections;
 using Fusion;
 
-public class Resource : NetworkBehaviour 
+public class Resource : NetworkBehaviour
 {
     public ResourceType resourceType;
     public int amount = 1;
-    public int hitsToHarvest = 3; 
-    public Color hitColor = Color.red; 
-    public float colorChangeDuration = 0.2f; 
+    public int hitsToHarvest = 3;
+    public Color hitColor = Color.red;
+    public float colorChangeDuration = 0.2f;
 
     private int currentHits = 0;
     private PlayerInventory playerInventory;
@@ -28,16 +28,10 @@ public class Resource : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        try
+
+        if (other.CompareTag(TagConstants.RESOURCE_TOOL))
         {
-            if (other.CompareTag(TagConstants.RESOURCE_TOOL))
-            {
-             Harvest(other.gameObject.GetComponent<NetworkObject>());
-            }
-        }
-        catch
-        {
-            Debug.LogError("An error occurred during trigger handling.");
+            Harvest(other.gameObject.GetComponent<NetworkObject>());
         }
     }
 
@@ -53,7 +47,10 @@ public class Resource : NetworkBehaviour
 
         if (currentHits >= hitsToHarvest)
         {
-            playerInventory.AddResource(resourceType, amount);
+            if (playerInventory != null)
+            {
+                playerInventory.AddResource(resourceType, amount);
+            }
             Debug.Log("Should Despawn now.");
             Runner.Despawn(networkObject);
         }
