@@ -10,7 +10,7 @@ public class BucketFill : MonoBehaviour
     private Vector3 initialPosition; // Die anfängliche Position des Zylinders
     private Renderer bucketRenderer; // Der Renderer des Zylinders
 
-    private const float minVisiblePercentage = 0.05f;
+    private const float minVisiblePercentage = 0.02f;
 
     void Start()
     {
