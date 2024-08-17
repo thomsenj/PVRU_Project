@@ -375,6 +375,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7034295906033919064, guid: b5136785ed6664a72a2cf554a353a7f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3f4d1526527724e589ba60726d8d0d14, type: 3}
+    - target: {fileID: 7034295906033919064, guid: b5136785ed6664a72a2cf554a353a7f2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -551,9 +559,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 917403578357737724}
     m_Modifications:
+    - target: {fileID: 1611718248963160431, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611718248963160431, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611718248963160431, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.26
+      objectReference: {fileID: 0}
     - target: {fileID: 2725747268665365186, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
       propertyPath: m_Name
-      value: StoneCounter
+      value: CoalCounter
       objectReference: {fileID: 0}
     - target: {fileID: 5366507634328364979, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
       propertyPath: m_Pivot.x
@@ -633,6 +653,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5366507634328364979, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455733715138117283, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 25290a16c0b8e4176a2444fcad878c98, type: 3}
+    - target: {fileID: 8455733715138117283, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
+      propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -735,7 +763,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2170048244800815506, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
       propertyPath: m_Name
-      value: WoodCounter
+      value: WaterCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027568859206439464, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b3d2a8cfd03ea4fc68270d60bfdf0e7e, type: 3}
+    - target: {fileID: 6027568859206439464, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118485354160718203, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118485354160718203, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118485354160718203, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
