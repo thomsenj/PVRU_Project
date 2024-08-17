@@ -16,6 +16,7 @@ namespace Fusion.XRShared.Demo
         [SerializeField] private float spawnInterval = 5.0f;
         private float spawnTimer;
         public AddCoal addCoal;
+        public AudioSource burningSound;
 
         private void Start()
         {
@@ -80,6 +81,11 @@ namespace Fusion.XRShared.Demo
         private void addFuel()
         {
             fuelstand = Mathf.Clamp(fuelstand + 10, 0, 100);
+
+            if (burningSound != null)
+            {
+                burningSound.Play();
+            }
         }
 
         private float getSpeed()

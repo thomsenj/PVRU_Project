@@ -15,6 +15,7 @@ public class WaterBucket : NetworkBehaviour
     private Rigidbody rb;
 
     public HeatUpObject heatUpObject;
+    public AudioSource splashSound;
 
     private Vector3 startPos;
 
@@ -60,6 +61,11 @@ public class WaterBucket : NetworkBehaviour
             if (!waterParticles.isPlaying)
             {
                 waterParticles.Play();
+            }
+
+            if (splashSound != null)
+            {
+                splashSound.Play();
             }
 
 
