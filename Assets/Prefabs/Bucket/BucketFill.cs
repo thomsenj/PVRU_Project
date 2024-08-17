@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
-public class BucketFill : MonoBehaviour
+public class BucketFill : NetworkBehaviour  
 {
     public WaterBucket waterBucket;
 
@@ -19,7 +20,7 @@ public class BucketFill : MonoBehaviour
         bucketRenderer = GetComponent<Renderer>(); // Holen des Renderer-Komponenten
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
         // Füllstand als Prozentsatz (Wert zwischen 0 und 1)
         float fillPercentage = waterBucket.GetWaterPercentage();
