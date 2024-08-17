@@ -28,7 +28,7 @@ public class TrainHealth : NetworkBehaviour
     {
         if (gameObject.GetComponent<EMSAdapter>() != null)
         {
-            gameObject.GetComponent<EMSAdapter>().sendImpulseChannel1(500);
+            gameObject.GetComponent<EMSAdapter>().SendImpulseChannel1(500);
         }
     }
 }

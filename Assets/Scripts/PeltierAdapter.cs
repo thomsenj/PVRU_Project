@@ -7,13 +7,15 @@ public class PeltierAdapter : MonoBehaviour
     public string microcontrollerIP = "192.168.1.100"; // Default IP address
     public int microcontrollerPort = 80; // Default port
 
+    private float lastTemperatureLimit = float.MinValue;
+    private float lastAimTemperature = float.MinValue;
+    private float lastPercentage = float.MinValue;
+
     // Start is called before the first frame update
     void Start()
     {
         // Example usage
         StartCoroutine(GetTemperature());
-        LazySetPeltierState(true);
-        StartCoroutine(SetTemperatureLimit(30.0f));
     }
 
     // Method to set the IP address and port of the microcontroller
@@ -100,6 +102,25 @@ public class PeltierAdapter : MonoBehaviour
         }
     }
 
+    // Coroutine to set the percentage
+    IEnumerator SetPercentage(float percentage)
+    {
+        string url = $"http://{microcontrollerIP}:{microcontrollerPort}/setPercentage?percentage={percentage*100}";
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error setting percentage: {request.error}");
+            }
+            else
+            {
+                Debug.Log($"Percentage set to: {percentage}%");
+            }
+        }
+    }
+
     // Lazy method to set the Peltier state
     public void LazySetPeltierState(bool state)
     {
@@ -112,15 +133,33 @@ public class PeltierAdapter : MonoBehaviour
         StartCoroutine(GetTemperature());
     }
 
-    // Lazy method to set the temperature limit
-    public void LazySetTemperatureLimit(float limit)
+    // Lazy method to set the temperature limit with threshold
+    public void LazySetTemperatureLimit(float limit, float threshold)
     {
-        StartCoroutine(SetTemperatureLimit(limit));
+        if (Mathf.Abs(limit - lastTemperatureLimit) > threshold)
+        {
+            lastTemperatureLimit = limit;
+            StartCoroutine(SetTemperatureLimit(limit));
+        }
     }
 
-    // Lazy method to set the aim temperature
-    public void LazySetAimTemperature(float temperature)
+    // Lazy method to set the aim temperature with threshold
+    public void LazySetAimTemperature(float temperature, float threshold)
     {
-        StartCoroutine(SetAimTemperature(temperature));
+        if (Mathf.Abs(temperature - lastAimTemperature) > threshold)
+        {
+            lastAimTemperature = temperature;
+            StartCoroutine(SetAimTemperature(temperature));
+        }
+    }
+
+    // Lazy method to set the percentage with threshold
+    public void LazySetPercentage(float percentage, float threshold)
+    {
+        if (Mathf.Abs(percentage - lastPercentage) > threshold)
+        {
+            lastPercentage = percentage;
+            StartCoroutine(SetPercentage(percentage));
+        }
     }
 }

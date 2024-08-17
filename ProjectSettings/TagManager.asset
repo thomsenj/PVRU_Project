@@ -24,6 +24,7 @@ TagManager:
   - Resource
   - Carriage
   - OnTrain
+  - WaterParticle
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - UI
   - Locomotion
   - Magnets
-  - 
+  - HeatingLayer
   - 
   - 
   - 

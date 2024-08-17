@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
         if (gameObject.GetComponent<EMSAdapter>() != null)
         {
             // call the "triggerEms" method of the EMSAdapter component
-            gameObject.GetComponent<EMSAdapter>().sendImpulseChannel1(500);
+            gameObject.GetComponent<EMSAdapter>().SendImpulseChannel1(500);
         }
     }
 
