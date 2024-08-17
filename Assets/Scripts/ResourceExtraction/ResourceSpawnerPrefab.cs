@@ -68,7 +68,7 @@ namespace Fusion.XRShared.Demo
 
         Vector3 spawnPoint = pos + offset;
 
-        return new Vector3(spawnPoint.x, 0, spawnPoint.z);
+        return new Vector3(spawnPoint.x, 3, spawnPoint.z);
     }
 
 

@@ -4989,6 +4989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterParticles: {fileID: 1418707880490693074}
   maxWaterAmount: 100
+  _currentWaterAmount: 0
   pourRate: 10
   heatUpObject: {fileID: 0}
 --- !u!114 &4260229248193797272
@@ -5182,6 +5183,7 @@ MonoBehaviour:
   Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 4179571428132424794}
   - {fileID: -7060325058438021911}
   - {fileID: 6363037746371737205}
   - {fileID: 394490316603234942}

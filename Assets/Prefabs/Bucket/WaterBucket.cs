@@ -1,13 +1,15 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class WaterBucket : MonoBehaviour
+public class WaterBucket : NetworkBehaviour
 {
     public ParticleSystem waterParticles;
     private bool isPouring = false;
 
     public float maxWaterAmount = 100f;
-    private float currentWaterAmount;
+    [Networked]
+    public float currentWaterAmount { get; set; }
     public float pourRate = 10f;
 
     private Rigidbody rb;
@@ -23,15 +25,26 @@ public class WaterBucket : MonoBehaviour
         startPos = transform.localPosition;
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
-        if(!isPouring && transform.position != startPos){
-            isPouring = true;
-        }
-        if (isPouring && IsBucketTilted())
+        base.FixedUpdateNetwork();
+
+        if (Object.HasStateAuthority)
         {
-            PourWater();
+            if (!isPouring && transform.position != startPos)
+            {
+                isPouring = true;
+            }
+            if (isPouring && IsBucketTilted())
+            {
+                PourWater();
+            }
         }
+    }
+
+    public void FillUp()
+    {
+        currentWaterAmount = currentWaterAmount + 50; 
     }
 
     private bool IsBucketTilted()
@@ -50,7 +63,7 @@ public class WaterBucket : MonoBehaviour
             }
 
 
-            //currentWaterAmount -= pourRate * Time.deltaTime;
+            currentWaterAmount -= pourRate * Time.deltaTime;
             if (currentWaterAmount <= 0)
             {
                 currentWaterAmount = 0;
