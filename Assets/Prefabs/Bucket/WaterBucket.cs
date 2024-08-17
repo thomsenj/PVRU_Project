@@ -1,11 +1,12 @@
 using Fusion;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
 
 public class WaterBucket : NetworkBehaviour
 {
     public ParticleSystem waterParticles;
-    private bool isPouring = false;
+    public Transform attachPoint;
 
     public float maxWaterAmount = 100f;
     [Networked]
@@ -17,45 +18,68 @@ public class WaterBucket : NetworkBehaviour
     public HeatUpObject heatUpObject;
     public AudioSource splashSound;
 
-    private Vector3 startPos;
+    public float detachThreshold = 2.0f;
+    public float resetDelay = 3.0f; 
+    private bool isFalling = false;
+    private Transform originalParent;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentWaterAmount = maxWaterAmount;
-        startPos = transform.localPosition;
+        originalParent = transform.parent;
     }
 
     public override void FixedUpdateNetwork()
     {
-        base.FixedUpdateNetwork();
-
-        if (Object.HasStateAuthority)
+        if (!isFalling && CheckIfIsFalling())
         {
-            if (!isPouring && transform.position != startPos)
-            {
-                isPouring = true;
-            }
-            if (isPouring && IsBucketTilted())
-            {
-                PourWater();
-            }
+            isFalling = true;
+            transform.SetParent(null);
+            StartCoroutine(HandleFallingBucket());
         }
+
+        if (IsBucketTilted())
+        {
+            PourWater();
+        }
+        else
+        {
+            StopPouring();
+        }
+    }
+
+    private bool CheckIfIsFalling()
+    {
+        if (attachPoint == null)
+        {
+            return false;
+        }
+        return Vector3.Distance(transform.position, attachPoint.position) > detachThreshold && transform.position.y < attachPoint.position.y;
     }
 
     public void FillUp()
     {
-        currentWaterAmount = currentWaterAmount + 50; 
+        currentWaterAmount = currentWaterAmount + 50;
+        if(currentWaterAmount > maxWaterAmount)
+        {
+            maxWaterAmount = currentWaterAmount;
+        }
     }
 
     private bool IsBucketTilted()
     {
+        return Vector3.Dot(transform.up, Vector3.up) < 0.65f;
+    }
 
-        return Vector3.Dot(transform.up, Vector3.up) < 0.5f;
+    public float GetWaterPercentage()
+    {
+        return currentWaterAmount / maxWaterAmount;
     }
 
     private void PourWater()
     {
+        Debug.Log(currentWaterAmount);
         if (currentWaterAmount > 0)
         {
             if (!waterParticles.isPlaying)
@@ -73,10 +97,8 @@ public class WaterBucket : NetworkBehaviour
             if (currentWaterAmount <= 0)
             {
                 currentWaterAmount = 0;
-                waterParticles.Stop();
-                isPouring = false;
+                StopPouring();
             }
-
 
             if (heatUpObject != null)
             {
@@ -85,17 +107,32 @@ public class WaterBucket : NetworkBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void StopPouring()
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ground"))
+        if (waterParticles.isPlaying)
+        {
+            waterParticles.Stop();
+        }
+    }
+
+    private IEnumerator HandleFallingBucket()
+    {
+        yield return new WaitForSeconds(resetDelay);
+
+        if (attachPoint != null && CheckIfIsFalling())
         {
             ResetBucketPosition();
-            isPouring = false;
         }
+
+        isFalling = false;
     }
 
     private void ResetBucketPosition()
     {
-        transform.localPosition = startPos;
+        rb.velocity = Vector3.zero; // Stoppt die Bewegung des Eimers
+        rb.angularVelocity = Vector3.zero; // Stoppt die Rotation des Eimers
+        transform.position = attachPoint.position; // Teleportiert den Eimer zur?ck zum Befestigungspunkt
+        transform.rotation = attachPoint.rotation; // Setzt die Rotation zur?ck, falls n?tig
+        transform.SetParent(originalParent); // Weist das urspr?ngliche Elternteil erneut zu
     }
 }
