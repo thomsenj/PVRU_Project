@@ -1,6 +1,7 @@
 using UnityEngine;
 using Fusion;
 using Fusion.XRShared.Demo;
+using System.Collections;
 
 public class CoalContainer : NetworkBehaviour
 {
@@ -8,6 +9,7 @@ public class CoalContainer : NetworkBehaviour
     private int currentHits = 0;
     [SerializeField] private int maxHitsToKill;
     [SerializeField] private ResourceContainer resourceContainer;
+    [SerializeField] private ParticleSystem particleSystemPrefab;
 
     void OnTriggerEnter(Collider other)
     {
@@ -16,8 +18,7 @@ public class CoalContainer : NetworkBehaviour
             if (maxHitsToKill == currentHits)
             {
                 HandleSpawn();
-                resourceSpawnerPrefab = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceSpawnerPrefab>();
-                resourceSpawnerPrefab.Despawn(gameObject);
+                StartCoroutine(DestroyAfterEffect());
             }
             else
             {
@@ -38,6 +39,14 @@ public class CoalContainer : NetworkBehaviour
             WaterBucket w = GameObject.FindGameObjectWithTag(TagConstants.RESOURCE_TOOL).GetComponent<WaterBucket>();
             w.FillUp();
         }
+    }
+
+    private IEnumerator DestroyAfterEffect()
+    {
+        particleSystemPrefab.Play();
+        yield return new WaitForSeconds(particleSystemPrefab.main.duration);
+        resourceSpawnerPrefab = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<ResourceSpawnerPrefab>();
+        resourceSpawnerPrefab.Despawn(gameObject);
     }
 }
 

@@ -191,3 +191,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitsToKill: 1
+  resourceContainer: 1
+  particleSystemPrefab: {fileID: 198880425136568428, guid: f171ac3dbb620c44e81cd88ddee1cbbd, type: 3}
