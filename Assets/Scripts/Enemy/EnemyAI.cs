@@ -152,6 +152,9 @@ public class EnemyAI : NetworkBehaviour
     private void PerformAttack()
     {
         animator.SetTrigger(AnimationConstants.ATTACK);
+        TrainHealth trainHealth = GameObject.FindGameObjectWithTag(TagConstants.PLAYER_DAMAGE_COLLIDER).GetComponent<TrainHealth>();
+        trainHealth.TakeDamage();
+        Despawn();
     }
 
 
@@ -191,6 +194,11 @@ public class EnemyAI : NetworkBehaviour
     private IEnumerator HandleDeath()
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Despawn();
+    }
+
+    private void Despawn()
+    {
         EnemyPrefabSpawner spawner = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<EnemyPrefabSpawner>();
         spawner.Despawn(this.gameObject);
     }

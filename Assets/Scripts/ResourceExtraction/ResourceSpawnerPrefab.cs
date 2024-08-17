@@ -44,7 +44,9 @@ namespace Fusion.XRShared.Demo
         void Spawn(Vector3 pos)
         {
             if (prefab == null || prefab.Count == 0) return;
-            NetworkObject resourceGameObject = prefab[0];
+            System.Random rand = new System.Random();
+            int index = rand.Next(0, 2);
+            NetworkObject resourceGameObject = prefab[index];
             Runner.Spawn(resourceGameObject, GetSpawnPoint(pos));
         }
 
@@ -62,7 +64,7 @@ namespace Fusion.XRShared.Demo
             forwardDirection.x * Mathf.Sin(angleRad) + forwardDirection.z * Mathf.Cos(angleRad)
         );
 
-        offset = offset.normalized * 5f;
+        offset = offset.normalized * 7f;
 
         Vector3 spawnPoint = pos + offset;
 
