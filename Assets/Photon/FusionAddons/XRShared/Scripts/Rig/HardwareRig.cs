@@ -106,6 +106,11 @@ namespace Fusion.XR.Shared.Rig
         }
         #endregion
 
+        private void Awake()
+        {
+            initialRigPosition = transform.position;
+        }
+
         private void FixedUpdate()
         {
             if (trainTransform != null)
