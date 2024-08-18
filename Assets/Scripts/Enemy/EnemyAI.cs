@@ -24,6 +24,8 @@ public class EnemyAI : NetworkBehaviour
     private Transform currentTarget;
     private float lastAttackTime;
 
+    [SerializeField] private Transform spawnPoint;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -34,7 +36,14 @@ public class EnemyAI : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            spawnPoint = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyPrefabSpawner>().spawnTarget.transform;
+            transform.position = spawnPoint.position;
+            currentHealth = maxHealth;
+            animator.SetTrigger("respawn");
+            isDead = false;
+        }
 
         if (currentHealth != previousHealth)
         {
