@@ -5,13 +5,6 @@ using Fusion;
 
 public class RevolverController : NetworkBehaviour
 {
-    public Transform attachPoint;
-    public float detachThreshold = 3.0f;
-    private bool isFalling = false;
-
-    public float resetDelay = 5.0f;
-
-
     public Transform muzzle;                    
     public float recoilAmount = 0.25f;          
     public float recoilSpeed = 25f;             
@@ -25,61 +18,9 @@ public class RevolverController : NetworkBehaviour
 
     private bool canShoot = true;
 
-    private Rigidbody rb;
-    private Transform originalParent;
-
-    public void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private bool CheckIfIsFalling()
-    {
-        if (attachPoint == null)
-        {
-            return false;
-        }
-        return Vector3.Distance(transform.position, attachPoint.position) > detachThreshold && transform.position.y < attachPoint.position.y;
-    }
-
-    public override void FixedUpdateNetwork()
-    {
-        if (!isFalling && CheckIfIsFalling())
-        {
-            isFalling = true;
-            transform.SetParent(null);
-            StartCoroutine(HandleFallingRevolver());
-        }
-        rb.isKinematic = IsOnAttachPoint();
-    }
-
-    private bool IsOnAttachPoint()
-    {
-        return Vector3.Distance(transform.position, attachPoint.position) < 0.1f;
-    }
-
-    private IEnumerator HandleFallingRevolver()
-    {
-        yield return new WaitForSeconds(resetDelay);
-        if (attachPoint != null && CheckIfIsFalling())
-        {
-            ResetRevolverPosition();
-        }
-        isFalling = false;
-    }
-
-    private void ResetRevolverPosition()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        transform.position = attachPoint.position;
-        transform.rotation = attachPoint.rotation; 
-        transform.SetParent(originalParent); 
-    }
-
     public void Shoot()
     {
-        if(canShoot && !IsOnAttachPoint())
+        if(canShoot)
         {
             canShoot = false;
 

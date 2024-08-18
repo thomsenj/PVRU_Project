@@ -59,7 +59,7 @@ public class WaterBucket : NetworkBehaviour
 
     public void FillUp()
     {
-        currentWaterAmount = currentWaterAmount + 50;
+        currentWaterAmount += 50;
         if(currentWaterAmount > maxWaterAmount)
         {
             maxWaterAmount = currentWaterAmount;
