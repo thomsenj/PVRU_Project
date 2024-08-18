@@ -27,6 +27,8 @@ public class EnemyAI : NetworkBehaviour
     private NavMeshAgent navMeshAgent;
     private Transform spawnPoint;
 
+    [SerializeField] private Transform spawnPoint;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,8 +44,11 @@ public class EnemyAI : NetworkBehaviour
     {
         if (isDead)
         {
-            gameObject.transform.position = spawnPoint.position;
+            spawnPoint = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyPrefabSpawner>().spawnTarget.transform;
+            transform.position = spawnPoint.position;
             currentHealth = maxHealth;
+            animator.SetTrigger("respawn");
+            isDead = false;
         }
 
         if (currentHealth != previousHealth)

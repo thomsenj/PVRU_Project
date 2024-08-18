@@ -15,7 +15,6 @@ public class WaterBucket : NetworkBehaviour
 
     private Rigidbody rb;
 
-    public HeatUpObject heatUpObject;
     public AudioSource splashSound;
 
     public float detachThreshold = 2.0f;
@@ -99,11 +98,6 @@ public class WaterBucket : NetworkBehaviour
                 currentWaterAmount = 0;
                 StopPouring();
             }
-
-            if (heatUpObject != null)
-            {
-                heatUpObject.CoolDown(pourRate * Time.deltaTime);
-            }
         }
     }
 
@@ -131,8 +125,7 @@ public class WaterBucket : NetworkBehaviour
     {
         rb.velocity = Vector3.zero; // Stoppt die Bewegung des Eimers
         rb.angularVelocity = Vector3.zero; // Stoppt die Rotation des Eimers
-        transform.position = attachPoint.position; // Teleportiert den Eimer zur?ck zum Befestigungspunkt
-        transform.rotation = attachPoint.rotation; // Setzt die Rotation zur?ck, falls n?tig
-        transform.SetParent(originalParent); // Weist das urspr?ngliche Elternteil erneut zu
+        transform.SetPositionAndRotation(attachPoint.position, attachPoint.rotation);
+        transform.SetParent(attachPoint.parent);
     }
 }
