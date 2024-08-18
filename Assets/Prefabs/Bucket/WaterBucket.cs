@@ -125,8 +125,7 @@ public class WaterBucket : NetworkBehaviour
     {
         rb.velocity = Vector3.zero; // Stoppt die Bewegung des Eimers
         rb.angularVelocity = Vector3.zero; // Stoppt die Rotation des Eimers
-        transform.position = attachPoint.position; // Teleportiert den Eimer zur?ck zum Befestigungspunkt
-        transform.rotation = attachPoint.rotation; // Setzt die Rotation zur?ck, falls n?tig
-        transform.SetParent(originalParent); // Weist das urspr?ngliche Elternteil erneut zu
+        transform.SetPositionAndRotation(attachPoint.position, attachPoint.rotation);
+        transform.SetParent(attachPoint.parent);
     }
 }
