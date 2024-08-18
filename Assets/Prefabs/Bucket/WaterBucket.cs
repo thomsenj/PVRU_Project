@@ -15,7 +15,6 @@ public class WaterBucket : NetworkBehaviour
 
     private Rigidbody rb;
 
-    public HeatUpObject heatUpObject;
     public AudioSource splashSound;
 
     public float detachThreshold = 2.0f;
@@ -98,11 +97,6 @@ public class WaterBucket : NetworkBehaviour
             {
                 currentWaterAmount = 0;
                 StopPouring();
-            }
-
-            if (heatUpObject != null)
-            {
-                heatUpObject.CoolDown(pourRate * Time.deltaTime);
             }
         }
     }
