@@ -31,7 +31,7 @@ namespace Fusion.XRShared.Demo
                 {
                     if (currentCount < maxCount)
                     {
-                        Spawn();
+                       // Spawn();
                         currentCount++;
                     }
                     spawnTimer = 0f;
@@ -70,13 +70,10 @@ namespace Fusion.XRShared.Demo
 
         public void UpdateEnemies(List<GameObject> enemies, GameObject plane)
         {
-            foreach(GameObject e in enemies)
-            {
-                Runner.Despawn(e.GetComponent<NetworkObject>());
-            }
+            
             PlaneInformation planeInfo = plane.GetComponent<PlaneInformation>();
             spawnTarget = planeInfo.enemySpawner;
-            currentCount = 0;
+           
         }
 
 

@@ -27,8 +27,6 @@ public class EnemyAI : NetworkBehaviour
     private NavMeshAgent navMeshAgent;
     private Transform spawnPoint;
 
-    [SerializeField] private Transform spawnPoint;
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,9 +40,17 @@ public class EnemyAI : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        GameObject WorldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
+        spawnPoint = WorldManager.GetComponent<EnemyPrefabSpawner>().spawnTarget.transform;
+        float radius = WorldManager.GetComponent<WorldManager>().planeRadius;
+        float distance = GetDistance(WorldManager.GetComponent<WorldManager>().mainPlane, transform.position);
+        float nextDistance = GetDistance(WorldManager.GetComponent<WorldManager>().mainPlane.GetComponent<PlaneInformation>().nextPlane, transform.position);
+        if (distance > radius && distance > nextDistance)
+        {
+            transform.position = spawnPoint.position;
+        }
         if (isDead)
         {
-            spawnPoint = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyPrefabSpawner>().spawnTarget.transform;
             transform.position = spawnPoint.position;
             currentHealth = maxHealth;
             animator.SetTrigger("respawn");
@@ -64,6 +70,19 @@ public class EnemyAI : NetworkBehaviour
         if (isGrounded && IsObstacleAhead())
         {
             Jump();
+        }
+    }
+
+    private float GetDistance(GameObject plane, Vector3 trainPosition)
+    {
+        try
+        {
+            Vector3 direction = plane.transform.position - trainPosition;
+            return direction.magnitude;
+        }
+        catch
+        {
+            return -1;
         }
     }
 
@@ -168,7 +187,8 @@ public class EnemyAI : NetworkBehaviour
         animator.SetTrigger(AnimationConstants.ATTACK);
         TrainHealth trainHealth = GameObject.FindGameObjectWithTag(TagConstants.PLAYER_DAMAGE_COLLIDER).GetComponent<TrainHealth>();
         trainHealth.TakeDamage();
-        Despawn();
+        // Despawn();
+        isDead = true;
     }
 
 

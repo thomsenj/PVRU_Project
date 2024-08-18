@@ -27,19 +27,18 @@ public class WorldManager : MonoBehaviour
 
     private void Update()
     {
+        PlaneInformation planeInformation = mainPlane.GetComponent<PlaneInformation>();
         Vector3 position = train.transform.position;
         float distance = GetDistance(mainPlane, position);
+        float nextDistance = GetDistance(planeInformation.nextPlane, position);
         if (distance < planeRadius/2)
         {
             safetyLock = true;
         }
-        if (distance > planeRadius && safetyLock)
+        if (distance > planeRadius && safetyLock && distance > nextDistance)
         {
             safetyLock = false;
-            Debug.Log("Train change works");
-            PlaneInformation planeInformation = mainPlane.GetComponent<PlaneInformation>();
             mainPlane = planeInformation.nextPlane;
-            Debug.Log("New Mainplane: " + mainPlane.name);
             ClearEnemies();
             UpdateTrainManager();
             UpdateResourceFactory();
