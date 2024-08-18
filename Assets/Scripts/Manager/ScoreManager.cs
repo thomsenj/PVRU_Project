@@ -7,7 +7,7 @@ public class ScoreManager : NetworkBehaviour
 
     [Networked]
     public float score { get; set; } = 0;
-    public float scoreIncreaseRate = 2f;  
+    public float scoreIncreaseRate = 2f;
 
     private CollectableBankController scoreUI;
     private bool isScoring;

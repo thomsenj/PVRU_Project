@@ -235,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1816501291843364519, guid: 2b9cdd0c4212c4ab4a7f053588a2f70e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -43.1
+      value: -21.7
       objectReference: {fileID: 0}
     - target: {fileID: 1816501291843364519, guid: 2b9cdd0c4212c4ab4a7f053588a2f70e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -575,6 +575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoalCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 2725747268665365186, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5366507634328364979, guid: d2f169c8f5816469c83c5ff825edffdb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -743,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1816501291843364519, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -8.26
+      value: 13.140024
       objectReference: {fileID: 0}
     - target: {fileID: 1816501291843364519, guid: 94aee6062675e42238481bf5a819fd67, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -9,6 +9,7 @@ namespace Fusion.XRShared.Demo
     public class BurnCoal : NetworkBehaviour
     {
         public float fuelstand = 100f;
+        public HealthbarController controller;
 
         private TrainManager trainManager;
         private float fuelModifier = 1.0f;
@@ -20,6 +21,7 @@ namespace Fusion.XRShared.Demo
 
         private void Start()
         {
+            controller.SetMaxValue(150);
             try
             {
                 trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
@@ -49,9 +51,10 @@ namespace Fusion.XRShared.Demo
                     {
                         gameOverManager.TriggerGameOver();
                     }
-                     spawnTimer = 0f;
+                    spawnTimer = 0f;
                 }
             }
+            controller.SetValue((int)fuelstand);
         }
 
         void OnTriggerEnter(Collider other)

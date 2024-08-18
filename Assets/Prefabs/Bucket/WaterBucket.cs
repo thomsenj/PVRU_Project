@@ -7,6 +7,7 @@ public class WaterBucket : NetworkBehaviour
 {
     public ParticleSystem waterParticles;
     public Transform attachPoint;
+    public CollectableBankController controller;
 
     public float maxWaterAmount = 100f;
     [Networked]
@@ -46,6 +47,7 @@ public class WaterBucket : NetworkBehaviour
         {
             StopPouring();
         }
+        controller.SetCount((int)(currentWaterAmount));
     }
 
     private bool CheckIfIsFalling()
