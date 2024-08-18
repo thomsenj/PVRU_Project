@@ -31,7 +31,7 @@ public class WorldManager : MonoBehaviour
         Vector3 position = train.transform.position;
         float distance = GetDistance(mainPlane, position);
         float nextDistance = GetDistance(planeInformation.nextPlane, position);
-        if (distance < planeRadius/2)
+        if (distance < 60f)
         {
             safetyLock = true;
         }
