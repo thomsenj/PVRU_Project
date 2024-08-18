@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrainHealth : NetworkBehaviour
 {
     [Networked]
-    private int trainHealth { get; set; } = 20;
+    private int trainHealth { get; set; } = 40;
     public AudioSource damageSound;
     public HealthbarController controller;
 
@@ -23,7 +23,8 @@ public class TrainHealth : NetworkBehaviour
             damageSound.Play();
         }
         triggerEms();
-        if (trainHealth == 0 || trainHealth < 0) { 
+        if (trainHealth == 0 || trainHealth < 0)
+        {
             GameOverManager gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
             gameOverManager.TriggerGameOver();
         }
