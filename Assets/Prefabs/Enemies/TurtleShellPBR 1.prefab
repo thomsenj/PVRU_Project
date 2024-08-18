@@ -658,7 +658,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  maxHealth: 100
+  maxHealth: 1
   damageAudioSource: {fileID: 9080907455379545617}
 --- !u!114 &9012884958951729890
 MonoBehaviour:

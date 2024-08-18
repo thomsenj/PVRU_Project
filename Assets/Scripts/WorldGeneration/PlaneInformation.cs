@@ -8,6 +8,7 @@ public class PlaneInformation : MonoBehaviour
     public GameObject nextPlane;
     public GameObject enemySpawner;
     public List<GameObject> resourcePrefabs;
+    public List<GameObject> enemies;
     public int resourceCount;
     public int resourceMax;
     public WeatherTypes weatherType;

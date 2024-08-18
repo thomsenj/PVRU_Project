@@ -25,7 +25,7 @@ public class EnemyAI : NetworkBehaviour
     private Transform currentTarget;
     private float lastAttackTime;
     private NavMeshAgent navMeshAgent;
-    private Transform spawnPoint;
+    private bool isTransform = false;
 
     void Start()
     {
@@ -40,21 +40,20 @@ public class EnemyAI : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        GameObject WorldManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER);
-        spawnPoint = WorldManager.GetComponent<EnemyPrefabSpawner>().spawnTarget.transform;
-        float radius = WorldManager.GetComponent<WorldManager>().planeRadius;
-        float distance = GetDistance(WorldManager.GetComponent<WorldManager>().mainPlane, transform.position);
-        float nextDistance = GetDistance(WorldManager.GetComponent<WorldManager>().mainPlane.GetComponent<PlaneInformation>().nextPlane, transform.position);
-        if (distance > radius && distance > nextDistance)
+        if (isDead || isTransform)
         {
+            if (isTransform)
+            {
+                isTransform = false;
+            }
+            Transform spawnPoint = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<EnemyPrefabSpawner>().spawnTarget.transform;
             transform.position = spawnPoint.position;
-        }
-        if (isDead)
-        {
-            transform.position = spawnPoint.position;
-            currentHealth = maxHealth;
-            animator.SetTrigger("respawn");
-            isDead = false;
+            if (isDead)
+            {
+                currentHealth = maxHealth;
+                animator.SetTrigger("respawn");
+                isDead = false;
+            }
         }
 
         if (currentHealth != previousHealth)
@@ -73,17 +72,14 @@ public class EnemyAI : NetworkBehaviour
         }
     }
 
-    private float GetDistance(GameObject plane, Vector3 trainPosition)
+    public void UpdatePos(bool active)
     {
-        try
-        {
-            Vector3 direction = plane.transform.position - trainPosition;
-            return direction.magnitude;
-        }
-        catch
-        {
-            return -1;
-        }
+        gameObject.SetActive(active);
+    }
+
+    public void setNegative()
+    {
+        gameObject.SetActive(true);
     }
 
     private void UpdateCurrentTarget()

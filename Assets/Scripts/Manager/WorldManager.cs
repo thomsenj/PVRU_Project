@@ -38,8 +38,9 @@ public class WorldManager : MonoBehaviour
         if (distance > planeRadius && safetyLock && distance > nextDistance)
         {
             safetyLock = false;
-            mainPlane = planeInformation.nextPlane;
             ClearEnemies();
+            mainPlane = planeInformation.nextPlane;
+            UpdateEnemies();
             UpdateTrainManager();
             UpdateResourceFactory();
         }
@@ -63,10 +64,14 @@ public class WorldManager : MonoBehaviour
        ResourceSpawnerPrefab.UpdateResourceFactory(mainPlane);
     }
 
+    private void UpdateEnemies()
+    {
+        EnemyPrefabSpawner.UpdateEnemies(mainPlane);
+    }
+
     private void ClearEnemies()
     {
-        List<GameObject> enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(TagConstants.Enemy));
-        EnemyPrefabSpawner.UpdateEnemies(enemies, mainPlane);
+        EnemyPrefabSpawner.ClearEnemies(mainPlane);
     }
 
     private void UpdateTrainManager()

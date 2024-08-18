@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using Unity.VisualScripting;
 
 namespace Fusion.XRShared.Demo
 {
@@ -12,7 +13,7 @@ namespace Fusion.XRShared.Demo
         [SerializeField] public GameObject spawnTarget;
 
         [Networked]
-        public int currentCount {get; set;}
+        public int currentCount { get; set; }
 
         [SerializeField] private int maxCount;
 
@@ -31,7 +32,7 @@ namespace Fusion.XRShared.Demo
                 {
                     if (currentCount < maxCount)
                     {
-                       // Spawn();
+                        //Spawn();
                         currentCount++;
                     }
                     spawnTimer = 0f;
@@ -50,34 +51,52 @@ namespace Fusion.XRShared.Demo
         }
 
 
-    private Vector3 GetSpawnPoint(float radius)
-    {
-        if(spawnTarget != null) 
+        private Vector3 GetSpawnPoint(float radius)
         {
-            Vector3 pos = spawnTarget.transform.position;
-            pos.y = 0;
-            pos.z = pos.z + 2;
-            return pos;
+            if (spawnTarget != null)
+            {
+                Vector3 pos = spawnTarget.transform.position;
+                pos.y = 0;
+                pos.z = pos.z + 2;
+                return pos;
+            }
+
+            Vector3 playerPosition = GameObject.FindWithTag(TagConstants.TRAIN).transform.position;
+            float angle = Random.Range(0f, 360f);
+            float distance = Random.Range(0f, radius);
+            float xPos = playerPosition.x + distance * Mathf.Cos(angle * Mathf.Deg2Rad);
+            float zPos = playerPosition.z + distance * Mathf.Sin(angle * Mathf.Deg2Rad);
+            return new Vector3(xPos, 0, zPos);
         }
 
-        Vector3 playerPosition = GameObject.FindWithTag(TagConstants.TRAIN).transform.position;
-        float angle = Random.Range(0f, 360f);
-        float distance = Random.Range(0f, radius);
-        float xPos = playerPosition.x + distance * Mathf.Cos(angle * Mathf.Deg2Rad);
-        float zPos = playerPosition.z + distance * Mathf.Sin(angle * Mathf.Deg2Rad);
-        return new Vector3(xPos, 0, zPos);
-    }
-
-        public void UpdateEnemies(List<GameObject> enemies, GameObject plane)
+        public void ClearEnemies(GameObject plane)
         {
-            
             PlaneInformation planeInfo = plane.GetComponent<PlaneInformation>();
             spawnTarget = planeInfo.enemySpawner;
-           
+            List<GameObject> gameObjects = planeInfo.enemies;
+            UpdateEnemies(gameObjects, false);
+        }
+
+        public void UpdateEnemies(GameObject plane)
+        {
+            PlaneInformation planeInfo = plane.GetComponent<PlaneInformation>();
+            spawnTarget = planeInfo.enemySpawner;
+            List<GameObject> gameObjects = planeInfo.enemies;
+            UpdateEnemies(gameObjects, true);
         }
 
 
-        public void Despawn(GameObject gameObject) {
+        private void UpdateEnemies(List<GameObject> enemies, bool active)
+        {
+            foreach (GameObject e in enemies)
+            {
+                e.GetComponent<EnemyAI>().UpdatePos(active);
+            }
+        }
+
+
+        public void Despawn(GameObject gameObject)
+        {
             Runner.Despawn(gameObject.GetComponent<NetworkObject>());
             currentCount--;
         }
