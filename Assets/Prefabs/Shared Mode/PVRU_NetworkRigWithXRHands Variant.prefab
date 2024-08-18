@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4308240546056094932, guid: e263782ae517b5e46a1d6228d8ee88b7, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6199290577999107589, guid: e263782ae517b5e46a1d6228d8ee88b7, type: 3}
       propertyPath: SortKey
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7867808585486457895}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7162394376558145839}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f24cb2556f0be444fa4332f6780197b4, type: 3}
   m_Name: 

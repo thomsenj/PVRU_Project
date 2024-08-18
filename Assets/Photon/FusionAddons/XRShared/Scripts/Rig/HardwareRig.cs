@@ -48,7 +48,10 @@ namespace Fusion.XR.Shared.Rig
         public TeleportEvent onTeleport = new TeleportEvent();
 
         RigState _rigState = default;
-        
+        public Transform trainTransform;
+        public Vector3 previousTrainPosition;
+        public Vector3 initialRigPosition;
+
         public virtual RigState RigState
         {
             get
@@ -103,5 +106,56 @@ namespace Fusion.XR.Shared.Rig
         }
         #endregion
 
+        private void FixedUpdate()
+        {
+            if (trainTransform != null)
+            {
+                UpdateRigPosition();
+            }
+        }
+
+        public void StartTrackingTrain(Transform train)
+        {
+            trainTransform = train;
+            previousTrainPosition = train.position;
+
+            Vector3 headsetOffset = headset.transform.position - transform.position;
+            headsetOffset.y = 0;
+            initialRigPosition = trainTransform.position - headsetOffset;
+
+            transform.position = initialRigPosition;
+        }
+
+        public void StopTrackingTrain()
+        {
+            trainTransform = null;
+        }
+
+        public void UpdateRigPosition()
+        {
+            if (trainTransform == null) return;
+
+            Vector3 positionDelta = trainTransform.position - previousTrainPosition;
+
+            transform.position += positionDelta;
+
+            previousTrainPosition = trainTransform.position;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("OnTrain"))
+            {
+                StartTrackingTrain(other.transform);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("OnTrain"))
+            {
+                StopTrackingTrain();
+            }
+        }
     }
 }

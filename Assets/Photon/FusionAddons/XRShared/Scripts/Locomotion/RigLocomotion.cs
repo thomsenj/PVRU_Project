@@ -41,14 +41,14 @@ namespace Fusion.XR.Shared.Locomotion
         float timeStarted = 0;
 
         HardwareRig rig;
-        NetworkRig networkRig; // not part of package
+        // NetworkRig networkRig; // not part of package
 
         public LayerMask locomotionLayerMask = 0;
 
         // If locomotion constraints are needed, a ILocomotionValidationHandler can restrict them
         ILocomotionValidationHandler locomotionValidationHandler;
 
-        private Transform currentTrainTransform = null; // Not part of package
+        // private Transform currentTrainTransform = null; // Not part of package
 
         private void Awake()
         {
@@ -79,7 +79,7 @@ namespace Fusion.XR.Shared.Locomotion
         protected virtual void Update()
         {
             CheckSnapTurn();
-            EnsureNetworkRigReference();
+            // EnsureNetworkRigReference();
         }
 
         protected virtual void CheckSnapTurn()
@@ -147,54 +147,65 @@ namespace Fusion.XR.Shared.Locomotion
             }
         }
 
-        public void AttachRigToCarriage(Transform carriageTransform)
-        {
-            rig.transform.SetParent(carriageTransform, worldPositionStays: true);
+        // public void AttachRigToCarriage(Transform carriageTransform)
+        // {
+        //     if (networkRig != null)
+        //     {
+        //         networkRig.enabled = false;
+        //     }
 
-            if (networkRig != null)
-            {
-                networkRig.transform.SetParent(carriageTransform, worldPositionStays: true);
-            }
+        //     rig.transform.SetParent(carriageTransform, worldPositionStays: true);
 
-            currentTrainTransform = carriageTransform;
-        }
+        //     if (networkRig != null)
+        //     {
+        //         networkRig.transform.SetParent(carriageTransform, worldPositionStays: true);
+        //         networkRig.enabled = true;
+        //     }
+        //     // rig.transform.SetParent(carriageTransform, worldPositionStays: true);
 
-        public void DetachRigFromCarriage()
-        {
-            rig.transform.SetParent(null);
+        //     // if (networkRig != null)
+        //     // {
+        //     //     networkRig.transform.SetParent(carriageTransform, worldPositionStays: true);
+        //     // }
 
-            if (networkRig != null)
-            {
-                networkRig.transform.SetParent(null);
-            }
+        //     currentTrainTransform = carriageTransform;
+        //     OnBeamRelease(null, rig.transform.position);
+        // }
 
-            currentTrainTransform = null;
-        }
+        // public void DetachRigFromCarriage()
+        // {
+        //     rig.transform.SetParent(null);
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("OnTrain"))
-            {
-                AttachRigToCarriage(other.transform);
-            }
-        }
+        //     if (networkRig != null)
+        //     {
+        //         networkRig.transform.SetParent(null);
+        //     }
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("OnTrain"))
-            {
-                DetachRigFromCarriage();
-            }
-        }
+        //     currentTrainTransform = null;
+        // }
 
-        private void EnsureNetworkRigReference()
-        {
-            if (networkRig == null)
-            {
-                networkRig = FindObjectOfType<NetworkRig>();
-            }
-        }
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     if (other.CompareTag("OnTrain"))
+        //     {
+        //         AttachRigToCarriage(other.transform);
+        //     }
+        // }
 
+        // private void OnTriggerExit(Collider other)
+        // {
+        //     if (other.CompareTag("OnTrain"))
+        //     {
+        //         DetachRigFromCarriage();
+        //     }
+        // }
 
+        // private void EnsureNetworkRigReference()
+        // {
+        //     if (networkRig == null)
+        //     {
+        //         networkRig = FindObjectOfType<NetworkRig>();
+        //     }
+        // }
     }
 }
