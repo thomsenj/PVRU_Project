@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using Fusion;
 using Fusion.XRShared.Demo;
 
@@ -23,6 +24,8 @@ public class EnemyAI : NetworkBehaviour
     private ScoreManager scoreManager;
     private Transform currentTarget;
     private float lastAttackTime;
+    private NavMeshAgent navMeshAgent;
+    private Transform spawnPoint;
 
     void Start()
     {
@@ -30,11 +33,18 @@ public class EnemyAI : NetworkBehaviour
         scoreManager = GameObject.FindWithTag(TagConstants.WORLD_MANAGER)?.GetComponent<ScoreManager>();
         currentHealth = maxHealth;
         previousHealth = currentHealth;
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = moveSpeed;
     }
 
     public override void FixedUpdateNetwork()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            gameObject.transform.position = spawnPoint.position;
+            currentHealth = maxHealth;
+        }
 
         if (currentHealth != previousHealth)
         {
@@ -82,12 +92,11 @@ public class EnemyAI : NetworkBehaviour
     {
         if (currentTarget == null) return;
 
-        Vector3 direction = currentTarget.position - transform.position;
-        direction.y = 0;
+        navMeshAgent.SetDestination(currentTarget.position);
 
-        if (direction.magnitude > 0.5f)
+        if (navMeshAgent.remainingDistance > 0.5f)
         {
-            MoveTowardsTarget(direction);
+            animator.SetBool(AnimationConstants.IS_RUNNING, true);
         }
         else
         {
@@ -194,7 +203,7 @@ public class EnemyAI : NetworkBehaviour
     private IEnumerator HandleDeath()
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        Despawn();
+        // Despawn();
     }
 
     private void Despawn()
