@@ -46,7 +46,5 @@ public class GameOverManager : NetworkBehaviour
 
         SceneManager.LoadScene("MainMenu");
         Runner.UnloadScene(SceneRef.FromIndex(1)); //Runner.UnloadScene(SceneRef.FromIndex(1));
-        Runner.Disconnect(Runner.LocalPlayer);
-        Runner.gameObject.SetActive(false);
     }
 }

@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: bd5233355209d4a5780f816953cb4ef8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AllBiomes.unity
     guid: abd45484583b01d4990b58a2716b29bb
   - enabled: 0
@@ -32,6 +32,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Net_TestSceneManagers.unity
     guid: 7b76b4b18e951da4d8faa5f34f060f0b
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Game1.unity
+    guid: 637c58f7a1a03434a885f54d6452a38e
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Game2.unity
+    guid: 41e8448ba559b46caaa3b9f47b181d0d
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Game3.unity
+    guid: 07760283bb7de4d8db4306f6d414cc6c
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 67a46c3402fd74e49b0d3b57f0f79334, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a6f17fe77f9f6fb4884a64b5a091cdd1, type: 2}
