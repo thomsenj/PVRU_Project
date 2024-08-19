@@ -13,9 +13,9 @@ public class MenuRouter : MonoBehaviour
     {
         
     }
-
     public void StartGame()
     {
+        // reload scene "allBioms"
         UnityEngine.SceneManagement.SceneManager.LoadScene(gameSceneName);
     }
 }

@@ -23,6 +23,8 @@ public class WaterBucket : NetworkBehaviour
     private bool isFalling = false;
     private Transform originalParent;
 
+    public HeatUpObject heatUpObject;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -100,6 +102,11 @@ public class WaterBucket : NetworkBehaviour
             {
                 currentWaterAmount = 0;
                 StopPouring();
+            }
+
+            if(heatUpObject != null)
+            {
+                heatUpObject.CoolDown(0.2f);
             }
         }
     }
