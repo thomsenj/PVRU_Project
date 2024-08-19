@@ -58,7 +58,9 @@ public class HeatUpObject : MonoBehaviour
             UpdateHeatColor();
         }
 
-        adapter.LazySetPercentage(GetPercentage(), 0.05f);
+        float highestPercentage = GetPercentage();
+        float newPercentage = Mathf.InverseLerp(0.25f, 1f, highestPercentage);
+        adapter.LazySetPercentage(newPercentage, 0.05f);
 
         if (heatParticleSystem != null)
         {

@@ -129,8 +129,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 24.205992
-  m_Center: {x: 0, y: 10, z: 0}
+  m_Radius: 16.9
+  m_Center: {x: -1.2, y: 12.2, z: 0}
 --- !u!54 &1997355563072969561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -415,4 +415,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitsToKill: 1
   resourceContainer: 0
-  particleSystemPrefab: {fileID: 198880425136568428, guid: f171ac3dbb620c44e81cd88ddee1cbbd, type: 3}
+  bobbingAmount: 0.1
+  bobbingSpeed: 1
+  rotationSpeed: 30
