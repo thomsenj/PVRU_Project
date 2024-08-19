@@ -64,7 +64,8 @@ public class WaterBucket : NetworkBehaviour
         currentWaterAmount += 50;
         if(currentWaterAmount > maxWaterAmount)
         {
-            maxWaterAmount = currentWaterAmount;
+
+            currentWaterAmount = maxWaterAmount;
         }
     }
 
