@@ -12,7 +12,7 @@ public class TrainHealth : NetworkBehaviour
 
     private void Start()
     {
-        controller.SetMaxValue(41);
+        controller.SetMaxValue(20);
     }
 
     public void TakeDamage()
