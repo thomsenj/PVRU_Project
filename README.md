@@ -74,7 +74,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Icons Pack](https://syntystore.com/products/polygon-icons-pack)
 - [POLYGON - Particle FX Pack (Unity only)](https://syntystore.com/products/polygon-particle-fx-pack)
 
-### Free (but mostly used)
+### Free (but mostly unused)
 
 - [POLYGON - Bow and Crossbow | FREE](https://syntystore.com/products/polygon-bow-and-crossbow)
 - [POLYGON - Pride Crystal Weapons | FREE](https://syntystore.com/products/polygon-pride-crystal-weapons)
