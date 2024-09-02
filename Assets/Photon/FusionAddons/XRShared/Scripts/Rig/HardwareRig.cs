@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -51,6 +52,8 @@ namespace Fusion.XR.Shared.Rig
         public Transform trainTransform;
         public Vector3 previousTrainPosition;
         public Vector3 initialRigPosition;
+        // private Coroutine rigPositionCoroutine;
+        // [SerializeField] private float trainSpeed = 1;
 
         public virtual RigState RigState
         {
@@ -119,6 +122,15 @@ namespace Fusion.XR.Shared.Rig
             }
         }
 
+        // public virtual IEnumerator UpdateRigPositionOnTrainMovementSpeed()
+        // {
+        //     while (true)
+        //     {
+        //         UpdateRigPosition();
+        //         yield return new WaitForSeconds(1 / 100);
+        //     }
+        // }
+
         public void StartTrackingTrain(Transform train)
         {
             trainTransform = train;
@@ -152,6 +164,7 @@ namespace Fusion.XR.Shared.Rig
             if (other.CompareTag("OnTrain"))
             {
                 StartTrackingTrain(other.transform);
+                // rigPositionCoroutine = StartCoroutine(UpdateRigPositionOnTrainMovementSpeed());
             }
         }
 
@@ -160,6 +173,11 @@ namespace Fusion.XR.Shared.Rig
             if (other.CompareTag("OnTrain"))
             {
                 StopTrackingTrain();
+                // if (rigPositionCoroutine != null)
+                // {
+                //     StopCoroutine(rigPositionCoroutine);
+                //     rigPositionCoroutine = null;
+                // }
             }
         }
     }
