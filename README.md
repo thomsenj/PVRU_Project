@@ -87,6 +87,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Tropical Jungle - Nature Biome](https://syntystore.com/products/polygon-tropical-jungle-nature-biome)
 - [POLYGON - Western Frontier Pack](https://syntystore.com/products/polygon-western-frontier-pack)
 - [Simple Apocalypse Interiors - Cartoon Assets](https://syntystore.com/products/simple-apocalypse-interiors-cartoon-assets)
+- [Simple City - Cartoon Assets](https://syntystore.com/products/simple-city-cartoon-assets)
 
 ### Free (but mostly unused)
 
