@@ -85,6 +85,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - War Pack](https://syntystore.com/products/polygon-war-pack)
 - [POLYGON - War Map - WWI](https://syntystore.com/products/polygon-war-map-wwi)
 - [POLYGON - Tropical Jungle - Nature Biome](https://syntystore.com/products/polygon-tropical-jungle-nature-biome)
+- [POLYGON - Western Frontier Pack](https://syntystore.com/products/polygon-western-frontier-pack)
 
 ### Free (but mostly unused)
 
