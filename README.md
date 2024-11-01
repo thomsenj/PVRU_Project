@@ -74,6 +74,8 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Icons Pack](https://syntystore.com/products/polygon-icons-pack)
 - [POLYGON - Particle FX Pack (Unity only)](https://syntystore.com/products/polygon-particle-fx-pack)
 - [POLYGON - Battle Royale Pack](https://syntystore.com/products/polygon-battle-royale-pack)
+- [POLYGON - Dungeon Pack](https://syntystore.com/products/polygon-dungeon-pack)
+- [POLYGON - Dungeons Map](https://syntystore.com/products/polygon-dungeons-map)
 
 ### Free (but mostly unused)
 
