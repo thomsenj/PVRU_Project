@@ -93,6 +93,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [Simple People 2 - Cartoon Assets](https://syntystore.com/products/simple-people-2-cartoon-assets)
 - [Simple Props/Items/Icons - Cartoon Assets](https://syntystore.com/products/simple-props-items-icons-cartoon-assets)
 - [Simple Racer - Cartoon Assets](https://syntystore.com/products/simple-racer-cartoon-assets)
+- [Simple Shop Interiors - Cartoon Assets](https://syntystore.com/products/simple-shop-interiors-cartoon-assets)
 
 ### Free (but mostly unused)
 
