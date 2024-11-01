@@ -5,14 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/MainMenu.unity
     guid: bd5233355209d4a5780f816953cb4ef8
   - enabled: 1
-    path: Assets/Scenes/AllBiomes.unity
+    path: Assets/Scenes/Test Scenes/1 Start Scene.unity
+    guid: e43ff13cd2aff714d891d5949042e7ef
+  - enabled: 1
+    path: Assets/Scenes/Test Scenes/Train Track.unity
+    guid: 4d525ee2b96e1534e92b469605b8e285
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/AllBiomes.unity
     guid: abd45484583b01d4990b58a2716b29bb
   - enabled: 0
-    path: Assets/Scenes/VR UI.unity
+    path: Assets/Scenes/Test Scenes/VR UI.unity
     guid: 218b848ff86dc41b4be2588f1c82c7e1
   - enabled: 0
     path: Assets/Photon/FusionAddons/DataSyncHelpers/Demo/Scenes/PhotoCamera.unity
@@ -27,10 +33,10 @@ EditorBuildSettings:
     path: Assets/Photon/FusionAddons/XRHandsSynchronization/Demo/Scenes/DemoXRHands.unity
     guid: b3c90c54a9e514173be1079006f22c85
   - enabled: 0
-    path: Assets/Scenes/VRWeapon Multiplayer.unity
+    path: Assets/Scenes/Test Scenes/VRWeapon Multiplayer.unity
     guid: 561e2c6a96ba5584a99f78b23f660441
   - enabled: 0
-    path: Assets/Scenes/Net_TestSceneManagers.unity
+    path: Assets/Scenes/Test Scenes/Net_TestSceneManagers.unity
     guid: 7b76b4b18e951da4d8faa5f34f060f0b
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 67a46c3402fd74e49b0d3b57f0f79334, type: 2}
