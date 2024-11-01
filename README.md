@@ -88,6 +88,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Western Frontier Pack](https://syntystore.com/products/polygon-western-frontier-pack)
 - [Simple Apocalypse Interiors - Cartoon Assets](https://syntystore.com/products/simple-apocalypse-interiors-cartoon-assets)
 - [Simple City - Cartoon Assets](https://syntystore.com/products/simple-city-cartoon-assets)
+- [Simple Fantasy - Cartoon Assets](https://syntystore.com/products/simple-fantasy-cartoon-assets)
 
 ### Free (but mostly unused)
 
