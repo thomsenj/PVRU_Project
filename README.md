@@ -81,6 +81,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Hearse Kit](https://syntystore.com/products/polygon-hearse-kit)
 - [POLYGON - Modular Fantasy Hero Characters](https://syntystore.com/products/polygon-modular-fantasy-hero-characters)
 - [POLYGON - Pirate Pack](https://syntystore.com/products/polygon-pirate-pack)
+- [POLYGON - Prototype Pack](https://syntystore.com/products/polygon-prototype-pack)
 
 ### Free (but mostly unused)
 
