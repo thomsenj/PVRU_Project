@@ -73,6 +73,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Nature Pack](https://syntystore.com/products/polygon-nature-pack)
 - [POLYGON - Icons Pack](https://syntystore.com/products/polygon-icons-pack)
 - [POLYGON - Particle FX Pack (Unity only)](https://syntystore.com/products/polygon-particle-fx-pack)
+- [POLYGON - Battle Royale Pack](https://syntystore.com/products/polygon-battle-royale-pack)
 
 ### Free (but mostly unused)
 
