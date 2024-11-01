@@ -77,6 +77,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [POLYGON - Dungeon Pack](https://syntystore.com/products/polygon-dungeon-pack)
 - [POLYGON - Dungeons Map](https://syntystore.com/products/polygon-dungeons-map)
 - [POLYGON - Boss Zombies](https://syntystore.com/products/polygon-boss-zombies)
+- [POLYGON - Gang Warfare Pack](https://syntystore.com/products/polygon-gang-warfare-pack)
 
 ### Free (but mostly unused)
 
