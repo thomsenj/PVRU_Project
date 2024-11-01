@@ -90,6 +90,7 @@ So, what are you waiting for? All aboard the Choo Choo train and let the adventu
 - [Simple City - Cartoon Assets](https://syntystore.com/products/simple-city-cartoon-assets)
 - [Simple Fantasy - Cartoon Assets](https://syntystore.com/products/simple-fantasy-cartoon-assets)
 - [Simple Fantasy Interiors - Cartoon Assets](https://syntystore.com/products/simple-fantasy-interiors-cartoon-assets)
+- [Simple People 2 - Cartoon Assets](https://syntystore.com/products/simple-people-2-cartoon-assets)
 
 ### Free (but mostly unused)
 
