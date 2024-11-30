@@ -87,6 +87,7 @@ namespace Fusion.XR.Shared.Rig
 
             // update hand interaction
             if (updateGrabWithAction) isGrabbing = grabAction.action.ReadValue<float>() > grabThreshold;
+            // Debug.Log("Trigger value: " + handCommand.triggerCommand);
 
 #else
             Debug.LogError("Missing com.unity.inputsystem package");

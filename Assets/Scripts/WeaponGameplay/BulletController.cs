@@ -1,5 +1,7 @@
-﻿using Fusion;
+﻿using System;
+using Fusion;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class BulletController : NetworkBehaviour
 {
@@ -17,20 +19,25 @@ public class BulletController : NetworkBehaviour
     public override void FixedUpdateNetwork()
     {
         base.FixedUpdateNetwork();
-            float deltaTime = Time.deltaTime;
+        float deltaTime = Time.deltaTime;
+        Debug.Log("Delta Time: " + deltaTime);
 
-            Vector3 dragForce = -0.5f * dragCoefficient * airDensity * crossSectionalArea * velocity.sqrMagnitude * velocity.normalized;
-            velocity += (gravity + dragForce) * deltaTime;
+        Vector3 dragForce = -0.5f * dragCoefficient * airDensity * crossSectionalArea * velocity.sqrMagnitude * velocity.normalized;
+        velocity += (gravity + dragForce) * deltaTime;
 
-            Vector3 displacement = velocity * deltaTime;
-            gameObject.transform.position += displacement;
+        Vector3 displacement = velocity * deltaTime;
+        gameObject.transform.position += displacement;
 
-            distanceTraveled += displacement.magnitude;
+        distanceTraveled += displacement.magnitude;
 
-            if (distanceTraveled >= maxDistance)
-            {
-                ResetBullet();
-            }
+        if (distanceTraveled >= maxDistance)
+        {
+            ResetBullet();
+        }
+        // else
+        // {
+        //     Debug.Log("DistanceTraveled: " + distanceTraveled);
+        // }
     }
 
     public void Shoot(Vector3 startPosition, Vector3 shootDirection)

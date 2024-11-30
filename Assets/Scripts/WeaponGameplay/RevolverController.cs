@@ -1,26 +1,64 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit;
-using Fusion; 
+using UnityEngine.Events;
+using Fusion.XR.Shared.Rig;
+using UnityEngine.AI;
+
+
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+
+using Fusion;
 
 public class RevolverController : NetworkBehaviour
 {
-    public Transform muzzle;                    
-    public float recoilAmount = 0.25f;          
-    public float recoilSpeed = 25f;             
-    public BulletController bulletPrefab;        
+    public Transform muzzle;
+    public float recoilAmount = 0.25f;
+    public float recoilSpeed = 25f;
+    public BulletController bulletPrefab;
     public ParticleSystem shellEjectParticle;
     public AudioSource gunshotSound;
 
-    public Transform cylinder;                  
-    public Transform hammer;                    
-    public Transform trigger;                   
+    public HardwareHand hardwareHand;
+
+    public Transform cylinder;
+    public Transform hammer;
+    public Transform trigger;
 
     private bool canShoot = true;
 
+    // [Serializable]
+    // public class GunTriggerEvent : UnityEvent<Vector3, Vector3> { }
+    // public GunTriggerEvent onGunFired = new GunTriggerEvent();
+
+    public bool triggerCommandReset = true;
+
+    // public void Start()
+    // {
+    //     HardwareHand hardwareHand = new HardwareHand();
+    // }
+
+
+    public void Update()
+    {
+        if (hardwareHand.handCommand.triggerCommand > 0)
+        {
+            Shoot();
+            // triggerCommandReset = false;
+        }
+        // else if (hardwareHand.handCommand.triggerCommand <= 0)
+        // {
+        //     triggerCommandReset = true;
+        // }
+
+    }
+
     public void Shoot()
     {
-        if(canShoot)
+        if (canShoot)
         {
             canShoot = false;
 
