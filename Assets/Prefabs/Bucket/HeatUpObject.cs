@@ -25,7 +25,7 @@ public class HeatUpObject : MonoBehaviour
         try
         {
             trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
-            gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
+            // gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
             heatModifier = trainManager.getHeatModifier();
         }
         catch
@@ -50,7 +50,8 @@ public class HeatUpObject : MonoBehaviour
 
         if (temperature == maxTemperature)
         {
-            gameOverManager.TriggerGameOver();
+            // gameOverManager.TriggerGameOver();
+            Debug.Log("Gameover triggered from HeatObject");
         }
 
         if (showHeatColor && objectRenderer != null)
@@ -65,7 +66,7 @@ public class HeatUpObject : MonoBehaviour
             adapter.LazySetPercentage(newPercentage, 0.05f);
         }
         catch { }
-       
+
 
         if (heatParticleSystem != null)
         {

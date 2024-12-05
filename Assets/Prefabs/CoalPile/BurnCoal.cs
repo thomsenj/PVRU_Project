@@ -25,7 +25,7 @@ namespace Fusion.XRShared.Demo
             try
             {
                 trainManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<TrainManager>();
-                gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
+                // gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
                 fuelModifier = trainManager.getFuelModifier();
             }
             catch
@@ -49,7 +49,8 @@ namespace Fusion.XRShared.Demo
 
                     if (fuelstand < 1)
                     {
-                        gameOverManager.TriggerGameOver();
+                        // gameOverManager.TriggerGameOver();
+                        Debug.Log("Triggered Gameover from BurnCoal.cs");
                     }
                     spawnTimer = 0f;
                 }
