@@ -22,20 +22,20 @@ public class TrainHealth : NetworkBehaviour
         {
             damageSound.Play();
         }
-        triggerEms();
+        // triggerEms();
         if (trainHealth == 0 || trainHealth < 0)
         {
-            GameOverManager gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
-            gameOverManager.TriggerGameOver();
+            // GameOverManager gameOverManager = GameObject.FindGameObjectWithTag(TagConstants.WORLD_MANAGER).GetComponent<GameOverManager>();
+            // gameOverManager.TriggerGameOver();
         }
         controller.SetValue(trainHealth);
     }
 
-    private void triggerEms()
-    {
-        if (gameObject.GetComponent<EMSAdapter>() != null)
-        {
-            gameObject.GetComponent<EMSAdapter>().SendImpulseChannel1(500);
-        }
-    }
+    // private void triggerEms()
+    // {
+    //     if (gameObject.GetComponent<EMSAdapter>() != null)
+    //     {
+    //         gameObject.GetComponent<EMSAdapter>().SendImpulseChannel1(500);
+    //     }
+    // }
 }
