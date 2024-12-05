@@ -96,8 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 51c369829da4abf478c9b921b58d9617, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: ae09427b4354a894aa7dfa74bdfb46fa, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2206,7 +2206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 865075385244835223, guid: 5eccbf4be2c00e94689ee8062e4e7276, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773256366622995465, guid: 5eccbf4be2c00e94689ee8062e4e7276, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2904,7 +2904,7 @@ MonoBehaviour:
   _follow: 1
   _startPosition: 0.02329999953508377
   preserveUniformSpeedWithOffset: 0
-  _followSpeed: 30
+  _followSpeed: 2
   _followDuration: 1
   _speedModifier:
     blend: 1
@@ -3406,7 +3406,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -3740,27 +3740,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 98235071190019150, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 98235071190019150, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 98235071190019150, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 544551868224573016, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 544551868224573016, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 544551868224573016, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 553815360401719243, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: hardwareHand
@@ -3944,13 +3944,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8622109076671175511, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1935156776994193796, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 128196619744627319, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
 --- !u!114 &1328432719 stripped
 MonoBehaviour:
@@ -4053,7 +4056,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1381401906
 MonoBehaviour:
@@ -27430,7 +27433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2589809054354682351, guid: 61132d80baa3c024d995c0e48ddf27df, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264965659737637154, guid: 61132d80baa3c024d995c0e48ddf27df, type: 3}
       propertyPath: m_LocalPosition.x
