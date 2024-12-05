@@ -439,7 +439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905881638491077434, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: SortKey
-      value: 4088240083
+      value: 549245511
       objectReference: {fileID: 0}
     - target: {fileID: 8293814073323824969, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: m_LocalPosition.x
@@ -538,7 +538,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6361600155069712310, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: SortKey
-      value: 2318927749
+      value: 3074900473
       objectReference: {fileID: 0}
     - target: {fileID: 1997355563072969561, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: m_IsKinematic
@@ -596,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoalPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4443786845840345638, guid: 614526171d842d84fb95089187a5487f, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -627,7 +631,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3363266498400569022, guid: f06e086135bf64ecf9cfc199216823d5, type: 3}
       propertyPath: SortKey
-      value: 816485740
+      value: 1572458464
       objectReference: {fileID: 0}
     - target: {fileID: 3932988801393387395, guid: f06e086135bf64ecf9cfc199216823d5, type: 3}
       propertyPath: m_Name
@@ -852,9 +856,13 @@ PrefabInstance:
       propertyPath: heatUpObject
       value: 
       objectReference: {fileID: 2121333684}
+    - target: {fileID: 1636221588267848748, guid: 10760a83d16e04a4a8c9ef1ab736f18b, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2866637601795515346, guid: 10760a83d16e04a4a8c9ef1ab736f18b, type: 3}
       propertyPath: SortKey
-      value: 3394842251
+      value: 4150814975
       objectReference: {fileID: 0}
     - target: {fileID: 2866637601795515346, guid: 10760a83d16e04a4a8c9ef1ab736f18b, type: 3}
       propertyPath: NestedObjects.Array.size
@@ -915,7 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 177969391
+  SortKey: 933942115
   ObjectInterest: 1
   Flags: 524289
   NestedObjects: []
@@ -936,7 +944,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 478361173
+      value: 1234333897
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -1015,7 +1023,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 1514786809
+      value: 2270759533
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -1158,6 +1166,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2880562769554580585, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3498254034032386166, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1244,7 +1256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8929747345331010002, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: SortKey
-      value: 2933877231
+      value: 3689849955
       objectReference: {fileID: 0}
     - target: {fileID: 8929747345331010002, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: NestedObjects.Array.size
@@ -1567,6 +1579,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2880562769554580585, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3498254034032386166, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1653,7 +1669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8929747345331010002, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: SortKey
-      value: 670313905
+      value: 1426286629
       objectReference: {fileID: 0}
     - target: {fileID: 8929747345331010002, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: NestedObjects.Array.size
@@ -2132,7 +2148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905881638491077434, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: SortKey
-      value: 3998048203
+      value: 459053631
       objectReference: {fileID: 0}
     - target: {fileID: 8293814073323824969, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2329,7 +2345,7 @@ PrefabInstance:
       objectReference: {fileID: 273931354}
     - target: {fileID: 8288495739952894321, guid: e6466688193de304d9565e793315d1b2, type: 3}
       propertyPath: SortKey
-      value: 652563678
+      value: 1408536402
       objectReference: {fileID: 0}
     - target: {fileID: 8288495739952894321, guid: e6466688193de304d9565e793315d1b2, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
@@ -2461,7 +2477,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3363266498400569022, guid: f06e086135bf64ecf9cfc199216823d5, type: 3}
       propertyPath: SortKey
-      value: 904315049
+      value: 1660287773
       objectReference: {fileID: 0}
     - target: {fileID: 3932988801393387395, guid: f06e086135bf64ecf9cfc199216823d5, type: 3}
       propertyPath: m_Name
@@ -2719,7 +2735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6865270910621502311, guid: b7c5ac23e9041b64f89c8293ad4b792c, type: 3}
       propertyPath: SortKey
-      value: 1707607415
+      value: 2463580139
       objectReference: {fileID: 0}
     - target: {fileID: 7672444120373314329, guid: b7c5ac23e9041b64f89c8293ad4b792c, type: 3}
       propertyPath: m_LocalScale.x
@@ -2763,6 +2779,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7672444120373314329, guid: b7c5ac23e9041b64f89c8293ad4b792c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479265811270062305, guid: b7c5ac23e9041b64f89c8293ad4b792c, type: 3}
+      propertyPath: SyncParent
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8755789922299171048, guid: b7c5ac23e9041b64f89c8293ad4b792c, type: 3}
@@ -2886,7 +2906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905881638491077434, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: SortKey
-      value: 2925153520
+      value: 3681126244
       objectReference: {fileID: 0}
     - target: {fileID: 8293814073323824969, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2948,48 +2968,48 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: SortKey
-      value: 2734777046
+      value: 3490749770
       objectReference: {fileID: 0}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 1681595379}
+      objectReference: {fileID: 102808137}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.data[1]
       value: 
-      objectReference: {fileID: 102808137}
+      objectReference: {fileID: 2114316947}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.data[2]
       value: 
-      objectReference: {fileID: 2114316947}
+      objectReference: {fileID: 1497154424}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.data[3]
       value: 
-      objectReference: {fileID: 1497154424}
+      objectReference: {fileID: 315445771}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.data[4]
       value: 
-      objectReference: {fileID: 315445771}
+      objectReference: {fileID: 315445772}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NestedObjects.Array.data[5]
       value: 
       objectReference: {fileID: 315445772}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[1]
       value: 
-      objectReference: {fileID: 1578576594}
+      objectReference: {fileID: 1681595370}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[2]
       value: 
-      objectReference: {fileID: 558205215}
+      objectReference: {fileID: 1578576594}
     - target: {fileID: 103358883383824045, guid: 9e202ffe085b10745916b2da36cc19b6, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[3]
       value: 
@@ -3450,7 +3470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905881638491077434, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: SortKey
-      value: 931958799
+      value: 1687931523
       objectReference: {fileID: 0}
     - target: {fileID: 8293814073323824969, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3639,7 +3659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 4084812202
+      value: 545817630
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -4117,6 +4137,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: OnTrain
       objectReference: {fileID: 0}
+    - target: {fileID: 2534695642500861746, guid: 9843033c84a004e4fb4ffc740d68961e, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2945287580072839694, guid: 9843033c84a004e4fb4ffc740d68961e, type: 3}
       propertyPath: m_Name
       value: SM_Veh_Train_Coal_01
@@ -4127,7 +4151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5893685026646892594, guid: 9843033c84a004e4fb4ffc740d68961e, type: 3}
       propertyPath: SortKey
-      value: 1017459784
+      value: 1773432508
       objectReference: {fileID: 0}
     - target: {fileID: 5893685026646892594, guid: 9843033c84a004e4fb4ffc740d68961e, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
@@ -4398,7 +4422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7751886687626417330, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: SortKey
-      value: 1255132136
+      value: 2011104860
       objectReference: {fileID: 0}
     - target: {fileID: 8622109074998891944, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_BackGroundColor.a
@@ -4626,7 +4650,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 4195073115
+      value: 656078543
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -4731,7 +4755,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 1254847706
+      value: 2010820430
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -27292,6 +27316,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2880562769554580585, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3498254034032386166, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -27378,7 +27406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8929747345331010002, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: SortKey
-      value: 2815065568
+      value: 3571038292
       objectReference: {fileID: 0}
     - target: {fileID: 8929747345331010002, guid: 458320ced8820a642a4ab28dc55534db, type: 3}
       propertyPath: NestedObjects.Array.size
@@ -27818,7 +27846,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6361600155069712310, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: SortKey
-      value: 2902501878
+      value: 3658474602
       objectReference: {fileID: 0}
     - target: {fileID: 1997355563072969561, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: m_IsKinematic
@@ -27875,6 +27903,10 @@ PrefabInstance:
     - target: {fileID: 4433009467096039110, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: m_Name
       value: CoalPrefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443786845840345638, guid: 614526171d842d84fb95089187a5487f, type: 3}
+      propertyPath: SyncParent
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28191,9 +28223,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3568651523429395302, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1681595370}
-    - targetCorrespondingSourceObject: {fileID: 3568651523429395302, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1681595379}
   m_SourcePrefab: {fileID: 100100000, guid: ebe8275cae32c084da858ac1e8892a87, type: 3}
 --- !u!1 &1681595368 stripped
 GameObject:
@@ -28219,27 +28248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: -6361600155069712310, guid: 614526171d842d84fb95089187a5487f, type: 3}
   targetSpawn: {fileID: 1681595369}
---- !u!114 &1681595379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681595368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 3700560341
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects:
-  - {fileID: 102808137}
-  - {fileID: 2114316947}
-  - {fileID: 1497154424}
-  NetworkedBehaviours:
-  - {fileID: 1681595370}
 --- !u!1001 &1782840008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28250,7 +28258,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 1331289940
+      value: 2087262664
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -28402,7 +28410,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5775226674086009453, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: SortKey
-      value: 2241249593
+      value: 2997222317
       objectReference: {fileID: 0}
     - target: {fileID: -2058550080829389764, guid: c50ddc0592171df4e9ec9627a66cf6e1, type: 3}
       propertyPath: m_Speed
@@ -28644,7 +28652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905881638491077434, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: SortKey
-      value: 2609779802
+      value: 3365752526
       objectReference: {fileID: 0}
     - target: {fileID: 8293814073323824969, guid: badaf500709b0c341b141a760df12352, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28711,7 +28719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6361600155069712310, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: SortKey
-      value: 1426212830
+      value: 2182185554
       objectReference: {fileID: 0}
     - target: {fileID: 1997355563072969561, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: m_IsKinematic
@@ -28768,6 +28776,10 @@ PrefabInstance:
     - target: {fileID: 4433009467096039110, guid: 614526171d842d84fb95089187a5487f, type: 3}
       propertyPath: m_Name
       value: CoalPrefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443786845840345638, guid: 614526171d842d84fb95089187a5487f, type: 3}
+      propertyPath: SyncParent
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
