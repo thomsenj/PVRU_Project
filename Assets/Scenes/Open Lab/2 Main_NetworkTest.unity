@@ -4396,6 +4396,10 @@ PrefabInstance:
       propertyPath: hardwareHand
       value: 
       objectReference: {fileID: 1328432719}
+    - target: {fileID: 844396339755924768, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
+      propertyPath: SyncParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2785193307761974929, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_Value
       value: 4
@@ -4419,6 +4423,10 @@ PrefabInstance:
     - target: {fileID: 7554615993983308885, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751886687626417330, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
+      propertyPath: Flags
+      value: 524289
       objectReference: {fileID: 0}
     - target: {fileID: 7751886687626417330, guid: 1ef397f70c3c0ac498160fa48bcae44e, type: 3}
       propertyPath: SortKey
